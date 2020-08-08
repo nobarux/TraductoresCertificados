@@ -13,32 +13,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::get('/inicio', function () {
+    return view('inicioP');
 });
 
-Route::get('solicitudesRegistro', function () {
-    //return view('welcome');
-    return "Aqui van las solicitudes de admision para los usuarios interesados";
+Route::get('/solicitudesRegistro', function () {
+    return view('solicitudesRegistro');
 });
 
 ////---------------------------------------------//////
-Route::get('solicitudesGeneral', function () {
-    //return view('welcome');
-    return "Aqui se veran todas las solicitudes con sus respectivos estados";
+Route::get('/solicitudesGeneral', function () {
+    return view('solicitudesGeneral');
 });
 
-Route::get('solicitudesSuspensas', function () {
-    //return view('welcome');
-    return "Aqui van las solicitudes de admision para los usuarios que suspendieron";
+Route::get('/solicitudesSuspensas', function () {
+    return view('solicitudesSuspensas');
 });
 
-Route::get('reclamaciones', function () {
+Route::get('/reclamaciones', function () {
     //return view('welcome');
     return "Aqui van las solicitudes que tengan un estado reclamacion";
 });
 
-Route::get('roles', function () {
+Route::get('/administracion', function () {
     //return view('welcome');
     return "Aqui van la pantalla de los roles";
 });
