@@ -35,8 +35,8 @@ Route::get('/solicitudesSuspensas', function () {
 });
 
 Route::get('/reclamaciones', function () {
-    //return view('welcome');
-    return "Aqui van las solicitudes que tengan un estado reclamacion";
+    return view('reclamaciones');
+    
 });
 
 Route::get('/administracion', function () {
