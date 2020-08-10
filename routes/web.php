@@ -43,3 +43,6 @@ Route::get('/administracion', function () {
     //return view('welcome');
     return "Aqui van la pantalla de los roles";
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
