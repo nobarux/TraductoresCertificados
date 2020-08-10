@@ -1,5 +1,5 @@
 
-@extends('Layouts.apptree')
+@extends('Layouts.app')
 
 @section('content')
   <!-- Page Header -->
