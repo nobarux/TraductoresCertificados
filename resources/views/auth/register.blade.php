@@ -20,7 +20,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                <label for="name" >{{ __('Nombre') }}</label>
 
               </div>
 
@@ -32,7 +32,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                <label for="email" >{{ __('E-Mail') }}</label>
 
               </div>
               
@@ -46,23 +46,23 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <label for="password" >{{ __('Password') }}</label>
 
               </div>
               
               <div class="form-label-group">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Password') }}</label>
+                <label for="password-confirm" >{{ __('Confirmar Password') }}</label>
 
               </div>
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">
                 {{ __('Registrar') }}
               </button>
-              <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+              {{-- <a class="d-block text-center mt-2 small" href="#">Sign In</a>
               <hr class="my-4">
               <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>
+              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button> --}}
             </form>
           </div>
         </div>
