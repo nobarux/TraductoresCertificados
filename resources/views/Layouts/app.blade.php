@@ -32,7 +32,7 @@
 
 <body>
 <div id="app">
-  @if (!\Request::is('login'))
+  @if (!\Request::is('login') && !\Request::is('register'))
   {{-- Sirve para incluir elementos de otra vista. En este caso es para incluir un navbar personalizado --}}
   @include('partialViews.navbar')    
   @endif
