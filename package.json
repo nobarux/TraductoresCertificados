@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "bootstrap-scss": "^4.5.0",
-        "craftable": "^2.1.8"
+        "craftable": "^2.1.8",
+        "datatables.net": "^1.10.21",
+        "datatables.net-bs": "^1.10.21"
     }
 }

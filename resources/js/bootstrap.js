@@ -1,4 +1,6 @@
 window._ = require('lodash');
+window.$ = require('jquery');
+import * as dt from 'datatables'
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -11,6 +13,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('datatables.net');
+    require('datatables.net-bs');
 } catch (e) {}
 
 /**

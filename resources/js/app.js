@@ -3,15 +3,14 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-// import {$,JQuery} from 'jquery';
-// window.$ = $;
-// window.JQuery = JQuery;
-// global.$ = global.JQuery = require('jquery'); 
+import {$,JQuery} from 'jquery';
+// window.$ = window.JQuery = JQuery;
+// global.$ = global.JQuery = require('jquery');
+
 
  require('./bootstrap');
 
 window.Vue = require('vue');
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

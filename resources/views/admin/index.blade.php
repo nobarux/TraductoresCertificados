@@ -680,9 +680,11 @@
                 </footer>
             </div>
         </div>
-        {{-- <script src="{{asset('js/app.js')}}"> </script> --}}
+        <script src="{{asset('js/bootstrap.js')}}"> </script>
+
+        {{-- <script src="{{asset('jquery/dist/jquery.min.js')}}"> </script> --}}
     
-        <script src="/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
+        {{-- <script src="/jquery/dist/jquery.min.js" crossorigin="anonymous"></script> --}}
         <script src="/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/js/admin/scripts.js"></script>
         <script src="/js/admin/demo/chart-area-demo.js"></script>
