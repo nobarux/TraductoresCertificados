@@ -3,8 +3,12 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+// import {$,JQuery} from 'jquery';
+// window.$ = $;
+// window.JQuery = JQuery;
+// global.$ = global.JQuery = require('jquery'); 
 
-require('./bootstrap');
+ require('./bootstrap');
 
 window.Vue = require('vue');
 
