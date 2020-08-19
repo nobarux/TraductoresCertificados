@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illumninate\Support\Facades\Shcema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
