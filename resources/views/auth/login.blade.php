@@ -13,8 +13,9 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                   <div class="form-label-group">
-                    <input type="email" id="inputEmail" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required autofocus required autocomplete="email">
-                    <label for="inputEmail">Email address</label>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    {{-- <input type="email" id="inputEmail" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email address" required autofocus required autocomplete="email"> --}}
+                    <label for="email">Email address</label>
                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -37,7 +38,7 @@
                     <label class="custom-control-label" for="remember"></label>
                     {{ __('Recordar Contraseña') }}
                   </div>
-                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                  <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Entrar</button>
                   <div class="text-center" >
                     @if (Route::has('password.request'))
                     <a class="small" href="{{ route('password.request') }}">Olvidó la contraseña?</a></div>
