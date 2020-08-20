@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropNewColumn extends Migration
+class DropColumnaIdUsuario extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class DropNewColumn extends Migration
      */
     public function up()
     {
-        Schema::table('nEstadoSolicitud', function (Blueprint $table) {
-            $table->dropColumn('test');
+        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
+            $table->dropColumn('id_Usuario');
         });
     }
 
@@ -25,7 +25,7 @@ class DropNewColumn extends Migration
      */
     public function down()
     {
-        Schema::table('nEstadoSolicitud', function (Blueprint $table) {
+        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
             //
         });
     }
