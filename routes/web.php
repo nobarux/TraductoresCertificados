@@ -49,6 +49,18 @@ Route::get('/administracion', function () {
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-
+//Rutas para la parte de administracion
 Route::get('admin', 'AdminController@index')->middleware('auth');
-Route::get('usuarios', 'AdminController@usuarios');
+
+//Rutas para las solicitudes 
+Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
+Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
+
+//Rutas para el registro de traductores
+Route::get('/traductores', 'TraductorController@indexTrad');
+Route::get('/traductores/create', 'TraductorController@createTrad');
+Route::get('/traductores/{trad}', 'TraductorController@showTrad');
+Route::post('/traductores', 'TraductorController@storeTrad');
+Route::get('/traductores/{trad}/edit', 'TraductorController@editTrad');
+Route::patch('/traductores/{trad}', 'TraductorController@updateTrad');
+Route::delete('/traductores/{trad}', 'TraductorController@deleteTrad');
