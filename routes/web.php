@@ -57,10 +57,12 @@ Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
 
 //Rutas para el registro de traductores
-Route::get('/traductores', 'TraductorController@indexTrad');
-Route::get('/traductores/create', 'TraductorController@createTrad');
-Route::get('/traductores/{trad}', 'TraductorController@showTrad');
-Route::post('/traductores', 'TraductorController@storeTrad');
-Route::get('/traductores/{trad}/edit', 'TraductorController@editTrad');
-Route::patch('/traductores/{trad}', 'TraductorController@updateTrad');
-Route::delete('/traductores/{trad}', 'TraductorController@deleteTrad');
+// Route::get('/traductores', 'TraductorController@indexTrad');
+// Route::get('/traductores/create', 'TraductorController@createTrad');
+// Route::get('/traductores/{trad}', 'TraductorController@showTrad');
+// Route::post('/traductores', 'TraductorController@storeTrad');
+// Route::get('/traductores/{trad}/edit', 'TraductorController@editTrad');
+// Route::patch('/traductores/{trad}', 'TraductorController@updateTrad');
+// Route::delete('/traductores/{trad}', 'TraductorController@destroyTrad');
+
+Route::resource('traductores', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud

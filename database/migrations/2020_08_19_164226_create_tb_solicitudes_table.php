@@ -18,7 +18,7 @@ class CreateTbSolicitudesTable extends Migration
             $table->string('nombre',255);
             $table->string('apellidos',255);
             $table->text('lugar_Nac');
-            $table->string('edad');
+            $table->integer('edad');
             $table->string('nacionalidad',255);
             $table->string('prof_Ocup',255);
             $table->integer('id_Idioma');

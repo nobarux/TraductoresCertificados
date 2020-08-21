@@ -17,6 +17,9 @@
             <a class="nav-link" href="/solicitudesRegistro">Registro Traductores</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/solicitudesRegistro">Traductores</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/solicitudesGeneral">Solicitudes</a>
           </li>
           <li class="nav-item">
