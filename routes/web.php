@@ -59,4 +59,4 @@ Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspens
 // Route::patch('/traductores/{trad}', 'TraductorController@updateTrad');
 // Route::delete('/traductores/{trad}', 'TraductorController@destroyTrad');
 
-Route::resource('traductores', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud
+Route::resource('traductor', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud
