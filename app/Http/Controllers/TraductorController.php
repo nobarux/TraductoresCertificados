@@ -17,7 +17,7 @@ class TraductorController extends Controller
 
         $trad = Traductores::all();
 
-        return view('traductor', ['trad' => $trad]);
+        return view('traductores.index', ['trad' => $trad]);
     }
 
     /**
@@ -27,7 +27,8 @@ class TraductorController extends Controller
      */
     public function create()
     {
-        //
+        return view('traductores.create');
+        
     }
 
     /**

@@ -13,7 +13,7 @@ class SolicitudesController extends Controller
             ['id_Estado', '<>', '6'],
         ])->get();
 
-        return view('/solicitudesGeneral', ['soli' => $soli]);
+        return view('solicitudes.solicitudesGeneral', ['soli' => $soli]);
     }
 
     public function indexSolicitudSuspensas()
@@ -21,7 +21,12 @@ class SolicitudesController extends Controller
          $soliSuspensas = Solicitudes::where('id_Estado',5)
          ->orderBy('nombre','asc')
          ->get();
-        return view('/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas]);
+        return view('solicitudes.solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas]);
 
+    }
+
+    public function indexSolicitudRegistro()
+    {
+        return view('solicitudes.solicitudesRegistro');
     }
 }

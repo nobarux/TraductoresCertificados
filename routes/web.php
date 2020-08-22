@@ -24,10 +24,6 @@ Route::get('/inicio', function () {
     return view('inicioP');
 });
 
-Route::get('/solicitudesRegistro', function () {
-    return view('solicitudesRegistro');
-});
-
 ////---------------------------------------------//////
 
 
@@ -49,6 +45,7 @@ Route::get('admin', 'AdminController@index')->middleware('auth');
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
+Route::get('/solicitudesRegistro', 'SolicitudesController@indexSolicitudRegistro');
 
 //Rutas para el registro de traductores
 // Route::get('/traductores', 'TraductorController@indexTrad');
@@ -59,4 +56,4 @@ Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspens
 // Route::patch('/traductores/{trad}', 'TraductorController@updateTrad');
 // Route::delete('/traductores/{trad}', 'TraductorController@destroyTrad');
 
-Route::resource('traductor', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud
+Route::resource('traductores', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud

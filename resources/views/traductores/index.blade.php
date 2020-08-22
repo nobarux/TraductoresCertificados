@@ -18,6 +18,16 @@
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="row py-1g-2">
+          <div class="col-md-6"> 
+            <h1>Esta es la lista de traductores</h1>  
+          </div>
+          <div class="col-md-6">
+            <a href="/traductores/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
+            Registro Nuevo
+            </a>
+          </div>
+        </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
