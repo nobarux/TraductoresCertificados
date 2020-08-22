@@ -17,10 +17,10 @@
             <a class="nav-link" href="/solicitudesRegistro">Registro Traductores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/solicitudesRegistro">Traductores</a>
+            <a class="nav-link" href="/traductores">Traductores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/solicitudesGeneral">Solicitudes</a>
+            <a class="nav-link" href="/solicitudes">Solicitudes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/reclamaciones">Reclamaciones</a>

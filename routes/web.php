@@ -29,13 +29,7 @@ Route::get('/solicitudesRegistro', function () {
 });
 
 ////---------------------------------------------//////
-Route::get('/solicitudesGeneral', function () {
-    return view('solicitudesGeneral');
-});
 
-Route::get('/solicitudesSuspensas', function () {
-    return view('solicitudesSuspensas');
-});
 
 Route::get('/reclamaciones', function () {
     return view('reclamaciones');

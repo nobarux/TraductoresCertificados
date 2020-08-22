@@ -21,14 +21,14 @@ class CreateTbSolicitudesTable extends Migration
             $table->integer('edad');
             $table->string('nacionalidad',255);
             $table->string('prof_Ocup',255);
-            $table->integer('id_Idioma');
+            $table->bigInteger('id_Idioma');
             $table->integer('ci');
             $table->string('image_url');
             $table->string('ant_penales');
             $table->string('curriculum');
             $table->string('telefono',255);
             $table->string('email',255);
-            $table->integer('id_Estado');
+            $table->bigInteger('id_Estado');
             $table->integer('anno');
             $table->timestamps();
 
