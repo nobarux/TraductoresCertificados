@@ -25,7 +25,7 @@
 
   <!-- Custom styles for this template -->
   {{-- <link href="css/clean-blog.min.css" rel="stylesheet"> --}}
-  <link href="css/app.css" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet">
 
 
 </head>

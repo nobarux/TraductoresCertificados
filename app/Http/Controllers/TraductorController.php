@@ -27,7 +27,7 @@ class TraductorController extends Controller
      */
     public function create()
     {
-        return view('traductores.create');
+        return view('solicitudes.solicitudesRegistro');
         
     }
 
