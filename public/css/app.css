@@ -11113,8 +11113,12 @@ header.masthead .site-heading {
   header.masthead .page-heading,
   header.masthead .post-heading,
   header.masthead .site-heading {
-    padding: 200px 0;
+    padding: 40px 0 40px;
   }
+}
+
+.secundary{
+padding: 20px 0 20px;
 }
 
 header.masthead .page-heading,

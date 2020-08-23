@@ -9,8 +9,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Esta es la pagina de registro de solicitudes</h1>
-            {{-- <span class="subheading">This is what I do.</span> --}}
+           
           </div>
         </div>
       </div>
@@ -20,10 +19,95 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
+      <h1>Registro de nuevo traductor</h1>
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+
+        <form method="POST" action="/traductores" enctype="multipart/form-data">
+          {{csrf_field()}}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" id="nombre">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="apellido">Apellido</label>
+              <input type="text" class="form-control" id="apellido">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nacimiento">Lugar de nacimiento</label>
+            <input type="text" class="form-control" id="nacimiento" >
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="edad">Edad</label>
+              <input type="text" class="form-control" id="edad">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="nacionalidad">Nacionalidad</label>
+              <input type="text" class="form-control" id="nacionalidad">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="prof">Profesión/Ocupación</label>
+              <input type="text" class="form-control" id="prof">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="ci">CI</label>
+              <input type="number"  class="form-control" id="ci">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="telefono">Telefono</label>
+              <input type="number" class="form-control" id="telefono">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+          </div>
+          <br>
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imagen" lang="es">
+                <label class="custom-file-label" for="imagen">Imagen(Opcional)</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-8">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="antecedentes">
+                <label class="custom-file-label" for="antecedentes">Antecedentes Penales(Opcional)</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-8">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="curriculum">
+                <label class="custom-file-label" for="curriculum">Curriculum(Opcional)</label>
+              </div>
+            </div>
+            
+            
+          </div>  
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="idioma">Idioma</label>
+              <select id="idioma" class="form-control">
+                <option selected>Choose...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+        
       </div>
     </div>
   </div>
