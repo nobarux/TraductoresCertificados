@@ -32,16 +32,15 @@ Route::get('/reclamaciones', function () {
     
 });
 
-Route::get('/administracion', function () {
-    //return view('welcome');
-    return "Aqui van la pantalla de los roles";
-});
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 //Rutas para la parte de administracion
 Route::get('admin', 'AdminController@index')->middleware('auth');
-
+Route::get('returnIndex', 'AdminController@returnIndex');
+//Rutas para los usuarios
+Route::get('/usuariosadmin', 'UserController@usuarios');
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');

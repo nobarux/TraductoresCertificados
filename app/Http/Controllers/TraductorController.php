@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class TraductorController extends Controller
 {
+/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,6 +65,25 @@ class TraductorController extends Controller
         'id_Idioma'=> 'required|not_in:0'
         
       ]);
+
+
+        // Obtener los archivos del formulario
+        $fileNameWithTheExtension = request('image_url')->getClientOriginalName();
+        
+        //Obtener el nombre del archivo
+        $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+        
+        //Obtener la extenion del archivo a guardar
+        $extension = request('image_url')->getClientOriginalExtension();
+
+        //Creacion de un nombr nuevo para guaradarlo en bd
+        $newFileName = $fileName . '_' . time() . '.' . $extension;
+
+        //Redirigir las imagenes para una carpeta publica
+        $path = request('image_url')->storeAs('public/imagenesTraductores',$newFileName);
+
+        
+      //Llamado al modelo de traductores para poder guardarlo luego n bd
         $traductor = new Traductores();
         
         $traductor->nombre = $request->nombre;
@@ -66,7 +95,7 @@ class TraductorController extends Controller
         $traductor->ci = intval($request->ci);
         $traductor->telefono = $request->telefono;
         $traductor->email = $request->email;
-        $traductor->image_url = '';
+        $traductor->image_url = $newFileName;
         $traductor->ant_penales = $request->ant_penales;
         $traductor->curriculum = $request->curriculum;
         $traductor->id_Idioma = $request->id_Idioma;

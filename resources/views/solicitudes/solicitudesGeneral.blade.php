@@ -53,6 +53,7 @@
                                     <td>{{ $solicitudes->nombre }} </td>
                                     <td>{{ $solicitudes->apellidos }} </td>
                                     <td>{{ $solicitudes->idioma->descripcion }} </td>
+                                    {{-- <td><img src="{{asset('/storage/imagenesTraductores/'.$solicitudes->image_url)}}" alt="{{$solicitudes->image_url}}" width="80"> </td> --}}
                                     <td>{{ $solicitudes->estado->descripcion }} </td>
                                     <td> ....... </td>
                                 </tr>

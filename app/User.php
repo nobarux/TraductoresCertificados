@@ -39,5 +39,8 @@ class User extends Authenticatable
 
     /**Esta funcion es para q el formato de salida de los datos tipo datetime sean Año mes y dia */
     protected $dateFormat = 'Ymd H:m:s';
+
+    protected $table = 'users';
+
     
 }
