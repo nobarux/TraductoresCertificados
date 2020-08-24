@@ -4190,6 +4190,10 @@ input[type=button].btn-block {
   content: "Browse";
 }
 
+.custom-file-input:lang(es) ~ .custom-file-label::after {
+  content: "Elegir";
+}
+
 .custom-file-input ~ .custom-file-label[data-browse]::after {
   content: attr(data-browse);
 }
@@ -11032,7 +11036,7 @@ img::-moz-selection {
   }
 
   #mainNav .navbar-nav > li.nav-item > a {
-    padding: 10px 15px 10px 20px;
+    padding: 10px 20px;
     color: #fff;
   }
 
@@ -11105,7 +11109,7 @@ header.masthead .overlay {
 header.masthead .page-heading,
 header.masthead .post-heading,
 header.masthead .site-heading {
-  padding: 200px 0 150px;
+  padding: 40px 0 30px;
   color: white;
 }
 
@@ -11113,12 +11117,8 @@ header.masthead .site-heading {
   header.masthead .page-heading,
   header.masthead .post-heading,
   header.masthead .site-heading {
-    padding: 40px 0 40px;
+    /* padding: 200px 0; */
   }
-}
-
-.secundary{
-padding: 20px 0 20px;
 }
 
 header.masthead .page-heading,

@@ -39,7 +39,43 @@ class TraductorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //dd($request); //Esto creo q es un var dump
+
+      //Validar el formulario
+      $data = $request->validate([
+        'nombre'=> 'required|min:5|max:255',
+        'apellidos'=> 'required|min:5|max:255',
+        'edad'=> 'required|integer|min:18|max:100',
+        'nacionalidad'=> 'required|min:1|max:255',
+        'ci'=> 'required',
+        'telefono'=> 'required',
+        'email'=> 'required',
+        'image_url'=> 'image',
+        // 'image_url'=> 'file|size:512|image',
+        'id_Idioma'=> 'required|not_in:0'
+        
+      ]);
+        $traductor = new Traductores();
+        
+        $traductor->nombre = $request->nombre;
+        $traductor->apellidos = $request->apellidos;
+        $traductor->lugar_Nac = $request->lugar_Nac;
+        $traductor->edad = $request->edad;
+        $traductor->nacionalidad = $request->nacionalidad;
+        $traductor->prof_Ocup = $request->prof_Ocup;
+        $traductor->ci = intval($request->ci);
+        $traductor->telefono = $request->telefono;
+        $traductor->email = $request->email;
+        $traductor->image_url = '';
+        $traductor->ant_penales = $request->ant_penales;
+        $traductor->curriculum = $request->curriculum;
+        $traductor->id_Idioma = $request->id_Idioma;
+        $traductor->ant_penales = $request->ant_penales;
+        $traductor->id_Estado = 1;
+        $traductor->anno = 2020;
+        $traductor->save();
+        return redirect('/solicitudes');
+        //   dd($id_Idioma);
     }
 
     /**
