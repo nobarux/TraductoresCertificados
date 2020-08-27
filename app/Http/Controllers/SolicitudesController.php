@@ -39,4 +39,10 @@ class SolicitudesController extends Controller
     {
         return view('solicitudes.solicitudesRegistro');
     }
+
+    public function aprobadosUpdate()
+    {
+        dd('Esto es una prueba');
+        // return view('solicitudes.solicitudesRegistro');
+    }
 }

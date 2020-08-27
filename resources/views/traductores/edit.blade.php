@@ -19,7 +19,7 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
-      <h1>Registro de nuevo traductor</h1>
+      <h1>Editar a un traductor</h1>
       
 
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -34,49 +34,51 @@
         </div>
       @endif
     {{-- -------------------------------- --}}
-        <form method="POST" action="/traductores" enctype="multipart/form-data">
-          {{csrf_field()}}
+    <form method="POST" action="/traductores/{{ $trad->id }}" enctype="multipart/form-data">
+        @method('PATCH')  
+        @csrf
+        {{-- {{csrf_field()}} --}}
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="{{old('nombre')}}">
+              <input type="text" class="form-control" name="nombre" id="nombre" value="{{$trad->nombre}}">
             </div>
             <div class="form-group col-md-6">
               <label for="apellidos">Apellido</label>
-              <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{old('apellidos')}}">
+              <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{$trad->apellidos}}">
             </div>
           </div>
           <div class="form-group">
             <label for="lugar_Nac">Lugar de nacimiento</label>
-            <input type="text" class="form-control" id="lugar_Nac" name="lugar_Nac"  value="{{old('lugar_Nac')}}" >
+            <input type="text" class="form-control" id="lugar_Nac" name="lugar_Nac"  value="{{$trad->lugar_Nac}}" >
           </div>
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="edad">Edad</label>
-              <input type="text" class="form-control" id="edad" name="edad"  value="{{old('edad')}}">
+              <input type="text" class="form-control" id="edad" name="edad"  value="{{$trad->edad}}">
             </div>
             <div class="form-group col-md-4">
               <label for="nacionalidad">Nacionalidad</label>
-              <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" value="{{old('nacionalidad')}}">
+              <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" value="{{$trad->nacionalidad}}">
             </div>
             <div class="form-group col-md-4">
               <label for="prof_Ocup">Profesión/Ocupación</label>
-              <input type="text" class="form-control" id="prof_Ocup" name="prof_Ocup"  value="{{old('prof_Ocup')}}">
+              <input type="text" class="form-control" id="prof_Ocup" name="prof_Ocup"  value="{{$trad->prof_Ocup}}">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="ci">CI</label>
-              <input type="number"  class="form-control" id="ci" name="ci" value="{{old('ci')}}">
+              <input type="number"  class="form-control" id="ci" name="ci" value="{{$trad->ci}}">
             </div>
             <div class="form-group col-md-4">
               <label for="telefono">Telefono</label>
-              <input type="number" class="form-control" id="telefono" name="telefono" value="{{old('telefono')}}">
+              <input type="number" class="form-control" id="telefono" name="telefono" value="{{$trad->telefono}}">
             </div>
             <div class="form-group col-md-4">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
+              <input type="email" class="form-control" id="email" name="email" value="{{$trad->email}}">
             </div>
           </div>
           <br>
@@ -85,6 +87,10 @@
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="image_url" name="image_url"  lang="es" >
                 <label class="custom-file-label" for="image_url">Imagen(Opcional)</label>
+                
+                <div class="row">
+                    <img src="{{ asset('/storage/imagenesTraductores/'.$trad->image_url) }}" class="img-thumbnail mx-auto" alt="{{$trad->image_url}}" width="250">
+                </div>
               </div>
             </div>
 
@@ -108,8 +114,8 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="id_Idioma">Idioma</label>
-              <select id="id_Idioma" class="form-control" name="id_Idioma">
-                <option value="" selected>Selecciona un idioma</option>
+              <select id="id_Idioma" class="form-control" name="id_Idioma" >
+                <option value="{{$trad->id_Idioma}}" selected>Selecciona un idioma</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

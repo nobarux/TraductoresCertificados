@@ -31,6 +31,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th hidden>Id</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Idioma</th>
@@ -40,6 +41,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th hidden>Id</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Idioma</th>
@@ -50,12 +52,15 @@
                         <tbody>
                             @foreach ($soli as $solicitudes)
                                 <tr>
+                                    <td hidden>{{ $solicitudes->id }} </td>
                                     <td>{{ $solicitudes->nombre }} </td>
                                     <td>{{ $solicitudes->apellidos }} </td>
                                     <td>{{ $solicitudes->idioma->descripcion }} </td>
                                     {{-- <td><img src="{{asset('/storage/imagenesTraductores/'.$solicitudes->image_url)}}" alt="{{$solicitudes->image_url}}" width="80"> </td> --}}
                                     <td>{{ $solicitudes->estado->descripcion }} </td>
-                                    <td> ....... </td>
+                                    <td> 
+                                      <a href="/solicitudes/{{$solicitudes->id}}/edit">Cambio estado</a>   
+                                    </td>
                                 </tr>
                             @endforeach
                             
