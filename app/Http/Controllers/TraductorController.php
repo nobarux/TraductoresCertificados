@@ -215,7 +215,7 @@ class TraductorController extends Controller
         // dd($image);
 
         $nombreImagen = $trad_id->getOriginal('image_url');
-
+       
         //Borrar imagen del traductor cuando este  se elimine de la bd
         $oldImage = public_path() . '/storage/imagenesTraductores/' . $nombreImagen;
 

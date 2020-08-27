@@ -118,8 +118,6 @@
 
 </div>
 @section('jsModalDelete')
-    
-
 <script type=text/javascript>
   function deleteData(id)
   {
@@ -135,4 +133,5 @@
   }
 </script>
 @endsection
+
 @endsection

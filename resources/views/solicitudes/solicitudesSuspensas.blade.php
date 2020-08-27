@@ -53,7 +53,12 @@
                                     <td>{{ $solicitudesSus->apellidos }} </td>
                                     <td>{{ $solicitudesSus->idioma->descripcion }} </td>
                                     <td>{{ $solicitudesSus->estado->descripcion }} </td>
-                                    <td> ....... </td>
+                                    <td>
+                                      <form method="POST" id="changeForm" action="/solicitudesReclamar/{{ $solicitudesSus->id }}" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Reclamar Solicitud</button>
+                                      </form> </td>
                                 </tr>
                             @endforeach
                             

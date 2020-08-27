@@ -59,7 +59,36 @@
                                     {{-- <td><img src="{{asset('/storage/imagenesTraductores/'.$solicitudes->image_url)}}" alt="{{$solicitudes->image_url}}" width="80"> </td> --}}
                                     <td>{{ $solicitudes->estado->descripcion }} </td>
                                     <td> 
-                                      <a href="/solicitudes/{{$solicitudes->id}}/edit">Cambio estado</a>   
+                                      <form method="POST" id="changeForm" action="/solicitudes/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        {{-- <a href="" type="submit">Cambio estado</a>    --}}
+                                        {{-- <a href="javascript:;" onclick="deleteData({{$solicitudes->id}})"><i class="fa fa-trash"></i></a>    --}}
+
+                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Aprobado examen</button>
+                                      </form>
+                                      <br>
+
+                                      <form method="POST" id="changeForm" action="/solicitudesPend/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Pendiente Calif.</button>
+                                      </form>
+                                      <br>
+
+                                      <form method="POST" id="changeForm" action="/solicitudesAprob/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Aprobar Solicitud</button>
+                                      </form>
+                                      <br>
+
+                                      <form method="POST" id="changeForm" action="/solicitudesSusp/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Suspender Solicitud</button>
+                                      </form>
+                                      
                                     </td>
                                 </tr>
                             @endforeach
@@ -74,6 +103,20 @@
       </div>
     </div>
   </div>
-
+  {{-- <script type=text/javascript>
+    function deleteData(id)
+    {
+        var id = id;
+        var url = '{{ route("solicitudes.aprobadosUpdate", ":id") }}';
+        console.log(url);
+        url = url.replace(':id', id);
+        $("#changeForm").attr('action', url);
+    }
+  
+    function formSubmit()
+    {
+        $("#changeForm").submit();
+    }
+  </script> --}}
   <hr>
 @endsection

@@ -40,9 +40,63 @@ class SolicitudesController extends Controller
         return view('solicitudes.solicitudesRegistro');
     }
 
-    public function aprobadosUpdate()
+    public function aprobadosUpdate(Request $request, $solicitudes)
     {
-        dd('Esto es una prueba');
-        // return view('solicitudes.solicitudesRegistro');
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitudes::findOrFail($solicitudes);
+        $solicitud->id_Estado = 2;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/solicitudes');
+    }
+
+    public function pendienteCalifUpdate(Request $request, $solicitudes)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitudes::findOrFail($solicitudes);
+        $solicitud->id_Estado = 3;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/solicitudes');
+    }
+
+    public function aprobUpdate(Request $request, $solicitudes)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitudes::findOrFail($solicitudes);
+        $solicitud->id_Estado = 4;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/solicitudes');
+    }
+
+    public function suspUpdate(Request $request, $solicitudes)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitudes::findOrFail($solicitudes);
+        $solicitud->id_Estado = 5;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/solicitudes');
+    }
+
+    public function reclamarUpdate(Request $request, $solicitudesSus)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitudes::findOrFail($solicitudesSus);
+        $solicitud->id_Estado = 6;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/reclamaciones');
     }
 }

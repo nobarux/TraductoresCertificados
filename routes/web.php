@@ -45,7 +45,11 @@ Route::get('/usuariosadmin', 'UserController@usuarios');
 Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
 Route::get('/solicitudesRegistro', 'SolicitudesController@indexSolicitudRegistro');
-Route::patch('/solicitudes/{soli}/edit', 'SolicitudesController@aprobadosUpdate');
+Route::patch('/solicitudes/{soli}', 'SolicitudesController@aprobadosUpdate');
+Route::patch('/solicitudesPend/{soli}', 'SolicitudesController@pendienteCalifUpdate');
+Route::patch('/solicitudesAprob/{soli}', 'SolicitudesController@aprobUpdate');
+Route::patch('/solicitudesSusp/{soli}', 'SolicitudesController@suspUpdate');
+Route::patch('/solicitudesReclamar/{soli}', 'SolicitudesController@reclamarUpdate');
 
 //Rutas para el registro de traductores
 // Route::get('/traductores', 'TraductorController@index');
