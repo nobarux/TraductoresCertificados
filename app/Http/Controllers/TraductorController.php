@@ -207,6 +207,23 @@ class TraductorController extends Controller
     public function destroy($traductores)
     {
         $trad_id = Traductores::find($traductores);
+        /* se convierte esta variable a int para q luego pueda buscar cualquier 
+        cosa de la bd por el id q me esta enviando desde la vista*/
+        // $intid = intval($traductores);
+        // $image = Traductores::select('image_url')->where('id',$intid)
+        // ->get();
+        // dd($image);
+
+        $nombreImagen = $trad_id->getOriginal('image_url');
+
+        //Borrar imagen del traductor cuando este  se elimine de la bd
+        $oldImage = public_path() . '/storage/imagenesTraductores/' . $nombreImagen;
+
+        if (file_exists($oldImage)) {
+            //Borrar la imagen
+            unlink($oldImage);
+        }
+
         //Borrar el traductor
         $trad_id->delete();
         return redirect('/traductores');

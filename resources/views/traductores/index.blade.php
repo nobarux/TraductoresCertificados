@@ -117,6 +117,9 @@
   </div>
 
 </div>
+@section('jsModalDelete')
+    
+
 <script type=text/javascript>
   function deleteData(id)
   {
@@ -131,4 +134,5 @@
       $("#deleteForm").submit();
   }
 </script>
+@endsection
 @endsection

@@ -61,3 +61,4 @@
 <script src="/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/admin/scripts.js"></script>
 <script src="/js/admin/demo/datatables-demo.js"></script>
+@yield('jsModalDelete')
