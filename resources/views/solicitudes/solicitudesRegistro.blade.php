@@ -1,7 +1,7 @@
-
 @extends('Layouts.app')
 
 @section('content')
+
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('/img/about-bg.jpg')">
     <div class="overlay"></div>
@@ -102,7 +102,6 @@
               </div>
             </div>
             
-            
           </div>  
           
           <div class="form-row">
@@ -110,9 +109,9 @@
               <label for="id_Idioma">Idioma</label>
               <select id="id_Idioma" class="form-control" name="id_Idioma">
                 <option value="" selected>Selecciona un idioma</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                @foreach ($idioma as $idiomas)
+                <option value="{{ $idiomas->id }}">{{ $idiomas->descripcion}}</option>
+                @endforeach
               </select>
             </div>
             
@@ -126,4 +125,13 @@
   </div>
 
   <hr>
+  @endsection
+  @section('scriptNombreUpload' )
+  <script type=text/javascript>
+    $(document).on('change', '.custom-file-input', function (event) {
+    $(this).next('.custom-file-label').html(event.target.files[0].name);
+})
+    
+  </script>
+      
   @endsection

@@ -38,7 +38,6 @@ class TraductorController extends Controller
     public function create()
     {
         return view('solicitudes.solicitudesRegistro');
-        
     }
 
     /**
@@ -65,27 +64,69 @@ class TraductorController extends Controller
         'id_Idioma'=> 'required|not_in:0'
         
       ]);
-
-
-        // Obtener los archivos del formulario
-        $fileNameWithTheExtension = request('image_url')->getClientOriginalName();
         
-        //Obtener el nombre del archivo
-        $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
         
-        //Obtener la extenion del archivo a guardar
-        $extension = request('image_url')->getClientOriginalExtension();
 
-        //Creacion de un nombr nuevo para guaradarlo en bd
-        $newFileName = $fileName . '_' . time() . '.' . $extension;
+        if($request->hasFile('image_url'))
+        {
+            // Obtener los archivos del formulario
+            $fileNameWithTheExtension = request('image_url')->getClientOriginalName();
 
-        //Redirigir las imagenes para una carpeta publica
-        $path = request('image_url')->storeAs('public/imagenesTraductores',$newFileName);
-
+            //Obtener el nombre del archivo
+            $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+            
+            //Obtener la extenion del archivo a guardar
+            $extension = request('image_url')->getClientOriginalExtension();
+            
+            //Creacion de un nombre nuevo para guaradarlo en bd
+            $newFileName = $fileName . '_' . time() . '.' . $extension;
+            
+            
+            //Redirigir los archivos para una carpeta publica
+            $path = request('image_url')->storeAs('public/imagenesTraductores',$newFileName);
+            //dd($path);
+        }
+        else {
+            $newFileName = "";
+            // dd($newFileName);
+        }
         
-      //Llamado al modelo de traductores para poder guardarlo luego n bd
+        
+        if($request->hasFile('ant_penales'))
+        {
+            $fileNameAnt= request('ant_penales')->getClientOriginalName();
+            //Obtener el nombre del archivo
+            $fileNameAntecedentes = pathinfo($fileNameAnt, PATHINFO_FILENAME);
+
+            $extensionAntecedentes = request('ant_penales')->getClientOriginalExtension();
+
+            $newFileNameAntecedentes = $fileNameAntecedentes . '_' . time() . '.' . $extensionAntecedentes;
+            // dd($newFileNameAntecedentes);
+
+            $pathAntecedente = request('ant_penales')->storeAs('public/documentosTraductores',$newFileNameAntecedentes);
+            //dd($pathAntecedente);
+        }
+        else {
+            $newFileNameAntecedentes = "";
+        }
+
+        if($request->hasFile('curriculum'))
+        {
+            $fileNameCurric= request('curriculum')->getClientOriginalName();
+            $fileNameCurriculum = pathinfo($fileNameCurric, PATHINFO_FILENAME);
+            $extensionCurriculum = request('curriculum')->getClientOriginalExtension();
+            $newFileNameCurriculum = $fileNameCurriculum . '_' . time() . '.' . $extensionCurriculum;
+            $pathCurriculum = request('curriculum')->storeAs('public/documentosTraductores',$newFileNameCurriculum);
+            // dd($fileNameCurriculum);
+
+        }
+        else {
+            $newFileNameCurriculum = "";
+            //dd($newFileNameCurriculum);
+        }
+
+        //Llamado al modelo de traductores para poder guardarlo luego en bd
         $traductor = new Traductores();
-        
         $traductor->nombre = $request->nombre;
         $traductor->apellidos = $request->apellidos;
         $traductor->lugar_Nac = $request->lugar_Nac;
@@ -96,15 +137,15 @@ class TraductorController extends Controller
         $traductor->telefono = $request->telefono;
         $traductor->email = $request->email;
         $traductor->image_url = $newFileName;
-        $traductor->ant_penales = $request->ant_penales;
-        $traductor->curriculum = $request->curriculum;
+        $traductor->ant_penales = $newFileNameAntecedentes;
+        $traductor->curriculum = $newFileNameCurriculum;
         $traductor->id_Idioma = $request->id_Idioma;
-        $traductor->ant_penales = $request->ant_penales;
         $traductor->id_Estado = 1;
         $traductor->anno = 2020;
         $traductor->save();
         return redirect('/traductores');
         //   dd($id_Idioma);
+      
     }
 
     /**

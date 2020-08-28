@@ -62,3 +62,4 @@
 <script src="/js/admin/scripts.js"></script>
 <script src="/js/admin/demo/datatables-demo.js"></script>
 @yield('jsModalDelete')
+@yield('scriptNombreUpload')

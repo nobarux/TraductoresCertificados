@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Solicitudes;
+use App\Idiomas;
 use Illuminate\Http\Request;
 
 class SolicitudesController extends Controller
@@ -37,7 +38,9 @@ class SolicitudesController extends Controller
 
     public function indexSolicitudRegistro()
     {
-        return view('solicitudes.solicitudesRegistro');
+        $idiomas = Idiomas::all();
+
+        return view('solicitudes.solicitudesRegistro', ['idioma' => $idiomas]);
     }
 
     public function aprobadosUpdate(Request $request, $solicitudes)
