@@ -57,7 +57,7 @@
                                 Usuarios Registrados
                             </a>
                              <div class="sb-sidenav-menu-heading">Regreso</div>
-                            <a class="nav-link" href="/returnIndex" >
+                            <a class="nav-link" href="/" >
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Regreso a inicio
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

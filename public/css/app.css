@@ -12742,6 +12742,7 @@ img::-moz-selection {
   }
 
   #mainNav.is-fixed .navbar-nav > li.nav-item > a {
+    padding: 10px 20px;
     color: #212529;
   }
 
@@ -12778,16 +12779,8 @@ header.masthead .overlay {
 header.masthead .page-heading,
 header.masthead .post-heading,
 header.masthead .site-heading {
-  padding: 200px 0 150px;
+  padding: 40px 0 30px;
   color: white;
-}
-
-@media only screen and (min-width: 768px) {
-  header.masthead .page-heading,
-  header.masthead .post-heading,
-  header.masthead .site-heading {
-    padding: 200px 0;
-  }
 }
 
 header.masthead .page-heading,
@@ -12971,35 +12964,6 @@ footer .copyright {
   font-size: 14px;
   margin-bottom: 0;
   text-align: center;
-}
-
-.btn {
-  font-size: 14px;
-  font-weight: 800;
-  padding: 15px 25px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border-radius: 0;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.btn-primary {
-  background-color: #3490dc;
-  border-color: #3490dc;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
-  color: #fff;
-  background-color: #227dc7 !important;
-  border-color: #227dc7 !important;
-}
-
-.btn-lg,
-.btn-group-lg > .btn {
-  font-size: 16px;
-  padding: 25px 35px;
 }
 
 :root {

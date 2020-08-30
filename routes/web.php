@@ -31,7 +31,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 //Rutas para la parte de administracion
 Route::get('admin', 'AdminController@index')->middleware('auth');
-Route::get('returnIndex', 'AdminController@returnIndex');
+
 //Rutas para los usuarios
 Route::get('/usuariosadmin', 'UserController@usuarios');
 //Rutas para las solicitudes 

@@ -21,8 +21,4 @@ class AdminController extends Controller
         return view('admin.usuarios');
     }
 
-    public function returnIndex()
-    {
-        return view('inicioP');
-    }
 }
