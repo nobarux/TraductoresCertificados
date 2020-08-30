@@ -16,13 +16,6 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', function () {
-    return view('inicioP');
-});
-
-Route::get('/inicio', function () {
-    return view('inicioP');
-});
 
 ////---------------------------------------------//////
 
@@ -35,7 +28,7 @@ Route::get('/reclamaciones', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 //Rutas para la parte de administracion
 Route::get('admin', 'AdminController@index')->middleware('auth');
 Route::get('returnIndex', 'AdminController@returnIndex');

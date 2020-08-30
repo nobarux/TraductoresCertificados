@@ -101,7 +101,7 @@
         <span aria-hidden="true">x</span>
       </button>
       </div>
-      <div class="modal-body">Selecciona "Eliminar" si desea eliminar a este traductor</div>
+      <div class="modal-body">¿Esta seguro que desea eliminar a este traductor?</div>
       <div class="modal-footer">
         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
         
