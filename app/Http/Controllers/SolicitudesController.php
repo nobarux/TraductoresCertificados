@@ -102,4 +102,13 @@ class SolicitudesController extends Controller
         //return redirect('/solicitudes/solicitudesGeneral');
         return redirect('/reclamaciones');
     }
+
+    public function test($solicitudes)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        
+        $solicitud = Solicitudes::select('nombre')->where('id',$solicitudes)
+        ->get();
+       return view('solicitudes.solicitudesRegistro', ['soli' => $soli]);
+    }
 }

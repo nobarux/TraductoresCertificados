@@ -66,7 +66,8 @@
                             @foreach ($trad as $traductores)
                                 <tr>
                                     <td hidden>{{ $traductores->id }} </td>
-                                    <td>{{ $traductores->nombre }} </td>
+                                    <td><a type="button" data-toggle="modal" data-target="#detailModal"  onclick='showData("{{$traductores->nombre}}","{{$traductores->apellidos}}","{{$traductores->ci}}","{{$traductores->image_url}}")'><i class="fas fa-address-card fa-sm"></i></a>   {{ $traductores->nombre }}</td>
+                                    {{-- <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailModal" onclick='showData("{{$traductores->nombre}}","{{$traductores->apellidos}}","{{$traductores->ci}}","{{$traductores->image_url}}")'><i class="icon-user"></i></button> {{ $traductores->nombre }} </td> --}}
                                     <td>{{ $traductores->apellidos }} </td>
                                     <td>{{ $traductores->ci }} </td>
                                     <td>{{ $traductores->edad }} </td>
@@ -98,7 +99,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Eliminado de traductor</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="close">
-        <span aria-hidden="true">x</span>
+        <span aria-hidden="true">&times;</span>
       </button>
       </div>
       <div class="modal-body">¿Esta seguro que desea eliminar a este traductor?</div>
@@ -109,7 +110,7 @@
           @method('DELETE')
           @csrf
           {{-- <a class="btn btn-primary" onclick="$(this).closest('form').submit();">Eliminar</a> --}}
-          <button type=submit name="" class="btn btn-primary" data-dismiss="modal" onclick="formSubmit()">Eliminar</button>
+          <button type="submit" name="" class="btn btn-primary" data-dismiss="modal" onclick="formSubmit()">Eliminar</button>
       </form>
       </div>
     </div>
@@ -117,6 +118,44 @@
   </div>
 
 </div>
+
+{{-- Modal para el view --}}
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Datos del traductor</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          
+          <form method="POST" id="viewForm">  
+            <img src="" id="imagen" style="width: 200px; height: 200px;" class="rounded float-right" alt="...">
+            
+            <div class="form-group col-md-4">
+              <input class="form-control" id="nombre" name="nombre" type="text" value="" readonly>
+            </div>
+            <div class="form-group col-md-4">
+              <input class="form-control" id="apellido" name="apellido" type="text" value=""  readonly>
+            </div>
+            <div class="form-group col-md-4">
+              <input class="form-control" id="ci" name="ci" type="text" value="" readonly>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+          
+          {{-- <button type=submit name="" class="btn btn-primary" data-dismiss="modal" onclick="formSubmit()">Eliminar</button> --}}
+    </div>
+    </div>
+
+  </div>
+
+</div>
+
 @section('jsModalDelete')
 <script type=text/javascript>
   function deleteData(id)
@@ -131,6 +170,23 @@
   {
       $("#deleteForm").submit();
   }
+
+  function showData(nmbre,apellido,ci,imagen)
+  {
+      var nombre = nmbre;
+      var apellido = apellido;
+      var ci = ci;
+      var img = imagen;
+      var imagModal = document.querySelector('#imagen');
+      imagModal.setAttribute("src", "/storage/imagenesTraductores/" + img);
+      //alert(imagen)
+       document.getElementById("nombre").value = nmbre; 
+       document.getElementById("apellido").value = apellido; 
+       document.getElementById("ci").value = ci; 
+      //  
+  }
+
+  
 </script>
 @endsection
 

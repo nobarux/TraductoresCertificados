@@ -43,6 +43,7 @@ Route::patch('/solicitudesPend/{soli}', 'SolicitudesController@pendienteCalifUpd
 Route::patch('/solicitudesAprob/{soli}', 'SolicitudesController@aprobUpdate');
 Route::patch('/solicitudesSusp/{soli}', 'SolicitudesController@suspUpdate');
 Route::patch('/solicitudesReclamar/{soli}', 'SolicitudesController@reclamarUpdate');
+Route::get('/solicitudesRegistro/{soli}', 'SolicitudesController@test');
 
 //Rutas para el registro de traductores
 // Route::get('/traductores', 'TraductorController@index');
