@@ -10,7 +10,6 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h1>Eesta es la pagina de las solicitudes en general</h1>
-            <span class="subheading">This is what I do.</span>
           </div>
         </div>
       </div>
@@ -35,6 +34,7 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Idioma</th>
+                                <th>Solicitud</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -45,6 +45,7 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Idioma</th>
+                                <th>Solicitud</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -56,6 +57,7 @@
                                     <td>{{ $solicitudes->nombre }} </td>
                                     <td>{{ $solicitudes->apellidos }} </td>
                                     <td>{{ $solicitudes->idioma->descripcion }} </td>
+                                    <td>{{ $solicitudes->num_Solicitud }} </td>
                                     {{-- <td><img src="{{asset('/storage/imagenesTraductores/'.$solicitudes->image_url)}}" alt="{{$solicitudes->image_url}}" width="80"> </td> --}}
                                     <td>{{ $solicitudes->estado->descripcion }} </td>
                                     <td> 

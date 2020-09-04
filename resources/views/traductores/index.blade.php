@@ -15,6 +15,14 @@
     </div>
   </header>
 <!-- Main Content -->
+@if (session('mensaje'))
+  <div class="alert alert-success" role="alert" id="alerta" style="text-align:center">
+    {{session('mensaje')}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
 <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -156,8 +164,16 @@
 
 </div>
 
+
+
 @section('jsModalDelete')
 <script type=text/javascript>
+ //Parte del autocerrado del alert cuando e inserta un nuevo registro
+  $("#alerta").fadeTo(5000,500).slideUp(500,function() {
+    $("#alerta").slideUp(500);
+  })
+
+
   function deleteData(id)
   {
       var id = id;

@@ -161,7 +161,7 @@ class TraductorController extends Controller
         $traductor->anno = $Year = date("Y");
         $traductor->num_Solicitud = $nextSolicitud;
         $traductor->save();
-        return redirect('/traductores');
+        return redirect('/traductores')->with('mensaje','Ha creado un registro correctamente');
         //   dd($id_Idioma);
       
     }
