@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traductores;
+use App\Idiomas;
 use Illuminate\Http\Request;
 
 class TraductorController extends Controller
@@ -37,7 +38,8 @@ class TraductorController extends Controller
      */
     public function create()
     {
-        return view('solicitudes.solicitudesRegistro');
+        $idiomas = Idiomas::all();
+        return view('solicitudes.solicitudesRegistro',['idioma' => $idiomas]);
     }
 
     /**
@@ -59,7 +61,7 @@ class TraductorController extends Controller
         'ci'=> 'required',
         'telefono'=> 'required',
         'email'=> 'required',
-        'image_url'=> 'image',
+        'image_url'=> 'size:1024|image',
         // 'image_url'=> 'file|size:512|image',
         'id_Idioma'=> 'required|not_in:0'
         
@@ -125,6 +127,21 @@ class TraductorController extends Controller
             //dd($newFileNameCurriculum);
         }
 
+        // //Saber el ultimo numero de solicitud
+        $last_solicitud = Traductores::select('num_Solicitud')
+        ->orderBy('num_Solicitud','desc')
+        ->first();
+        // dd($last_solicitud);
+
+        if ($last_solicitud->num_Solicitud != null) {
+            //Sumarle uno para hacerle el continuo
+            $nextSolicitud = $last_solicitud->num_Solicitud + 1;
+        }
+        else {
+            $nextSolicitud = 1;
+        }
+       
+        
         //Llamado al modelo de traductores para poder guardarlo luego en bd
         $traductor = new Traductores();
         $traductor->nombre = $request->nombre;
@@ -141,7 +158,8 @@ class TraductorController extends Controller
         $traductor->curriculum = $newFileNameCurriculum;
         $traductor->id_Idioma = $request->id_Idioma;
         $traductor->id_Estado = 1;
-        $traductor->anno = 2020;
+        $traductor->anno = $Year = date("Y");
+        $traductor->num_Solicitud = $nextSolicitud;
         $traductor->save();
         return redirect('/traductores');
         //   dd($id_Idioma);
@@ -192,7 +210,7 @@ class TraductorController extends Controller
         'ci'=> 'required',
         'telefono'=> 'required',
         'email'=> 'required',
-        'image_url'=> 'image',
+        'image_url'=> 'size:1024|image',
         // 'image_url'=> 'file|size:512|image',
         'id_Idioma'=> 'required|not_in:0'
         
@@ -232,7 +250,6 @@ class TraductorController extends Controller
         $traductor->curriculum = $request->curriculum;
         $traductor->id_Idioma = $request->id_Idioma;
         $traductor->ant_penales = $request->ant_penales;
-        $traductor->anno = 2020;
         //dd($traductor);
 
         $traductor->save();

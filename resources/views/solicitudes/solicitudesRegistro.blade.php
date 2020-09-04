@@ -68,11 +68,11 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="ci">CI</label>
-              <input type="number"  class="form-control" id="ci" name="ci" value="{{old('ci')}}">
+              <input type="number" maxlength="11"  class="form-control" id="ci" name="ci" value="{{old('ci')}}">
             </div>
             <div class="form-group col-md-4">
               <label for="telefono">Telefono</label>
-              <input type="number" class="form-control" id="telefono" name="telefono" value="{{old('telefono')}}">
+              <input type="number" min="1" max="9999999" class="form-control" id="telefono" name="telefono" value="{{old('telefono')}}">
             </div>
             <div class="form-group col-md-4">
               <label for="email">Email</label>
