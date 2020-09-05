@@ -51,7 +51,7 @@ class TraductorController extends Controller
     public function store(Request $request)
     {
       //dd($request); //Esto creo q es un var dump
-
+      $Year = date("Y");
       //Validar el formulario
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
@@ -127,20 +127,32 @@ class TraductorController extends Controller
             //dd($newFileNameCurriculum);
         }
 
-        // //Saber el ultimo numero de solicitud
+        //Saber el ultimo numero de solicitud
         $last_solicitud = Traductores::select('num_Solicitud')
-        ->orderBy('num_Solicitud','desc')
+        ->orderBy('id','desc')
         ->first();
         // dd($last_solicitud);
 
         if ($last_solicitud->num_Solicitud != null) {
-            //Sumarle uno para hacerle el continuo
-            $nextSolicitud = $last_solicitud->num_Solicitud + 1;
+            //Si el año no es el actual empieza el numero de solicitud en uno
+            $last_anno = Traductores::select('anno')
+            ->orderBy('id','desc')
+            ->first();
+            if ($last_anno->anno < $Year) {
+                $nextSolicitud = 1;
+            }
+            else {
+                //Sumarle uno al numero de solicitud para hacerle el continuo
+                $nextSolicitud = $last_solicitud->num_Solicitud + 1;
+            }
+            
         }
         else {
             $nextSolicitud = 1;
         }
        
+       
+
         
         //Llamado al modelo de traductores para poder guardarlo luego en bd
         $traductor = new Traductores();
@@ -158,7 +170,7 @@ class TraductorController extends Controller
         $traductor->curriculum = $newFileNameCurriculum;
         $traductor->id_Idioma = $request->id_Idioma;
         $traductor->id_Estado = 1;
-        $traductor->anno = $Year = date("Y");
+        $traductor->anno = $Year;
         $traductor->num_Solicitud = $nextSolicitud;
         $traductor->save();
         return redirect('/traductores')->with('mensaje','Ha creado un registro correctamente');
