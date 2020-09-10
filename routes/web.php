@@ -33,7 +33,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('admin', 'AdminController@index')->middleware('auth');
 
 //Rutas para los usuarios
-Route::get('/usuariosadmin', 'UserController@usuarios');
+Route::get('/usuariosadmin', 'UserController@index');
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');

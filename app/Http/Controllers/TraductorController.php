@@ -199,8 +199,10 @@ class TraductorController extends Controller
     {
         //Variable q captura la id del traductor para editarlo
         $trad_id = Traductores::find($traductores);
+
+        $idiomas = Idiomas::all();
         //Retornar a la vista
-        return view('/traductores/edit',['trad'=>$trad_id]);
+        return view('/traductores/edit',['trad'=>$trad_id],['idioma'=>$idiomas]);
     }
 
 
@@ -213,7 +215,9 @@ class TraductorController extends Controller
      */
     public function update(Request $request, $traductores)
     {
-        //Validar el formulario
+       //dd($request); //Esto creo q es un var dump
+      $Year = date("Y");
+      //Validar el formulario
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
         'apellidos'=> 'required|min:5|max:255',
@@ -222,32 +226,81 @@ class TraductorController extends Controller
         'ci'=> 'required',
         'telefono'=> 'required',
         'email'=> 'required',
-        'image_url'=> 'size:1024|image',
+        'image_url'=> 'image',
         // 'image_url'=> 'file|size:512|image',
         'id_Idioma'=> 'required|not_in:0'
         
       ]);
-
-
-        // Obtener los archivos del formulario
-        $fileNameWithTheExtension = request('image_url')->getClientOriginalName();
         
-        //Obtener el nombre del archivo
-        $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+        $estadoSolicitud = Traductores::select('id_Estado')->where('id',$traductores)
+        ->first();
         
-        //Obtener la extenion del archivo a guardar
-        $extension = request('image_url')->getClientOriginalExtension();
+        $numSolicitud = Traductores::select('num_Solicitud')->where('id',$traductores)
+        ->first();
+        
 
-        //Creacion de un nombr nuevo para guaradarlo en bd
-        $newFileName = $fileName . '_' . time() . '.' . $extension;
+        if($request->hasFile('image_url'))
+        {
+            // Obtener los archivos del formulario
+            $fileNameWithTheExtension = request('image_url')->getClientOriginalName();
 
-        //Redirigir las imagenes para una carpeta publica
-        $path = request('image_url')->storeAs('public/imagenesTraductores',$newFileName);
+            //Obtener el nombre del archivo
+            $fileName = pathinfo($fileNameWithTheExtension, PATHINFO_FILENAME);
+            
+            //Obtener la extenion del archivo a guardar
+            $extension = request('image_url')->getClientOriginalExtension();
+            
+            //Creacion de un nombre nuevo para guaradarlo en bd
+            $newFileName = $fileName . '_' . time() . '.' . $extension;
+            
+            
+            //Redirigir los archivos para una carpeta publica
+            $path = request('image_url')->storeAs('public/imagenesTraductores',$newFileName);
+            //dd($path);
+        }
+        else {
+            $newFileName = "";
+            // dd($newFileName);
+        }
+        
+        
+        if($request->hasFile('ant_penales'))
+        {
+            $fileNameAnt= request('ant_penales')->getClientOriginalName();
+            //Obtener el nombre del archivo
+            $fileNameAntecedentes = pathinfo($fileNameAnt, PATHINFO_FILENAME);
+
+            $extensionAntecedentes = request('ant_penales')->getClientOriginalExtension();
+
+            $newFileNameAntecedentes = $fileNameAntecedentes . '_' . time() . '.' . $extensionAntecedentes;
+            // dd($newFileNameAntecedentes);
+
+            $pathAntecedente = request('ant_penales')->storeAs('public/documentosTraductores',$newFileNameAntecedentes);
+            //dd($pathAntecedente);
+        }
+        else {
+            $newFileNameAntecedentes = "";
+        }
+
+        if($request->hasFile('curriculum'))
+        {
+            $fileNameCurric= request('curriculum')->getClientOriginalName();
+            $fileNameCurriculum = pathinfo($fileNameCurric, PATHINFO_FILENAME);
+            $extensionCurriculum = request('curriculum')->getClientOriginalExtension();
+            $newFileNameCurriculum = $fileNameCurriculum . '_' . time() . '.' . $extensionCurriculum;
+            $pathCurriculum = request('curriculum')->storeAs('public/documentosTraductores',$newFileNameCurriculum);
+            // dd($fileNameCurriculum);
+
+        }
+        else {
+            $newFileNameCurriculum = "";
+            //dd($newFileNameCurriculum);
+        }
 
         
-      //Llamado al modelo de traductores para poder guardarlo luego n bd
-        $traductor = Traductores::findOrFail($traductores);
-        
+        //Llamado al modelo de traductores para poder guardarlo luego en bd
+        $traductor = Traductores::find($traductores);
+        // $traductor = new Traductores();
         $traductor->nombre = $request->nombre;
         $traductor->apellidos = $request->apellidos;
         $traductor->lugar_Nac = $request->lugar_Nac;
@@ -258,14 +311,17 @@ class TraductorController extends Controller
         $traductor->telefono = $request->telefono;
         $traductor->email = $request->email;
         $traductor->image_url = $newFileName;
-        $traductor->ant_penales = $request->ant_penales;
-        $traductor->curriculum = $request->curriculum;
+        $traductor->ant_penales = $newFileNameAntecedentes;
+        $traductor->curriculum = $newFileNameCurriculum;
         $traductor->id_Idioma = $request->id_Idioma;
-        $traductor->ant_penales = $request->ant_penales;
-        //dd($traductor);
-
+        $traductor->id_Estado = $estadoSolicitud->id_Estado;
+        $traductor->num_Solicitud =$numSolicitud->num_Solicitud;
+        $traductor->anno = $Year;
+        // $traductor->num_Solicitud = $nextSolicitud;
         $traductor->save();
-        return redirect('/traductores');
+        return redirect('/traductores')->with('mensaje','Ha actualizado un registro correctamente');
+        //   dd($id_Idioma);
+      
     }
 
     /**

@@ -45,7 +45,7 @@ class SolicitudesController extends Controller
 
     public function aprobadosUpdate(Request $request, $solicitudes)
     {
-        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        //
         $solicitud = Solicitudes::findOrFail($solicitudes);
         $solicitud->id_Estado = 2;
         //dd($traductor);
@@ -103,12 +103,4 @@ class SolicitudesController extends Controller
         return redirect('/reclamaciones');
     }
 
-    public function test($solicitudes)
-    {
-        //Llamado al modelo de traductores para poder guardarlo luego n bd
-        
-        $solicitud = Solicitudes::select('nombre')->where('id',$solicitudes)
-        ->get();
-       return view('solicitudes.solicitudesRegistro', ['soli' => $soli]);
-    }
 }

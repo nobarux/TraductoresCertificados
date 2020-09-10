@@ -87,10 +87,6 @@
               <div class="custom-file">
                 <input type="file" class="custom-file-input" id="image_url" name="image_url"  lang="es" >
                 <label class="custom-file-label" for="image_url">Imagen(Opcional)</label>
-                
-                <div class="row">
-                    <img src="{{ asset('/storage/imagenesTraductores/'.$trad->image_url) }}" class="img-thumbnail mx-auto" alt="{{$trad->image_url}}" width="250">
-                </div>
               </div>
             </div>
 
@@ -108,17 +104,16 @@
               </div>
             </div>
             
-            
           </div>  
           
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="id_Idioma">Idioma</label>
-              <select id="id_Idioma" class="form-control" name="id_Idioma" >
-                <option value="{{$trad->id_Idioma}}" selected>Selecciona un idioma</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+              <select id="id_Idioma" class="form-control" name="id_Idioma">
+                <option value="" selected>Selecciona un idioma</option>
+                  @foreach ($idioma as $idiomas)
+                  <option value="{{ $idiomas->id }}">{{ $idiomas->descripcion}}</option>
+                  @endforeach
               </select>
             </div>
             
@@ -132,4 +127,14 @@
   </div>
 
   <hr>
+  @endsection
+
+  @section('scriptNombreUpload' )
+    <script type=text/javascript>
+      $(document).on('change', '.custom-file-input', function (event) {
+      $(this).next('.custom-file-label').html(event.target.files[0].name);
+      })
+    
+  </script>
+      
   @endsection
