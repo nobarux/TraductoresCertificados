@@ -25,15 +25,12 @@ Route::get('/reclamaciones', function () {
     
 });
 
-
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 //Rutas para la parte de administracion
 Route::get('admin', 'AdminController@index')->middleware('auth');
 
-//Rutas para los usuarios
-Route::get('/usuariosadmin', 'UserController@index');
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
 Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
@@ -53,5 +50,7 @@ Route::get('/solicitudesRegistro/{soli}', 'SolicitudesController@test');
 // Route::get('/traductores/{trad}/edit', 'TraductorController@edit');
 // Route::patch('/traductores/{trad}', 'TraductorController@update');
 // Route::delete('/traductores/{trad}', 'TraductorController@destroy');
-
 Route::resource('traductores', 'TraductorController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud
+
+//Rutas para los usuarios
+Route::resource('usuarios', 'UserController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud

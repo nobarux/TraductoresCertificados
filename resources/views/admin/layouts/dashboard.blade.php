@@ -52,7 +52,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Administracion de Usuarios</div>
-                            <a class="nav-link" href="/usuariosadmin">
+                            <a class="nav-link" href="/usuarios">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Usuarios Registrados
                             </a>
@@ -117,22 +117,18 @@
                 </nav>
                 
             </div>
+            <div id="layoutSidenav_content">
+                @yield('content')
+                @include('admin.layouts.partialViewsAdmin.footer')
+
+            </div>
         
-@yield('content')
-
-<footer class="py-4 bg-light mt-auto">
-    <div class="container-fluid">
-        <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2020</div>
-            {{-- <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-            </div> --}}
+           
         </div>
-    </div>
-</footer>
 
+
+</body>
+</html>
 <script src="{{asset('js/bootstrap.js')}}"> </script>
 
 {{-- <script src="{{asset('jquery/dist/jquery.min.js')}}"> </script> --}}
@@ -140,8 +136,3 @@
 {{-- <script src="/jquery/dist/jquery.min.js" crossorigin="anonymous"></script> --}}
 <script src="/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/admin/scripts.js"></script>
-<script src="/js/admin/demo/chart-area-demo.js"></script>
-<script src="/js/admin/demo/chart-bar-demo.js"></script>
-<script src="/js/admin/demo/datatables-demo.js"></script>
-</body>
-</html>

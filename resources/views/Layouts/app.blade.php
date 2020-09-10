@@ -38,8 +38,6 @@
   {{-- Sirve para decir q todo formulario q tenga esta etiqueta 'content' tenga todos los elementos de esta pagina. --}}
   @yield('content')
  
- 
-
   {{-- <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

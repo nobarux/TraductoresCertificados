@@ -1,12 +1,9 @@
 @extends('admin.layouts.dashboard')
 @section('content')
-<div id="layoutSidenav">
-    <div id="layoutSidenav_content">
-    <h1>Esto es la pagina de usuarios</h1>
-    
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
+            <h1>Esto es la pagina de usuarios</h1>
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="card mb-4">
                 <div class="card-header">
@@ -20,7 +17,8 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Creado</th>
+                                    <th>Roles</th>
+                                    <th>Permisos</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -28,7 +26,8 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Creado</th>
+                                    <th>Roles</th>
+                                    <th>Permisos</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -37,8 +36,11 @@
                                     <tr>
                                         <td>{{ $users->name }} </td>
                                         <td>{{ $users->email }} </td>
-                                        <td>{{ $users->created_at }} </td>
+                                        <td>roles </td>
                                         <td> ....... </td>
+                                        <td> 
+                                            <a href="/usuarios/{{ $users['id'] }}/edit" ><i class="fa fa-edit"></i></a>   
+                                        </td>
                                     </tr>
                                 @endforeach
                                 
@@ -51,7 +53,7 @@
             
           </div>
         </div>
-      </div>
     </div>
-</div>
+
+
 @endsection

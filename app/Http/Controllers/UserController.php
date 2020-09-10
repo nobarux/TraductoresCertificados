@@ -111,9 +111,9 @@ class UserController extends Controller
     public function edit($user)
     {
         //Variable q captura la id del traductor para editarlo
-        $trad_id = Traductores::find($traductores);
+        $user_id = User::find($user);
         //Retornar a la vista
-        return view('/traductores/edit',['trad'=>$trad_id]);
+        return view('admin/usuarios/edit',['user'=>$user_id]);
     }
 
 
