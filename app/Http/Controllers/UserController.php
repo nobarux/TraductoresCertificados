@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -52,42 +52,42 @@ class UserController extends Controller
     public function store(Request $request)
     {
       
-      $Year = date("Y");
-      //Validar el formulario
-      $data = $request->validate([
-        'nombre'=> 'required|min:5|max:255',
-        'apellidos'=> 'required|min:5|max:255',
-        'edad'=> 'required|integer|min:18|max:100',
-        'nacionalidad'=> 'required|min:1|max:255',
-        'ci'=> 'required',
-        'telefono'=> 'required',
-        'email'=> 'required',
-        'image_url'=> 'size:1024|image',
-        // 'image_url'=> 'file|size:512|image',
-        'id_Idioma'=> 'required|not_in:0'
+      // $Year = date("Y");
+      // //Validar el formulario
+      // $data = $request->validate([
+      //   'nombre'=> 'required|min:5|max:255',
+      //   'apellidos'=> 'required|min:5|max:255',
+      //   'edad'=> 'required|integer|min:18|max:100',
+      //   'nacionalidad'=> 'required|min:1|max:255',
+      //   'ci'=> 'required',
+      //   'telefono'=> 'required',
+      //   'email'=> 'required',
+      //   'image_url'=> 'size:1024|image',
+      //   // 'image_url'=> 'file|size:512|image',
+      //   'id_Idioma'=> 'required|not_in:0'
         
-      ]);
+      // ]);
         
-        //Llamado al modelo de traductores para poder guardarlo luego en bd
-        $traductor = new Traductores();
-        $traductor->nombre = $request->nombre;
-        $traductor->apellidos = $request->apellidos;
-        $traductor->lugar_Nac = $request->lugar_Nac;
-        $traductor->edad = $request->edad;
-        $traductor->nacionalidad = $request->nacionalidad;
-        $traductor->prof_Ocup = $request->prof_Ocup;
-        $traductor->ci = intval($request->ci);
-        $traductor->telefono = $request->telefono;
-        $traductor->email = $request->email;
-        $traductor->image_url = $newFileName;
-        $traductor->ant_penales = $newFileNameAntecedentes;
-        $traductor->curriculum = $newFileNameCurriculum;
-        $traductor->id_Idioma = $request->id_Idioma;
-        $traductor->id_Estado = 1;
-        $traductor->anno = $Year;
-        $traductor->num_Solicitud = $nextSolicitud;
-        $traductor->save();
-        return redirect('/admin/usuarios')->with('mensaje','Ha creado un usuario correctamente');
+      //   //Llamado al modelo de traductores para poder guardarlo luego en bd
+      //   $traductor = new Traductores();
+      //   $traductor->nombre = $request->nombre;
+      //   $traductor->apellidos = $request->apellidos;
+      //   $traductor->lugar_Nac = $request->lugar_Nac;
+      //   $traductor->edad = $request->edad;
+      //   $traductor->nacionalidad = $request->nacionalidad;
+      //   $traductor->prof_Ocup = $request->prof_Ocup;
+      //   $traductor->ci = intval($request->ci);
+      //   $traductor->telefono = $request->telefono;
+      //   $traductor->email = $request->email;
+      //   $traductor->image_url = $newFileName;
+      //   $traductor->ant_penales = $newFileNameAntecedentes;
+      //   $traductor->curriculum = $newFileNameCurriculum;
+      //   $traductor->id_Idioma = $request->id_Idioma;
+      //   $traductor->id_Estado = 1;
+      //   $traductor->anno = $Year;
+      //   $traductor->num_Solicitud = $nextSolicitud;
+      //   $traductor->save();
+      //   return redirect('/admin/usuarios')->with('mensaje','Ha creado un usuario correctamente');
        
     }
 
@@ -129,40 +129,23 @@ class UserController extends Controller
         //Validar el formulario
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
-        'apellidos'=> 'required|min:5|max:255',
-        'edad'=> 'required|integer|min:18|max:100',
-        'nacionalidad'=> 'required|min:1|max:255',
-        'ci'=> 'required',
-        'telefono'=> 'required',
-        'email'=> 'required',
-        'image_url'=> 'size:1024|image',
-        // 'image_url'=> 'file|size:512|image',
-        'id_Idioma'=> 'required|not_in:0'
+        'email'=> 'required|min:5|max:255',
         
       ]);
 
         
       //Llamado al modelo de traductores para poder guardarlo luego n bd
-        $traductor = Traductores::findOrFail($traductores);
+        $user = User::findOrFail($user);
         
-        $traductor->nombre = $request->nombre;
-        $traductor->apellidos = $request->apellidos;
-        $traductor->lugar_Nac = $request->lugar_Nac;
-        $traductor->edad = $request->edad;
-        $traductor->nacionalidad = $request->nacionalidad;
-        $traductor->prof_Ocup = $request->prof_Ocup;
-        $traductor->ci = intval($request->ci);
-        $traductor->telefono = $request->telefono;
-        $traductor->email = $request->email;
-        $traductor->image_url = $newFileName;
-        $traductor->ant_penales = $request->ant_penales;
-        $traductor->curriculum = $request->curriculum;
-        $traductor->id_Idioma = $request->id_Idioma;
-        $traductor->ant_penales = $request->ant_penales;
-        //dd($traductor);
-
-        $traductor->save();
-        return redirect('/traductores');
+        $user->name = $request->nombre;
+        $user->email = $request->email;
+        if ($request->password != null) {
+          $user->password = Hash::make($request->password);
+        }
+        // $user->lugar_Nac = $request->lugar_Nac;
+        
+        $user->save();
+        return redirect('/usuarios')->with('mensaje','Ha actualizado un usuario correctamente');
     }
 
     /**
@@ -173,10 +156,10 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        $trad_id = Traductores::find($traductores);
+        $user_id = Usuario::find($user);
         
         //Borrar el traductor
-        $trad_id->delete();
-        return redirect('/traductores');
+        $user_id->delete();
+        return redirect('/usuarios')->with('mensaje','Ha eliminado un usuario correctamente');
     }
 }
