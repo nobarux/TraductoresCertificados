@@ -49,7 +49,8 @@
                                         <td> 
                                             <a type="button" class="btn btn-outline-primary" href="/usuarios/{{ $users['id'] }}/edit" >Editar</a>
                                             {{-- <a href="javascript:;" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{ $users['id'] }})">Eliminar</a>    --}}
-                                            <a href="javascript:;" onclick="a()">ssss</a>
+                                            <br>
+                                            <a  class="btn btn-outline-danger" href="javascript:;" data-toggle="modal" data-target="#deleteModal" id="borrar" onclick="deleteData({{ $users['id'] }})">Eliminar</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -90,15 +91,14 @@
         </div>
     
     </div>
-
-    @section('jsModalDelete')
-        <script type=text/javascript>
+    
+    <script type=text/javascript>
         //Parte del autocerrado del alert cuando e inserta un nuevo registro
         $("#alerta").fadeTo(5000,500).slideUp(500,function() {
-            $("#alerta").slideUp(500);
-        })
-        
-        
+                $("#alerta").slideUp(500);
+            })
+        // var valor = document.getElementById('borrar').addEventListener('click',deleteData());
+
         function deleteData(id)
         {
             var id = id;
@@ -107,17 +107,12 @@
             $("#deleteForm").attr('action', url);
         }
 
-        function a()
-        {
-            alert("aaaaaa");
-        }
-        
         function formSubmit()
         {
             $("#deleteForm").submit();
         }
         
         
-        </script>
-    @endsection
+    </script>
+
 @endsection

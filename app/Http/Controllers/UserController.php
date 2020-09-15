@@ -156,8 +156,7 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
-        $user_id = Usuario::find($user);
-        
+        $user_id = User::find($user);
         //Borrar el traductor
         $user_id->delete();
         return redirect('/usuarios')->with('mensaje','Ha eliminado un usuario correctamente');
