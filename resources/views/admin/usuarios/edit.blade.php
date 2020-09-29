@@ -45,7 +45,7 @@
                  </div>
                  <div class="form-group">
                   <label for="password_confirm">Confirmar Contraseña</label>
-                  <input type="password" class="form-control" name="password_confirm" id="password_confirm" placeholder="Confirmar Contraseña..." minlength="8">
+                  <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirmar Contraseña..." minlength="8">
                 </div>
 
                 {{-- Espacio para poner roles --}}

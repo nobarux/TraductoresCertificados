@@ -61,7 +61,7 @@ class TraductorController extends Controller
         'nacionalidad'=> 'required|min:1|max:255',
         'ci'=> 'required',
         'telefono'=> 'required',
-        'email'=> 'required',
+        'email'=> 'required|unique:tbSolicitudesAdminsion',
         'image_url'=> 'size:1024|image',
         // 'image_url'=> 'file|size:512|image',
         'id_Idioma'=> 'required|not_in:0'
@@ -226,7 +226,7 @@ class TraductorController extends Controller
         'nacionalidad'=> 'required|min:1|max:255',
         'ci'=> 'required',
         'telefono'=> 'required',
-        'email'=> 'required',
+        'email'=> 'required|unique:tbSolicitudesAdminsion',
         'image_url'=> 'image',
         // 'image_url'=> 'file|size:512|image',
         'id_Idioma'=> 'required|not_in:0'

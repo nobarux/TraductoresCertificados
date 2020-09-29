@@ -13,6 +13,21 @@
               </button>
             </div>
           @endif
+            
+            {{-- <div class="card mb-4">
+              <a href="/usuarios/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
+              Registro Nuevo
+              </a>
+            </div> --}}
+            <div class="row py-1g-2">
+                
+                <div class="col-md-12">
+                    <a href="/usuarios/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
+                        Registro Nuevo
+                        </a>
+                </div>
+              </div>
+          <br>
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table mr-1"></i>

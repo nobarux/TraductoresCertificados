@@ -39,8 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $idiomas = Idiomas::all();
-        return view('solicitudes.solicitudesRegistro',['idioma' => $idiomas]);
+
+        return view('admin.usuarios.create');
     }
 
     /**
@@ -51,44 +51,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      
-      // $Year = date("Y");
-      // //Validar el formulario
-      // $data = $request->validate([
-      //   'nombre'=> 'required|min:5|max:255',
-      //   'apellidos'=> 'required|min:5|max:255',
-      //   'edad'=> 'required|integer|min:18|max:100',
-      //   'nacionalidad'=> 'required|min:1|max:255',
-      //   'ci'=> 'required',
-      //   'telefono'=> 'required',
-      //   'email'=> 'required',
-      //   'image_url'=> 'size:1024|image',
-      //   // 'image_url'=> 'file|size:512|image',
-      //   'id_Idioma'=> 'required|not_in:0'
+       //Validar el formulario
+       $data = $request->validate([
+        'nombre'=> 'required|min:5|max:255',
+        'email'=> 'required|unique:users|email',
+        'password'=> 'required|between:8,255|confirmed',
+        'password_confirmation'=> 'required'
         
-      // ]);
+      ]);
+        //Llamado al modelo de traductores para poder guardarlo luego en bd
+        $user = new User();
+        $user->name = $request->nombre;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        if ($request->password != null) {
+          $user->password = Hash::make($request->password);
+        }
         
-      //   //Llamado al modelo de traductores para poder guardarlo luego en bd
-      //   $traductor = new Traductores();
-      //   $traductor->nombre = $request->nombre;
-      //   $traductor->apellidos = $request->apellidos;
-      //   $traductor->lugar_Nac = $request->lugar_Nac;
-      //   $traductor->edad = $request->edad;
-      //   $traductor->nacionalidad = $request->nacionalidad;
-      //   $traductor->prof_Ocup = $request->prof_Ocup;
-      //   $traductor->ci = intval($request->ci);
-      //   $traductor->telefono = $request->telefono;
-      //   $traductor->email = $request->email;
-      //   $traductor->image_url = $newFileName;
-      //   $traductor->ant_penales = $newFileNameAntecedentes;
-      //   $traductor->curriculum = $newFileNameCurriculum;
-      //   $traductor->id_Idioma = $request->id_Idioma;
-      //   $traductor->id_Estado = 1;
-      //   $traductor->anno = $Year;
-      //   $traductor->num_Solicitud = $nextSolicitud;
-      //   $traductor->save();
-      //   return redirect('/admin/usuarios')->with('mensaje','Ha creado un usuario correctamente');
-       
+        $user->save();
+        
+        return redirect('/usuarios')->with('mensaje','Ha creado un usuario correctamente');
     }
 
     /**
@@ -129,7 +111,10 @@ class UserController extends Controller
         //Validar el formulario
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
-        'email'=> 'required|min:5|max:255',
+        'email'=> 'required|unique:users|email',
+        'password'=> 'required|between:8,255|confirmed',
+        'password_confirmation'=> 'required'
+
         
       ]);
 
@@ -142,7 +127,6 @@ class UserController extends Controller
         if ($request->password != null) {
           $user->password = Hash::make($request->password);
         }
-        // $user->lugar_Nac = $request->lugar_Nac;
         
         $user->save();
         return redirect('/usuarios')->with('mensaje','Ha actualizado un usuario correctamente');
