@@ -64,7 +64,7 @@
                                         <td> 
                                             <a type="button" class="btn btn-outline-primary" href="/usuarios/{{ $users['id'] }}/edit" >Editar</a>
                                             {{-- <a href="javascript:;" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{ $users['id'] }})">Eliminar</a>    --}}
-                                            <br>
+                                            <hr/>
                                             <a  class="btn btn-outline-danger" href="javascript:;" data-toggle="modal" data-target="#deleteModal" id="borrar" onclick="deleteData({{ $users['id'] }})">Eliminar</a>
                                         </td>
                                     </tr>

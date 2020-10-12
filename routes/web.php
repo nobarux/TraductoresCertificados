@@ -54,3 +54,19 @@ Route::resource('traductores', 'TraductorController');//Esto se utiliza para rut
 
 //Rutas para los usuarios
 Route::resource('usuarios', 'UserController');//Esto se utiliza para rutear de manera sencilla todas las pantallas de un crud
+
+//Rutas para el reporte
+Route::get('/reporteTrad', 'ReporteController@reporteTrad');
+
+// //Para los pdf
+// Route::get('descargar', function()
+// {
+//     $pdf = App::make('dompdf.wrapper');
+//     $pdf->loadView('reportes.reporteTraductor');
+//     return $pdf->download();
+// })->name('descargar');
+
+Route::get('/reporteTrad/pdf','ReporteController@downloadPDF');
+
+
+

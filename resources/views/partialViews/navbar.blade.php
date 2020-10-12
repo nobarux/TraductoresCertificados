@@ -13,9 +13,9 @@
             <a class="nav-link" href="/">Inicio</a>
           </li>
       @auth
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" href="/solicitudesRegistro">Registro Traductores</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="/traductores">Traductores</a>
           </li>
@@ -27,6 +27,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/solicitudesSuspensas">Solicitudes Suspensas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/reporteTrad">Reporte Traductores</a>
           </li>
       @endauth
           <!-- Authentication Links -->

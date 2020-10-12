@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Eesta es la pagina de las solicitudes Suspensas</h1>
+            
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                DataTable Example
+                Lista de Solicitudes
             </div>
             <div class="card-body">
                 <div class="table-responsive">

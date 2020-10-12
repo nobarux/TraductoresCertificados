@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Eesta es la pagina de los taductores</h1>
+            {{-- <h1>Eesta es la pagina de los taductores</h1> --}}
           </div>
         </div>
       </div>
@@ -28,18 +28,18 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="row py-1g-2">
           <div class="col-md-6"> 
-            <h1>Esta es la lista de traductores</h1>  
+            {{-- <h1>Esta es la lista de traductores</h1>   --}}
           </div>
-          <div class="col-md-6">
+          {{-- <div class="col-md-6">
             <a href="/traductores/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
             Registro Nuevo
             </a>
-          </div>
+          </div> --}}
         </div>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                DataTable Example
+                Lista de traductores
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -54,7 +54,7 @@
                                 <th>Nacionalidad</th>
                                 <th>Telefono</th>
                                 <th>Email</th>
-                                <th>Acciones</th>
+                                {{-- <th>Acciones</th> --}}
                             </tr>
                         </thead>
                         <tfoot>
@@ -67,7 +67,7 @@
                                 <th>Nacionalidad</th>
                                 <th>Telefono</th>
                                 <th>Email</th>
-                                <th>Acciones</th>
+                                {{-- <th>Acciones</th> --}}
                             </tr>
                         </tfoot>
                         <tbody>
@@ -82,11 +82,11 @@
                                     <td>{{ $traductores->nacionalidad }} </td>
                                     <td>{{ $traductores->telefono }} </td>
                                     <td>{{ $traductores->email }} </td>
-                                    <td> 
+                                    {{-- <td> 
                                       <a href="/traductores/{{ $traductores['id'] }}/edit" ><i class="fa fa-edit"></i></a>   
                                       <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{$traductores->id}})"><i class="fa fa-trash"></i></a>   
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                             
