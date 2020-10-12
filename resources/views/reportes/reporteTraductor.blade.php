@@ -37,15 +37,9 @@
                 Lista de traductores
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="{{ URL::to('/reporteTrad/pdf') }}">Export to PDF</a>
-                <nav class="navbar navbar-light bg-light float-right">
-                    <form class="form-inline">
-                      <input name="buscar" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </form>
-                  </nav>
+                
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th hidden>Id</th>
@@ -54,20 +48,10 @@
                                 <th>Idioma</th>
                                 <th>Provincia</th>
                                 <th>Registrado</th>
-                                {{-- <th>Acciones</th> --}}
+                               
                             </tr>
                         </thead>
-                        {{-- <tfoot>
-                            <tr>
-                                <th hidden>Id</th>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Idioma</th>
-                                <th>Provincia</th>
-                                <th>Registrado</th>
-                                {{-- <th>Acciones</th> 
-                            </tr>
-                        </tfoot> --}}
+                        
                         <tbody>
                             @foreach ($reportes as $solicitud)
                                 
@@ -97,5 +81,35 @@
       </div>
     </div>
 </div>
+
+@section('dataTableJS')
+<script type=text/javascript>
+$(document).ready(function () {
+    var table = $('#datatable').DataTable({
+        dom: 'Bfrtip',
+    buttons:[{
+        
+    extend:'pdfHtml5',
+            text:'Exportar a PDF',
+            pageSize: 'Letter',
+            orientation: 'portrait',
+            download: 'open'
+        },
+        {
+            extend: 'print',
+            text: 'Imprimir',
+            orientation:'portrait'
+        }
+    
+    ]
+});
+table.buttons().container().appendTo($('.col-sm-6:eq(0)', table.table().container()))
+
+});
+
+
+    
+</script>
+@endsection
 
 @endsection

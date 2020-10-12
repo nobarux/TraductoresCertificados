@@ -18,8 +18,14 @@
   <!-- Custom fonts for this template -->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
+  
+
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{asset('js/bootstrap.js')}}"> </script>
+
+
+  
 
   <!-- Custom styles for this template -->
   {{-- <link href="css/clean-blog.min.css" rel="stylesheet"> --}}
@@ -49,13 +55,10 @@
 @include('partialViews.footer')
 </html>
 
-<script src="{{asset('js/bootstrap.js')}}"> </script>
 
-{{-- <script src="{{asset('jquery/dist/jquery.min.js')}}"> </script> --}}
-
-{{-- <script src="/jquery/dist/jquery.min.js" crossorigin="anonymous"></script> --}}
 <script src="/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/admin/scripts.js"></script>
 <script src="/js/admin/demo/datatables-demo.js"></script>
 @yield('jsModalDelete')
 @yield('scriptNombreUpload')
+@yield('dataTableJS')

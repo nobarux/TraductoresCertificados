@@ -12,11 +12,19 @@ window.chart = require('chart.js');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
+    
     require('bootstrap');
     require('datatables.net');
     require('datatables.net-bs');
+    require('datatables.net-buttons/js/dataTables.buttons');
+    require('datatables.net-buttons/js/buttons.colVis');
+    require('datatables.net-buttons/js/buttons.html5');
+    require('datatables.net-buttons/js/buttons.flash');
+    require('datatables.net-buttons/js/buttons.print');
     require('chart.js');
+    window.pdfMake = require('pdfmake/build/pdfmake');
+    window.pdfFonts = require('pdfmake/build/vfs_fonts');
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
 } catch (e) {}
 
 /**
