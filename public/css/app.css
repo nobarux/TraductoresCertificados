@@ -14745,7 +14745,7 @@ body .container.body .right_col {
 
 body {
   color: #73879C;
-  background: #2A3F54;
+  background: #ffffff;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -15253,7 +15253,7 @@ a:focus {
 }
 
 footer {
-  background: #fff;
+  background: #f1f1f1;
   padding: 10px 20px;
   display: block;
 }
@@ -16197,7 +16197,7 @@ span.right {
 
 @media (min-width: 992px) {
   footer {
-    margin-left: 230px;
+    /*margin-left: 230px;*/
   }
 }
 

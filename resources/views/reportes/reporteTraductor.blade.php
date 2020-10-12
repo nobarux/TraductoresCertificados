@@ -39,40 +39,42 @@
             <div class="card-body">
                 
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th hidden>Id</th>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Idioma</th>
-                                <th>Provincia</th>
-                                <th>Registrado</th>
-                               
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            @foreach ($reportes as $solicitud)
-                                
+                    <div id="other" class="card-box table-responsive">
+                        <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <td hidden>{{ $solicitud->id }} </td>
-                                    <td>{{ $solicitud->nombre }}</td>
-                                    <td>{{ $solicitud->apellidos }} </td>
-                                    <td>{{ $solicitud->idioma->descripcion }} </td>
-                                    <td>{{ $solicitud->provincia->nombre }} </td>
-                                    <td>{{ date('d-m-Y', strtotime($solicitud->created_at)) }} </td>
-                                    
-                                    {{-- <td> 
-                                      <a href="/traductores/{{ $traductores['id'] }}/edit" ><i class="fa fa-edit"></i></a>   
-                                      <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{$traductores->id}})"><i class="fa fa-trash"></i></a>   
-                                    </td> --}}
+                                    <th hidden>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Idioma</th>
+                                    <th>Provincia</th>
+                                    <th>Registrado</th>
+                                
                                 </tr>
-                               
-                            @endforeach
+                            </thead>
                             
-                        </tbody>
-                    </table>
+                            <tbody>
+                                @foreach ($reportes as $solicitud)
+                                    
+                                    <tr>
+                                        <td hidden>{{ $solicitud->id }} </td>
+                                        <td>{{ $solicitud->nombre }}</td>
+                                        <td>{{ $solicitud->apellidos }} </td>
+                                        <td>{{ $solicitud->idioma->descripcion }} </td>
+                                        <td>{{ $solicitud->provincia->nombre }} </td>
+                                        <td>{{ date('d-m-Y', strtotime($solicitud->created_at)) }} </td>
+                                        
+                                        {{-- <td> 
+                                        <a href="/traductores/{{ $traductores['id'] }}/edit" ><i class="fa fa-edit"></i></a>   
+                                        <a href="javascript:;" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{$traductores->id}})"><i class="fa fa-trash"></i></a>   
+                                        </td> --}}
+                                    </tr>
+                                
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>    
                 </div>
             </div>
         </div>
@@ -85,8 +87,12 @@
 @section('dataTableJS')
 <script type=text/javascript>
 $(document).ready(function () {
+    ""
     var table = $('#datatable').DataTable({
         dom: 'Bfrtip',
+        "ordering": true,
+    "lengthChange": true,
+
     buttons:[{
         
     extend:'pdfHtml5',
@@ -103,7 +109,7 @@ $(document).ready(function () {
     
     ]
 });
-table.buttons().container().appendTo($('.col-sm-6:eq(0)', table.table().container()))
+table.buttons().container().appendTo($('#other .col-sm-6:eq(0)', table.table().container()))
 
 });
 
