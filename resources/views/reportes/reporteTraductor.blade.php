@@ -43,26 +43,26 @@
                         <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th hidden>Id</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Idioma</th>
                                     <th>Provincia</th>
+                                    <th>Profesión</th>
                                     <th>Registrado</th>
                                 
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                @foreach ($reportes as $solicitud)
+                                @foreach ($reportes as $reporte)
                                     
                                     <tr>
-                                        <td hidden>{{ $solicitud->id }} </td>
-                                        <td>{{ $solicitud->nombre }}</td>
-                                        <td>{{ $solicitud->apellidos }} </td>
-                                        <td>{{ $solicitud->idioma->descripcion }} </td>
-                                        <td>{{ $solicitud->provincia->nombre }} </td>
-                                        <td>{{ date('d-m-Y', strtotime($solicitud->created_at)) }} </td>
+                                        <td>{{ $reporte->nombre }}</td>
+                                        <td>{{ $reporte->apellidos }} </td> 
+                                        <td>{{ $listaidioma[0]->nombre}} </td>
+                                        <td>{{ $listaprov[0]->nombre}} </td>
+                                        <td>{{ $listaprof[0]->nombre}} </td>
+                                        <td>{{ date('d-m-Y', strtotime($reporte->created_at)) }} </td>
                                         
                                         {{-- <td> 
                                         <a href="/traductores/{{ $traductores['id'] }}/edit" ><i class="fa fa-edit"></i></a>   

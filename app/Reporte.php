@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reporte extends Model
 {
-    protected $table = 'tbSolicitudesAdminsion';
+    protected $table = 'solicituds';
     public $primaryKey = 'id';
 
      /**Esta funcion es para q el formato de salida de los datos tipo datetime sean Año mes y dia */
@@ -22,5 +22,10 @@ class Reporte extends Model
       public function provincia()
       {
           return $this->belongsTo('App\Provincia','id_Prov');
+      }
+
+      public function estado()
+      {
+          return $this->belongsTo('App\Estado','id_Estados');
       }
 }

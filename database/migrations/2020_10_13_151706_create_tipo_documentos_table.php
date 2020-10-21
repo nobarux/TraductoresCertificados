@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNumSolicitudtbTable extends Migration
+class CreateTipoDocumentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddNumSolicitudtbTable extends Migration
      */
     public function up()
     {
-        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
-            $table->integer('num_Solicitud')->nullable();
+        Schema::create('tipodocumentos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->integer('dificultad');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddNumSolicitudtbTable extends Migration
      */
     public function down()
     {
-        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tipo_documentos');
     }
 }

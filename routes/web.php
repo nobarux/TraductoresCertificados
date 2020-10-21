@@ -32,15 +32,15 @@ Route::get('/', 'HomeController@index');
 Route::get('admin', 'AdminController@index')->middleware('auth');
 
 //Rutas para las solicitudes 
-Route::get('/solicitudes', 'SolicitudesController@indexSolicitud');
-Route::get('/solicitudesSuspensas', 'SolicitudesController@indexSolicitudSuspensas');
-Route::get('/solicitudesRegistro', 'SolicitudesController@indexSolicitudRegistro');
-Route::patch('/solicitudes/{soli}', 'SolicitudesController@aprobadosUpdate');
-Route::patch('/solicitudesPend/{soli}', 'SolicitudesController@pendienteCalifUpdate');
-Route::patch('/solicitudesAprob/{soli}', 'SolicitudesController@aprobUpdate');
-Route::patch('/solicitudesSusp/{soli}', 'SolicitudesController@suspUpdate');
-Route::patch('/solicitudesReclamar/{soli}', 'SolicitudesController@reclamarUpdate');
-Route::get('/solicitudesRegistro/{soli}', 'SolicitudesController@test');
+Route::get('/solicitudes', 'SolicitudController@index');
+Route::get('/solicitudesSuspensas', 'SolicitudController@indexSolicitudSuspensas');
+Route::get('/solicitudesRegistro', 'SolicitudController@indexSolicitudRegistro');
+Route::patch('/solicitudes/{soli}', 'SolicitudController@aprobadosUpdate');
+Route::patch('/solicitudesPend/{soli}', 'SolicitudController@pendienteCalifUpdate');
+Route::patch('/solicitudesAprob/{soli}', 'SolicitudController@aprobUpdate');
+Route::patch('/solicitudesSusp/{soli}', 'SolicitudController@suspUpdate');
+Route::patch('/solicitudesReclamar/{soli}', 'SolicitudController@reclamarUpdate');
+Route::get('/solicitudesRegistro/{soli}', 'SolicitudController@test');
 
 //Rutas para el registro de traductores
 // Route::get('/traductores', 'TraductorController@index');

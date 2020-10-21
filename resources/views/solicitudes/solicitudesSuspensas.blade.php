@@ -20,50 +20,54 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="card mb-4">
+        <div class="row py-1g-2">
+          <div class="col-md-6"> 
+            
+          </div>
+        </div>
+        <div class="card mb-12">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                Lista de Solicitudes
+                Lista de traductores
             </div>
             <div class="card-body">
+                
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Idioma</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Idioma</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            @foreach ($soliSuspensas as $solicitudesSus)
+                    <div id="other" class="card-box table-responsive">
+                        <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
+                            <thead>
                                 <tr>
-                                    <td>{{ $solicitudesSus->nombre }} </td>
-                                    <td>{{ $solicitudesSus->apellidos }} </td>
-                                    <td>{{ $solicitudesSus->idioma->descripcion }} </td>
-                                    <td>{{ $solicitudesSus->estado->descripcion }} </td>
-                                    <td>
-                                      <form method="POST" id="changeForm" action="/solicitudesReclamar/{{ $solicitudesSus->id }}" enctype="multipart/form-data">
-                                        @method('PATCH')
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary btn-xs" value="submit">Reclamar Solicitud</button>
-                                      </form> </td>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Idioma</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            @endforeach
+                            </thead>
                             
-                        </tbody>
-                    </table>
+                            <tbody>
+                                @foreach ($soliSuspensas as $solicitudes)
+                                    
+                                    <tr>
+                                        <td>{{ $solicitudes->nombre }}</td>
+                                        <td>{{ $solicitudes->apellidos }} </td> 
+                                        <td>{{ $idioma[0]->nombre}} </td>
+                                        <td>{{ $estado[0]->nombre}} </td>
+                                        <td> 
+                                          <form method="POST" id="changeForm" action="/solicitudesReclamar/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary btn-xs" value="submit">Reclamar Solicitud</button>
+                                          </form>
+                                          
+                                        </td>
+                                    </tr>
+                                
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>    
                 </div>
             </div>
         </div>
@@ -71,7 +75,21 @@
         
       </div>
     </div>
-  </div>
+</div>
 
-  <hr>
+@section('dataTableJS')
+<script type=text/javascript>
+      $(document).ready(function () {
+          ""
+          var table = $('#datatable').DataTable({
+              dom: 'Lfrtip',
+              "ordering": true,
+          "lengthChange": true
+      });
+
+      });
+
+  </script>
+@endsection
+
 @endsection

@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estado extends Model
 {
-    protected $table = 'nEstadoSolicitud';
+    protected $table = "estados";
+
 }

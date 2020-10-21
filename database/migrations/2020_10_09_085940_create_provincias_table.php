@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNIdiomasTable extends Migration
+class CreateProvinciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateNIdiomasTable extends Migration
      */
     public function up()
     {
-        Schema::create('nIdiomas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('descripcion',255);
+        Schema::create('provincias', function (Blueprint $table) {
+            $table->id();
+            $table->string("dpa")->unique();
+            $table->string("nombre");
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateNIdiomasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nIdiomas');
+        Schema::dropIfExists('provincias');
     }
 }

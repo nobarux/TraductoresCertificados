@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropColumnaIdioma extends Migration
+class CreateEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class DropColumnaIdioma extends Migration
      */
     public function up()
     {
-        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
-            $table->integer('id_Idioma');
-            $table->dropColumn('idioma');
+        Schema::create('estados', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ class DropColumnaIdioma extends Migration
      */
     public function down()
     {
-        Schema::table('tbSolicitudesAdminsion', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('estados');
     }
 }
