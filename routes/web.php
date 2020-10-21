@@ -34,12 +34,14 @@ Route::get('admin', 'AdminController@index')->middleware('auth');
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudController@index');
 Route::get('/solicitudesSuspensas', 'SolicitudController@indexSolicitudSuspensas');
+Route::get('/reclamaciones', 'SolicitudController@indexSolicitudReclamar');
 Route::get('/solicitudesRegistro', 'SolicitudController@indexSolicitudRegistro');
 Route::patch('/solicitudes/{soli}', 'SolicitudController@aprobadosUpdate');
 Route::patch('/solicitudesPend/{soli}', 'SolicitudController@pendienteCalifUpdate');
 Route::patch('/solicitudesAprob/{soli}', 'SolicitudController@aprobUpdate');
 Route::patch('/solicitudesSusp/{soli}', 'SolicitudController@suspUpdate');
 Route::patch('/solicitudesReclamar/{soli}', 'SolicitudController@reclamarUpdate');
+Route::patch('/solicitudesReclamarRechazada/{soli}', 'SolicitudController@reclamarRechazado');
 Route::get('/solicitudesRegistro/{soli}', 'SolicitudController@test');
 
 //Rutas para el registro de traductores

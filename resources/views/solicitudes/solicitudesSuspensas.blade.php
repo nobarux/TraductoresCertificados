@@ -17,6 +17,14 @@
   </header>
 
   <!-- Main Content -->
+  @if (session('mensaje'))
+  <div class="alert alert-success" role="alert" id="alerta" style="text-align:center">
+    {{session('mensaje')}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+@endif
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -28,7 +36,7 @@
         <div class="card mb-12">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
-                Lista de traductores
+                Lista de Solicitudes
             </div>
             <div class="card-body">
                 
@@ -89,6 +97,10 @@
 
       });
 
+      //Parte del autocerrado del alert cuando e inserta un nuevo registro
+      $("#alerta").fadeTo(5000,500).slideUp(500,function() {
+          $("#alerta").slideUp(500);
+        })
   </script>
 @endsection
 

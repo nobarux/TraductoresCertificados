@@ -164,6 +164,18 @@ class SolicitudController extends Controller
         return redirect('/solicitudesSuspensas');
     }
 
+    public function reclamarRechazado(Request $request, $solicitudes)
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitud::findOrFail($solicitudes);
+        $solicitud->estado = 7;
+        //dd($traductor);
+
+        $solicitud->save();
+        //return redirect('/solicitudes/solicitudesGeneral');
+        return redirect('/reclamaciones');
+    }
+
    
     public function indexSolicitudSuspensas()
     {
@@ -174,7 +186,17 @@ class SolicitudController extends Controller
         //  $idEstado = $soliSuspensas[0]->estado;
         //  $idioma = Idioma::where('id_Idioma', $idIdioma)->get();
         //  $estado = Estado::where('id_Estados', $idEstado)->get();
-        return view('/solicitudes/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas]);
+        return view('/solicitudes/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas])->with('mensaje','Se ha editado el estado de la solicitud a Reclamación');
+
+    }
+
+    public function indexSolicitudReclamar()
+    {
+         $soliReclamada = Solicitud::where('estado',6)
+         ->orderBy('nombre','asc')
+         ->get();
+        
+        return view('/reclamaciones', ['soliReclamada' => $soliReclamada])->with('mensaje','Se ha editado el estado de la solicitud');
 
     }
 }
