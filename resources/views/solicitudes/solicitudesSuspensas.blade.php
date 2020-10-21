@@ -51,8 +51,8 @@
                                     <tr>
                                         <td>{{ $solicitudes->nombre }}</td>
                                         <td>{{ $solicitudes->apellidos }} </td> 
-                                        <td>{{ $idioma[0]->nombre}} </td>
-                                        <td>{{ $estado[0]->nombre}} </td>
+                                        <td>{{ $solicitudes->listaidiomas($solicitudes->idioma) }} </td>
+                                        <td>{{ $solicitudes->listaestados($solicitudes->estado) }} </td>
                                         <td> 
                                           <form method="POST" id="changeForm" action="/solicitudesReclamar/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')

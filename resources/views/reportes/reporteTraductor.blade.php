@@ -59,9 +59,9 @@
                                     <tr>
                                         <td>{{ $reporte->nombre }}</td>
                                         <td>{{ $reporte->apellidos }} </td> 
-                                        <td>{{ $listaidioma[0]->nombre}} </td>
-                                        <td>{{ $listaprov[0]->nombre}} </td>
-                                        <td>{{ $listaprof[0]->nombre}} </td>
+                                        <td>{{ $reporte->listaidiomas($reporte->idioma)}} </td>
+                                        <td>{{ $reporte->listaprovincias($reporte->provincia)}} </td>
+                                        <td>{{ $reporte->listaprofesion($reporte->profesion)}} </td>
                                         <td>{{ date('d-m-Y', strtotime($reporte->created_at)) }} </td>
                                         
                                         {{-- <td> 

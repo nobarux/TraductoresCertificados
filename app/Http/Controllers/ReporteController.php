@@ -28,16 +28,7 @@ class ReporteController extends Controller
             ['estado', '<>', '5'],
             ['estado', '<>', '6'],
         ])->get();
-        $idIdio = $reportes[0]->idioma;
-        $idProv = $reportes[0]->provincia;
-        $idEstado = $reportes[0]->estado;
-        $idProf = $reportes[0]->profesion;
-        $listaidioma = Idioma::where('id_Idioma', $idIdio)->get();
-        $listaprov = Provincia::where('id_Prov', $idProv)->get();
-        $listaestado = Estado::where('id_Estados', $idEstado)->get();
-        $listaprof = Profesion::where('id_Prof', $idProf)->get();
-
-        return view('reportes.reporteTraductor', ['reportes' => $reportes, 'listaidioma' => $listaidioma, 'listaprov' => $listaprov, 'listaestado' => $listaestado, 'listaprof' => $listaprof]);
+        return view('reportes.reporteTraductor', ['reportes' => $reportes]);
     }
 
     // Generate PDF
@@ -51,6 +42,8 @@ class ReporteController extends Controller
         return $pdf->setPaper('a4', 'landscape')
         ->stream('reporte.pdf');
       }
+
+     
 
 
 }

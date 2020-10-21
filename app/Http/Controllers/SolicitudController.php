@@ -161,21 +161,20 @@ class SolicitudController extends Controller
 
         $solicitud->save();
         //return redirect('/solicitudes/solicitudesGeneral');
-        return redirect('/solicitudes/solicitudesSuspensas');
+        return redirect('/solicitudesSuspensas');
     }
 
    
     public function indexSolicitudSuspensas()
     {
-         
          $soliSuspensas = Solicitud::where('estado',5)
          ->orderBy('nombre','asc')
          ->get();
-         $idIdioma = $soliSuspensas[0]->idioma;
-         $idEstado = $soliSuspensas[0]->estado;
-         $idioma = Idioma::where('id_Idioma', $idIdioma)->get();
-         $estado = Estado::where('id_Estados', $idEstado)->get();
-        return view('/solicitudes/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas,'idioma' => $idioma , 'estado'=>$estado]);
+        //  $idIdioma = $soliSuspensas[0]->idioma;
+        //  $idEstado = $soliSuspensas[0]->estado;
+        //  $idioma = Idioma::where('id_Idioma', $idIdioma)->get();
+        //  $estado = Estado::where('id_Estados', $idEstado)->get();
+        return view('/solicitudes/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas]);
 
     }
 }

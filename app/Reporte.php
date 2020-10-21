@@ -28,4 +28,22 @@ class Reporte extends Model
       {
           return $this->belongsTo('App\Estado','id_Estados');
       }
+
+      public function listaidiomas($idIdioma)
+      {
+        $listaidioma = Idioma::where('id_Idioma', $idIdioma)->first();
+       return $listaidioma->nombre;
+      }
+
+      public function listaprovincias($idProvincia)
+      {
+        $listaprov = Provincia::where('id_Prov', $idProvincia)->first();
+       return $listaprov->nombre;
+      }
+
+      public function listaprofesion($idProfesion)
+      {
+        $listaprof = Profesion::where('id_Prof', $idProfesion)->first();
+       return $listaprof->nombre;
+      }
 }
