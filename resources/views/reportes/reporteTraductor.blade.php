@@ -32,15 +32,16 @@
           </div>
         </div>
         <div class="card mb-12">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Lista de traductores
+            <div class="card-header" style="text-align: center;">
+                <h4><i class="fas fa-table mr-1"></i>
+                  Lista de traductores
+                </h4>
             </div>
             <div class="card-body">
                 
                 <div class="table-responsive">
                     <div id="other" class="card-box table-responsive">
-                        <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
+                        <table class="table table-striped table-bordered dataTable" id="datatable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -73,6 +74,17 @@
                                 @endforeach
                                 
                             </tbody>
+
+                            <tfoot>
+                              <tr>
+                                  <th>Nombre</th>
+                                  <th>Apellidos</th>
+                                  <th>Idioma</th>
+                                  <th>Provincia</th>
+                                  <th>Profesión</th>
+                                  <th>Registro</th>
+                              </tr>
+                          </tfoot>
                         </table>
                     </div>    
                 </div>
@@ -87,27 +99,57 @@
 @section('dataTableJS')
 <script type=text/javascript>
 $(document).ready(function () {
-    ""
-    var table = $('#datatable').DataTable({
-        dom: 'Bfrtip',
-        "ordering": true,
-    "lengthChange": true,
+  //Crea un input por cada elemento q exista en este caso en el footer de la tabla.
+  $('#datatable tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Buscar por '+title+'" />' );
+    } );  
 
-    buttons:[{
-        
-    extend:'pdfHtml5',
-            text:'Exportar a PDF',
-            pageSize: 'Letter',
-            orientation: 'portrait',
-            download: 'open'
-        },
-        {
-            extend: 'print',
-            text: 'Imprimir',
-            orientation:'portrait'
-        }
+  
+  //DataTables
+    var table = $('#datatable').DataTable({
+      initComplete: function () 
+      {
+            // Apply the search
+            this.api().columns().every( function () 
+            {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () 
+                {
+                    if ( that.search() !== this.value ) 
+                    {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                });
+            });
+      }
+                    ,
+          "dom": 'B<f<t><"#df"<"pull-left" i><"pull-right"p><"pull-right"l>>>',
+         "lengthChange": true,
+         "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todos"]],
+        searching: true,
+        language: {
+                url: "/vendor/jQueryDT/Spanish.json"
+            },
+
+        buttons:[{
+            
+        extend:'pdfHtml5',
+                text:'Exportar a PDF',
+                pageSize: 'Letter',
+                orientation: 'portrait',
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                orientation:'portrait'
+            }
     
-    ]
+              ]
 });
 table.buttons().container().appendTo($('#other .col-sm-6:eq(0)', table.table().container()))
 

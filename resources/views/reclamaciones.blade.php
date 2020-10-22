@@ -34,15 +34,16 @@
           </div>
         </div>
         <div class="card mb-12">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Lista de Solicitudes
+            <div class="card-header" style="text-align: center;">
+               <h4> <i class="fas fa-table mr-1"></i>
+                    Lista de Reclamaciones
+                </h4>
             </div>
             <div class="card-body">
                 
                 <div class="table-responsive">
                     <div id="other" class="card-box table-responsive">
-                        <table class="table table-bordered" id="datatables" width="100%" cellspacing="0">
+                        <table class="table table-striped table-bordered dataTable" id="datatables" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -65,13 +66,17 @@
                                             <form method="POST"  action="/solicitudesAprob/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                                 @method('PATCH')
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm" value="submit">Aprobar Solicitud</button>
+                                                <button type="submit" class="btn btn-primary btn-sm" value="submit">
+                                                    <i class="fa fa-check"></i>  Aprobar Solicitud
+                                                </button>
                                             </form>
 
                                             <form method="POST"  action="/solicitudesReclamarRechazada/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                                 @method('PATCH')
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm" value="submit">Rechazar Reclamación</button>
+                                                <button type="submit" class="btn btn-primary btn-sm" value="submit">
+                                                    <i class="fa fa-times-circle"></i>  Rechazar Reclamación
+                                                </button>
                                               </form>
                                           
                                         </td>
@@ -94,11 +99,15 @@
 @section('dataTableJS')
 <script type=text/javascript>
       $(document).ready(function () {
-          ""
           var table = $('#datatables').DataTable({
-              dom: 'Lfrtip',
+            dom: 'frtipl',
+              "lengthChange": true,
+                "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todos"]],
               paging: true,
-            searching: false
+                searching: true,
+                language: {
+            url: "/vendor/jQueryDT/Spanish.json"
+        }
       });
 
       });

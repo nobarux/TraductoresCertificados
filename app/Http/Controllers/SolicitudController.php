@@ -17,13 +17,13 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        $soli = Solicitud::all();
+        $soli= Solicitud::where([
+            ['estado', '<>', '5'],
+            ['estado', '<>', '6'],
+            ['estado', '<>', '7']
+        ])->get();
+        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli]);
         
-        $idIdioma = $soli[0]->idioma;
-        $idEstado = $soli[0]->estado;
-        $idioma = Idioma::where('id_Idioma', $idIdioma)->get();
-        $estado = Estado::where('id_Estados', $idEstado)->get();
-        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli, 'idioma' => $idioma, 'estado' => $estado]);
     }
 
     /**
@@ -108,7 +108,7 @@ class SolicitudController extends Controller
         // return view('solicitudes.solicitudesRegistro');
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
-        $solicitud->id_Estado = 2;
+        $solicitud->estado = 2;
         //dd($traductor);
 
         $solicitud->save();
@@ -120,7 +120,7 @@ class SolicitudController extends Controller
     {
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
-        $solicitud->id_Estado = 3;
+        $solicitud->estado = 3;
         //dd($traductor);
 
         $solicitud->save();
@@ -132,7 +132,7 @@ class SolicitudController extends Controller
     {
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
-        $solicitud->id_Estado = 4;
+        $solicitud->estado = 4;
         //dd($traductor);
 
         $solicitud->save();
@@ -144,7 +144,7 @@ class SolicitudController extends Controller
     {
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
-        $solicitud->id_Estado = 5;
+        $solicitud->estado = 5;
         //dd($traductor);
 
         $solicitud->save();
@@ -185,7 +185,7 @@ class SolicitudController extends Controller
         //  $idIdioma = $soliSuspensas[0]->idioma;
         //  $idEstado = $soliSuspensas[0]->estado;
         //  $idioma = Idioma::where('id_Idioma', $idIdioma)->get();
-        //  $estado = Estado::where('id_Estados', $idEstado)->get();
+        //  $estado = Estado::where('estados', $idEstado)->get();
         return view('/solicitudes/solicitudesSuspensas', ['soliSuspensas' => $soliSuspensas])->with('mensaje','Se ha editado el estado de la solicitud a Reclamación');
 
     }

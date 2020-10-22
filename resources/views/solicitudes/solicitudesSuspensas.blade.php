@@ -34,15 +34,15 @@
           </div>
         </div>
         <div class="card mb-12">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Lista de Solicitudes
+            <div class="card-header" style="text-align: center;">
+                <h4><i class="fas fa-table mr-1"></i>
+                Lista de Solicitudes Desaprobadas</h4>
             </div>
             <div class="card-body">
                 
                 <div class="table-responsive">
                     <div id="other" class="card-box table-responsive">
-                        <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
+                        <table class="table table-striped table-bordered dataTable" id="datatable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -65,7 +65,10 @@
                                           <form method="POST" id="changeForm" action="/solicitudesReclamar/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
                                             @csrf
-                                            <button type="submit" class="btn btn-primary btn-xs" value="submit">Reclamar Solicitud</button>
+                                            
+                                            <button type="submit" class="btn btn-primary btn-xs" value="submit">
+                                              <i class="fa fa-redo"></i>  Reclamar Solicitud
+                                            </button>
                                           </form>
                                           
                                         </td>
@@ -88,11 +91,15 @@
 @section('dataTableJS')
 <script type=text/javascript>
       $(document).ready(function () {
-          ""
           var table = $('#datatable').DataTable({
-              dom: 'Lfrtip',
+              dom: 'frtipl',
+              "lengthChange": true,
+         "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todos"]],
               "ordering": true,
-          "lengthChange": true
+          "lengthChange": true,
+          language: {
+            url: "/vendor/jQueryDT/Spanish.json"
+        }
       });
 
       });

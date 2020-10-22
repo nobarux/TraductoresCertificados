@@ -17,9 +17,10 @@
 
   <!-- Custom fonts for this template -->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
+  <link href="/vendor/jQueryDT/css/bootstrapDT.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/jQueryDT/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/jQueryDT/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
   
-
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script src="{{asset('js/bootstrap.js')}}"> </script>
@@ -58,6 +59,8 @@
 
 <script src="/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/admin/scripts.js"></script>
+<script src="/js/jQueryDT/js/dataTables.bootstrap4.js"></script>
+<script src="/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/js/admin/demo/datatables-demo.js"></script>
 @yield('jsModalDelete')
 @yield('scriptNombreUpload')
