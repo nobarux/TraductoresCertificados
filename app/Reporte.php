@@ -37,7 +37,7 @@ class Reporte extends Model
 
       public function listaprovincias($idProvincia)
       {
-        $listaprov = Provincia::where('id_Prov', $idProvincia)->first();
+        $listaprov = Provincia::where('dpa', $idProvincia)->first();
        return $listaprov->nombre;
       }
 

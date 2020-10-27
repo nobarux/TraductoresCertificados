@@ -42,6 +42,7 @@
                                     <th>Idioma</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
+                                    <th>Impresión</th>
                                 </tr>
                             </thead>
                             
@@ -88,6 +89,9 @@
                                               <i class="fa fa-times-circle"></i>  Suspender Solicitud
                                             </button>
                                           </form>
+                                          
+                                        </td>
+                                        <td>asdadadS
                                           
                                         </td>
                                     </tr>
