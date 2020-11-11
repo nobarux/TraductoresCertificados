@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             ProvinciaSeeder::class,
             MunicipioSeeder::class,
             ProfesionSeeder::class,
-            TipoCertificacionSeeder::class
+            TipoCertificacionSeeder::class,
+            RazonesSeeder::class
         ]);
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Idioma;
 use App\Solicitud;
 use App\Estado;
+use App\Razones;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Response;
 
 class SolicitudController extends Controller
 {
@@ -17,12 +19,15 @@ class SolicitudController extends Controller
      */
     public function index()
     {
+        $razon = Razones::all();
+        // dd($razon);
         $soli= Solicitud::where([
             ['estado', '<>', '5'],
             ['estado', '<>', '6'],
-            ['estado', '<>', '7']
+            ['estado', '<>', '7'],
+            ['estado', '<>', '8']
         ])->get();
-        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli]);
+        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli], ['razon' => $razon]);
         
     }
 
@@ -96,7 +101,7 @@ class SolicitudController extends Controller
      */
     public function destroy(Solicitud $solicitud)
     {
-        //
+        
     }
 
 
@@ -148,8 +153,20 @@ class SolicitudController extends Controller
         //dd($traductor);
 
         $solicitud->save();
-        //return redirect('/solicitudes/solicitudesGeneral');
         return redirect('/solicitudes');
+    }
+
+    public function inscripcionDeneg(Request $request, $solicitudes )
+    {   
+        // dd($request->all());
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitud::findOrFail($solicitudes);
+        $solicitud->estado = 8;
+        $solicitud->razones = $request->id_Razones;
+        $solicitud->razonesDenegar = $request->razon;
+      
+        $solicitud->save();
+        return redirect('/solicitudes')->with('mensaje','Ha denegado una inscipción correctamente');
     }
 
     public function reclamarUpdate(Request $request, $solicitudes)
@@ -198,5 +215,46 @@ class SolicitudController extends Controller
         
         return view('/reclamaciones', ['soliReclamada' => $soliReclamada])->with('mensaje','Se ha editado el estado de la solicitud');
 
+    }
+
+    public function foto($solicitudes)
+    {
+        $fotoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+        //dd($fotoUser);
+        $ruta = $fotoUser->file_foto;
+        return Response::download($ruta);
+    }
+
+    public function carnet1($solicitudes)
+    {
+        $anversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+        // dd($anversoUser);
+        $ruta = $anversoUser->file_carnet1;
+        // dd($ruta);
+        return Response::download($ruta);
+    }
+
+    public function carnet2($solicitudes)
+    {
+        $reversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+        //dd($fotoUser);
+        $ruta = $reversoUser->file_carnet2;
+        return Response::download($ruta);
+    }
+
+    public function tit($solicitudes)
+    {
+        $titUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+        //dd($fotoUser);
+        $ruta = $titUser->file_titulo;
+        return Response::download($ruta);
+    }
+
+    public function ante($solicitudes)
+    {
+        $anteUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+        //dd($fotoUser);
+        $ruta = $anteUser->file_antecedentes;
+        return Response::download($ruta);
     }
 }

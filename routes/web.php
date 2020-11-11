@@ -33,6 +33,7 @@ Route::get('admin', 'AdminController@index')->middleware('auth');
 
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudController@index');
+Route::patch('/solicitudes/{soli}', 'SolicitudController@update');
 Route::get('/solicitudesSuspensas', 'SolicitudController@indexSolicitudSuspensas');
 Route::get('/reclamaciones', 'SolicitudController@indexSolicitudReclamar');
 Route::get('/solicitudesRegistro', 'SolicitudController@indexSolicitudRegistro');
@@ -43,6 +44,14 @@ Route::patch('/solicitudesSusp/{soli}', 'SolicitudController@suspUpdate');
 Route::patch('/solicitudesReclamar/{soli}', 'SolicitudController@reclamarUpdate');
 Route::patch('/solicitudesReclamarRechazada/{soli}', 'SolicitudController@reclamarRechazado');
 Route::get('/solicitudesRegistro/{soli}', 'SolicitudController@test');
+Route::post('/inscripcionesDeneg/{soli}/{idDeneg?}/{razonDeneg?}', 'SolicitudController@inscripcionDeneg')->name('solicitud.updateIncs');
+
+//Descarga de archivos segun user
+Route::get('/solicitudesDescFoto/{soli}', 'SolicitudController@foto')->name('solicitudes.descFoto');
+Route::get('/solicitudesDescCarnet1/{soli}', 'SolicitudController@carnet1')->name('solicitudes.descCarnet1');
+Route::get('/solicitudesDescCarnet2/{soli}', 'SolicitudController@carnet2')->name('solicitudes.descCarnet2');
+Route::get('/solicitudesDescTitulo/{soli}', 'SolicitudController@tit')->name('solicitudes.descTit');
+Route::get('/solicitudesDescAnte/{soli}', 'SolicitudController@ante')->name('solicitudes.descAnte');
 
 //Rutas para el registro de traductores
 // Route::get('/traductores', 'TraductorController@index');

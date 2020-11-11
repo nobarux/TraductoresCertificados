@@ -25,4 +25,11 @@ class Solicitud extends Model
         $listaestados = Estado::where('id_Estados', $idEstado)->first();
        return $listaestados->nombre;
       }
+
+      public function listaprovincias($idProvincia)
+      {
+        $listaprov = Provincia::where('dpa', $idProvincia)->first();
+       return $listaprov->nombre;
+      }
+
 }

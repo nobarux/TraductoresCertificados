@@ -24,10 +24,12 @@ class ReporteController extends Controller
 
     public function reporteTrad()
     {
-        $reportes= Reporte::where([
-            ['estado', '<>', '5'],
-            ['estado', '<>', '6'],
-        ])->get();
+        // $reportes= Reporte::where([
+        //     ['estado', '<>', '5'],
+        //     ['estado', '<>', '6'],
+        // ])->get();
+
+        $reportes= Reporte::all();
         return view('reportes.reporteTraductor', ['reportes' => $reportes]);
     }
 

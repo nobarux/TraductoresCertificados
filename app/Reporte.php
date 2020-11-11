@@ -46,4 +46,10 @@ class Reporte extends Model
         $listaprof = Profesion::where('id_Prof', $idProfesion)->first();
        return $listaprof->nombre;
       }
+
+      public function listaestados($idEstado)
+      {
+        $listaestados = Estado::where('id_Estados', $idEstado)->first();
+       return $listaestados->nombre;
+      }
 }

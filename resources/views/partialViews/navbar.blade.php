@@ -27,7 +27,7 @@
             <a class="nav-link" href="/reclamaciones">Reclamaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/solicitudesSuspensas">Solicitudes Desaprobadas</a>
+            <a class="nav-link" href="/solicitudesSuspensas">Solicitudes Denegadas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/reporteTrad">Reporte Traductores</a>
