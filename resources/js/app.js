@@ -9,6 +9,8 @@ import {$,JQuery} from 'jquery';
 
 
  require('./bootstrap');
+//  require('printThis.js');
+
 
 window.Vue = require('vue');
 /**

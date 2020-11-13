@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
 .js('jquery/dist/jquery.min.js', 'public/jquery/dist')
 .js('bootstrap/dist/js/bootstrap.bundle.min.js', 'public/bootstrap/dist/js')
 .js('resources/js/bootstrap.js', 'public/js')
+.js('resources/js/printThis.js', 'public/js')
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin/styles.scss', 'public/css/admin');

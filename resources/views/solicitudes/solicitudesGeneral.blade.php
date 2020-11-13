@@ -1,7 +1,7 @@
 @extends('Layouts.app')
 
 @section('content')
-
+  
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('/img/about-bg.jpg')">
     <div class="overlay"></div>
@@ -78,16 +78,18 @@
                                         <td>{{ $solicitudes->listaestados($solicitudes->estado)}} </td>
                                         <td data-order="{{ strtotime($solicitudes->created_at)}}" > {{ date('d-m-Y', strtotime($solicitudes->created_at)) }}</td>
                                         <td> 
-                                          <form method="POST"  action="/solicitudes/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                          <button data-toggle="modal" onclick='showAprobarData("{{$solicitudes->id}}","{{$solicitudes->nombre}}",
+                                          "{{$solicitudes->apellidos}}","{{$solicitudes->carnet}}","{{ $solicitudes->listacolor($solicitudes->colorP)}}",
+                                          "{{ $solicitudes->listaprofesion($solicitudes->profesion)}}","{{$solicitudes->sexo}}","{{$solicitudes->direccion}}",
+                                          "{{ $solicitudes->listaprovincias($solicitudes->provincia)}}","{{ $solicitudes->listamunicipio($solicitudes->municipio)}}",
+                                          "{{$solicitudes->telefono_fijo}}","{{$solicitudes->telefono_celular}}","{{$solicitudes->email}}",
+                                          "{{ $solicitudes->listaidiomas($solicitudes->idioma)}}","{{ $solicitudes->listacertificacion($solicitudes->certificacion)}}")' data-target="#showModal" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-folder-plus"></i> Aprobar admisión examen
+                                          </button>
+                                          {{-- <form method="POST"  action="/solicitudes/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
                                             @csrf
-                                            {{-- <a href="" type="submit">Cambio estado</a>    --}}
-                                            {{-- <a href="javascript:;" onclick="deleteData({{$solicitudes->id}})"><i class="fa fa-trash"></i></a>    --}}
-    
-                                            <button type="submit" class="btn btn-primary btn-sm" value="submit">
-                                              <i class="fa fa-folder-plus"></i> Aprobar admisión examen
-                                            </button>
-                                          </form>
+                                          </form> --}}
     
                                           <form method="POST"  action="/solicitudesPend/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
@@ -185,10 +187,124 @@
   </div>
 
 </div>
+{{-- Termino Modal para el inscripciones rechazadas --}}
 
+{{-- Modal para el imprimir cert --}}
+{{-- <div></div> --}}
+<div class="modal fade bd-example-modal-lg" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="showModalLabel">Certificación</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body" id="inscripcionModal">
+        <form method="POST" action="" id="Form" >
+          {{-- @method('PATCH') --}}
+          @csrf
+
+          <div class="form-group">
+            <h5 style="position: absolute; right: 10px">CERT-01</h5>
+            <br />
+            <div class="text-center">
+              <img src="../img/escudo.png" width="50px" alt="Fluid image" thumbnail>
+              <h5>República de Cuba</h5>
+            </div>
+            <h6 class="text-center">Ministerio de Relaciones Exteriores</h6>
+
+            <h3 class="text-center">
+              Planilla para la solicitud de Inscripción a Exámenes de Certificación
+              de Traductores e Intérpretes
+            </h3>
+          </div>
+          <div class="form-group">
+            <div class="col-8 col-sm-6">
+              <label for="nombrePlanilla" class="col-form-label">Nombre(s)</label>
+              <input class="form-control" id="nombrePlanilla" name="nombrePlanilla" type="text" readonly>
+              {{-- <input class="form-control" id="ocultos" name="ocultos" type="text" > --}}
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="apellidos" class="col-form-label">Apellidos</label>
+              <input class="form-control" id="apellidos" name="apellidos" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="CI" class="col-form-label">Carnet de Identidad</label>
+              <input class="form-control" id="CI" name="CI" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="colorP" class="col-form-label">Color de Piel</label>
+              <input class="form-control" id="colorP" name="colorP" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="profesion" class="col-form-label">Profesión</label>
+              <input class="form-control" id="profesion" name="profesion" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="sexo" class="col-form-label">Sexo</label>
+              <input class="form-control" id="sexo" name="sexo" type="text" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-8 col-sm-12">
+            <label for="message-text" class="col-form-label">Dirección</label>
+            <textarea class="form-control" id="direccion" name="direccion" readonly></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-8 col-sm-6">
+              <label for="provincia" class="col-form-label">Provincia</label>
+              <input class="form-control" id="provincia" name="provincia" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="municipio" class="col-form-label">Municipio</label>
+              <input class="form-control" id="municipio" name="municipio" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="telefono_fijo" class="col-form-label">Teléfono Fijo</label>
+              <input class="form-control" id="telefono_fijo" name="telefono_fijo" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="telefono_celular" class="col-form-label">Teléfono Celular</label>
+              <input class="form-control" id="telefono_celular" name="telefono_celular" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-12">
+              <label for="correo" class="col-form-label">Correo electrónico</label>
+              <input class="form-control" id="correo" name="correo" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="idioma" class="col-form-label">Idioma</label>
+              <input class="form-control" id="idioma" name="idioma" type="text" readonly>
+            </div>
+            <div class="col-8 col-sm-6">
+              <label for="certificación" class="col-form-label">Certificación a Solicitar</label>
+              <input class="form-control" id="certificación" name="certificación" type="text" readonly>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            
+            {{-- <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button> --}}
+              <button type="submit" name="" class="btn btn-primary" data-dismiss="modal" onclick="formSubmit()"><i class="fa fa-print"></i> Guardar e Imprimir</button>
+              <button type="button" name="printButton" id="printButton" class="btn btn-primary" ><i class="fa fa-print"></i> Imprimir </button>
+        </form>
+        
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+{{-- Termino Modal para el imprimir cert --}}
 
 
 @section('dataTableJS')
+<script src="print.js"></script>
 <script type=text/javascript>
 //Parte del autocerrado del alert cuando e inserta un nuevo registro
 $("#alerta").fadeTo(5000,500).slideUp(500,function() {
@@ -205,7 +321,7 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             url: "/vendor/jQueryDT/Spanish.json"
         }
       });
-
+      
       $("#id_Razones").change(function() {
           var selectedOption = $(this).children("option:selected").text();
           document.getElementById("oculto").value = selectedOption;
@@ -220,7 +336,25 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
           
         })
 
+        $("#printButton").click(function(){
+          // alert("aaaaa");
+          $("#inscripcionModal").printThis({
+            debug: false,                //show the iframe for debugging
+            importCSS: true,             //import page CSS
+            importStyle: false,          //import style tags
+            printContainer: true,        //grab outer container as well as the contents of the selector
+            loadCSS: "/vendor/bootstrap/css/bootstrap.css",   //path to additional css file - us an array [] for multiple
+            pageTitle: "",               //add title to print page
+            removeInline: false,         //remove all inline styles from print elements
+            printDelay: 333,             //variable print delay
+            header: null,                //prefix to html
+            formValues: true             //preserve input/form values
+            });
+        });
+
       });
+
+            
 
 //Funcion q muestra el modal de incripciones denegadas
       function showData(id,nmbre,apellidos)
@@ -235,6 +369,26 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             var url = 'http://traductorescertificados/inscripcionesDeneg/' + id;
             // var url = 'http://traductorescertificados/inscripcionesDeneg/' + id + '/' + selectedOption + '/' +  textAreaRazones;
             $("#Form").attr('action', url);
+        }
+
+        function showAprobarData(id,nmbre,apellidos,carnet,colorPiel,profesion,sexo,direccion,provincia,municipio,tel_fijo,tel_cel,email,idioma,certificacion) 
+        {
+          // alert(id);
+          // document.getElementById("ocultos").value = id;
+          document.getElementById("nombrePlanilla").value = nmbre;
+          document.getElementById("apellidos").value = apellidos;
+          document.getElementById("CI").value = carnet;
+          document.getElementById("colorP").value = colorPiel;
+          document.getElementById("profesion").value = profesion;
+          document.getElementById("sexo").value = sexo;
+          document.getElementById("direccion").value = direccion;
+          document.getElementById("provincia").value = provincia;
+          document.getElementById("municipio").value = municipio;
+          document.getElementById("telefono_fijo").value = tel_fijo;
+          document.getElementById("telefono_celular").value = tel_cel;
+          document.getElementById("correo").value = email;
+          document.getElementById("idioma").value = idioma;
+          document.getElementById("certificación").value = certificacion;
         }
 
         function formSubmit()

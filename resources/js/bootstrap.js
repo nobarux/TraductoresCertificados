@@ -22,6 +22,7 @@ try {
     require('datatables.net-buttons/js/buttons.flash');
     require('datatables.net-buttons/js/buttons.print');
     require('chart.js');
+    // require('printThis.js');
     window.pdfMake = require('pdfmake/build/pdfmake');
     window.pdfFonts = require('pdfmake/build/vfs_fonts');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;

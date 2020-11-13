@@ -32,4 +32,30 @@ class Solicitud extends Model
        return $listaprov->nombre;
       }
 
+      public function listamunicipio($idMunicipio)
+      {
+        $listamun = Municipio::where('id', $idMunicipio)->first();
+        // dd($listamun);
+       return $listamun->nombre;
+      }
+
+      public function listaprofesion($idProfesion)
+      {
+        $listaprof = Profesion::where('id_Prof', $idProfesion)->first();
+       return $listaprof->nombre;
+      }
+
+      public function listacolor($idColor)
+      {
+        $listacol = ColorPiel::where('id_Color', $idColor)->first();
+        // dd($listacol);
+       return $listacol->descripcion;
+      }
+
+      public function listacertificacion($idCert)
+      {
+        $listacert = Certificacion::where('id_Tipo_Cert', $idCert)->first();
+       return $listacert->nombre;
+      }
+
 }

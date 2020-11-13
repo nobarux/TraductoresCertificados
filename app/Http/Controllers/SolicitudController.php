@@ -27,6 +27,7 @@ class SolicitudController extends Controller
             ['estado', '<>', '7'],
             ['estado', '<>', '8']
         ])->get();
+        // dd($soli);
         return view('/solicitudes/solicitudesGeneral', ['soli' => $soli], ['razon' => $razon]);
         
     }
@@ -114,12 +115,18 @@ class SolicitudController extends Controller
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
         $solicitud->estado = 2;
+        //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
+        $random = rand(5, 15);
+        $solicitud->referencia = $random;
+
         //dd($traductor);
 
         $solicitud->save();
         //return redirect('/solicitudes/solicitudesGeneral');
         return redirect('/solicitudes');
     }
+
+
 
     public function pendienteCalifUpdate(Request $request, $solicitudes)
     {

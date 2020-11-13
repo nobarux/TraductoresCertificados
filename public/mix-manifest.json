@@ -9,5 +9,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin/styles.css": "/css/admin/styles.css",
-    "/js/bootstrap.js": "/js/bootstrap.js"
+    "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/printThis.js": "/js/printThis.js"
 }

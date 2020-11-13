@@ -34,6 +34,8 @@
         "datatables.net-responsive": "^2.2.6",
         "jszip": "^3.5.0",
         "pdfmake": "^0.1.68",
+        "print-js": "^1.5.0",
+        "print-this": "^1.15.1",
         "ziggy-js": "^0.9.4"
     }
 }
