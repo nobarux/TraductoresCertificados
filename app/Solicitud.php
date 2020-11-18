@@ -48,7 +48,11 @@ class Solicitud extends Model
       public function listacolor($idColor)
       {
         $listacol = ColorPiel::where('id_Color', $idColor)->first();
-        // dd($listacol);
+        // dd($idColor);
+        // if ($idColor == 0) {
+        //   dd($idColor);
+        //   $listacol->descripcion = "a";
+        // }
        return $listacol->descripcion;
       }
 

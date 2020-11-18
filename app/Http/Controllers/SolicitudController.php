@@ -8,6 +8,9 @@ use App\Estado;
 use App\Razones;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
+use Storage;
+use App\Mail\Error;
 use Response;
 
 class SolicitudController extends Controller
@@ -108,22 +111,23 @@ class SolicitudController extends Controller
 
     //////////////////////////////////////////////METODOS AUXILIARES/////////////////////////////////////////
 
-    public function aprobadosUpdate(Request $request, $solicitudes)
+    public function aprobadosInscripcion(Request $request, $solicitudes)
     {
-        // dd('Esto es una prueba');
         // return view('solicitudes.solicitudesRegistro');
         //Llamado al modelo de traductores para poder guardarlo luego n bd
         $solicitud = Solicitud::findOrFail($solicitudes);
         $solicitud->estado = 2;
         //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
         $random = rand(5, 15);
+        $dirUrl = "http://beta.esti.cu/pagos/certificacion/";
+        $getHash = $solicitud->hashSeguridad;
+        $dirCompleta = $dirUrl . $getHash;
+        Mail::to('danilo.arrieta@esti.cu')->queue(new Error("Llego el correo"));
+        // dd($dirCompleta);
         $solicitud->referencia = $random;
-
         //dd($traductor);
-
         $solicitud->save();
-        //return redirect('/solicitudes/solicitudesGeneral');
-        return redirect('/solicitudes');
+        return redirect('/solicitudes')->with('mensaje','Se ha aprobado la solicitud correctamente');;
     }
 
 
@@ -227,41 +231,53 @@ class SolicitudController extends Controller
     public function foto($solicitudes)
     {
         $fotoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        //dd($fotoUser);
-        $ruta = $fotoUser->file_foto;
-        return Response::download($ruta);
+        $rutaFotoBD = $fotoUser->file_foto;
+        // dd($rutaFotoBD);
+        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+        // $file_path = "/Apps/certificacion/91022322500/foto.png";
+        //$file = Storage::disk('ftp')->download($file_path);
+        // Storage::disk('ftp')->files($this->filePath.$filename);
+        // $datafile = file_get_contents("smb://INTERNAL;desarrollador1:desarollador*2020@10.10.10.11/Apps/certificacion/91022322500/foto.png");
+        // dd($datafile);
+
+        return Response::download($rutaCambiada);
     }
 
     public function carnet1($solicitudes)
     {
         $anversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
         // dd($anversoUser);
-        $ruta = $anversoUser->file_carnet1;
+        $rutaFotoBD = $anversoUser->file_carnet1;
+        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+
         // dd($ruta);
-        return Response::download($ruta);
+        return Response::download($rutaCambiada);
     }
 
     public function carnet2($solicitudes)
     {
         $reversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
         //dd($fotoUser);
-        $ruta = $reversoUser->file_carnet2;
-        return Response::download($ruta);
+        $rutaFotoBD = $reversoUser->file_carnet2;
+        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+        return Response::download($rutaCambiada);
     }
 
     public function tit($solicitudes)
     {
         $titUser = Solicitud::where('id', $solicitudes)->firstOrFail();
         //dd($fotoUser);
-        $ruta = $titUser->file_titulo;
-        return Response::download($ruta);
+        $rutaFotoBD = $titUser->file_titulo;
+        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+        return Response::download($rutaCambiada);
     }
 
     public function ante($solicitudes)
     {
         $anteUser = Solicitud::where('id', $solicitudes)->firstOrFail();
         //dd($fotoUser);
-        $ruta = $anteUser->file_antecedentes;
-        return Response::download($ruta);
+        $rutaFotoBD = $anteUser->file_antecedentes;
+        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+        return Response::download($rutaCambiada);
     }
 }

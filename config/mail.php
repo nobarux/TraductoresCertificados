@@ -36,15 +36,13 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'correo.esti.cu'),
             'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'encryption' => env('MAIL_ENCRYPTION', ''),
+            'username' => env('MAIL_USERNAME','contacto@esti.cu'),
+            'password' => env('MAIL_PASSWORD','esti*2020'),
             'timeout' => null,
-            'auth_mode' => null,
         ],
-
         'ses' => [
             'transport' => 'ses',
         ],
@@ -84,8 +82,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'sitio@esti.cu'),
+        'name' => env('MAIL_FROM_NAME', 'ESTI ~ Sitio Web'),
     ],
 
     /*

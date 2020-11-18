@@ -37,7 +37,7 @@ Route::patch('/solicitudes/{soli}', 'SolicitudController@update');
 Route::get('/solicitudesSuspensas', 'SolicitudController@indexSolicitudSuspensas');
 Route::get('/reclamaciones', 'SolicitudController@indexSolicitudReclamar');
 Route::get('/solicitudesRegistro', 'SolicitudController@indexSolicitudRegistro');
-Route::patch('/solicitudes/{soli}', 'SolicitudController@aprobadosUpdate');
+Route::patch('/solicitudesInscr/{soli}', 'SolicitudController@aprobadosInscripcion');
 Route::patch('/solicitudesPend/{soli}', 'SolicitudController@pendienteCalifUpdate');
 Route::patch('/solicitudesAprob/{soli}', 'SolicitudController@aprobUpdate');
 Route::patch('/solicitudesSusp/{soli}', 'SolicitudController@suspUpdate');

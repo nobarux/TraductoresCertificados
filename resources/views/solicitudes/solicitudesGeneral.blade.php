@@ -20,7 +20,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-10  mx-auto">
+      <div class="col-lg-12  mx-auto">
         <div class="row py-1g-2">
           <div class="col-md-6"> 
             
@@ -119,11 +119,11 @@
                                               <i class="fa fa-ban"></i>  Denegar inscripción
                                             </button>
                                         </td>
-                                        <td>
+                                        <td style="text-align: center">
                                           <a href="{{ route('solicitudes.descFoto', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar foto</a>
                                           <a href="{{ route('solicitudes.descCarnet1', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar carnet anverso</a>
                                           <a href="{{ route('solicitudes.descCarnet2', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar carnet reverso</a>
-                                          <a href="{{ route('solicitudes.descTit', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar titulo</a>
+                                          <a href="{{ route('solicitudes.descTit', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar título</a>
                                           <a href="{{ route('solicitudes.descAnte', $solicitudes->id) }}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar antecedentes</a>
                                           
                                         </td>
@@ -195,18 +195,18 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="showModalLabel">Certificación</h5>
+        <h5 class="modal-title" id="showModalLabel"></h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="close">
         <span aria-hidden="true">&times;</span>
       </button>
       </div>
       <div class="modal-body" id="inscripcionModal">
-        <form method="POST" action="" id="Form" >
-          {{-- @method('PATCH') --}}
+        <form method="POST" action="" id="FormImprimir" >
+          @method('PATCH')
           @csrf
 
           <div class="form-group">
-            <h5 style="position: absolute; right: 10px">CERT-01</h5>
+            <h5 style="position: absolute; right: 20px">CERT-01</h5>
             <br />
             <div class="text-center">
               <img src="../img/escudo.png" width="50px" alt="Fluid image" thumbnail>
@@ -219,29 +219,30 @@
               de Traductores e Intérpretes
             </h3>
           </div>
+          <div id="test">
           <div class="form-group">
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="nombrePlanilla" class="col-form-label">Nombre(s)</label>
               <input class="form-control" id="nombrePlanilla" name="nombrePlanilla" type="text" readonly>
-              {{-- <input class="form-control" id="ocultos" name="ocultos" type="text" > --}}
+              <input class="form-control" id="ocultos" name="ocultos" type="text" hidden>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="apellidos" class="col-form-label">Apellidos</label>
               <input class="form-control" id="apellidos" name="apellidos" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="CI" class="col-form-label">Carnet de Identidad</label>
               <input class="form-control" id="CI" name="CI" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="colorP" class="col-form-label">Color de Piel</label>
               <input class="form-control" id="colorP" name="colorP" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="profesion" class="col-form-label">Profesión</label>
               <input class="form-control" id="profesion" name="profesion" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="sexo" class="col-form-label">Sexo</label>
               <input class="form-control" id="sexo" name="sexo" type="text" readonly>
             </div>
@@ -255,19 +256,19 @@
           </div>
 
           <div class="form-group">
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="provincia" class="col-form-label">Provincia</label>
               <input class="form-control" id="provincia" name="provincia" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="municipio" class="col-form-label">Municipio</label>
               <input class="form-control" id="municipio" name="municipio" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="telefono_fijo" class="col-form-label">Teléfono Fijo</label>
               <input class="form-control" id="telefono_fijo" name="telefono_fijo" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="telefono_celular" class="col-form-label">Teléfono Celular</label>
               <input class="form-control" id="telefono_celular" name="telefono_celular" type="text" readonly>
             </div>
@@ -275,21 +276,21 @@
               <label for="correo" class="col-form-label">Correo electrónico</label>
               <input class="form-control" id="correo" name="correo" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="idioma" class="col-form-label">Idioma</label>
               <input class="form-control" id="idioma" name="idioma" type="text" readonly>
             </div>
-            <div class="col-8 col-sm-6">
+            <div class="col-8 col-sm-12">
               <label for="certificación" class="col-form-label">Certificación a Solicitar</label>
               <input class="form-control" id="certificación" name="certificación" type="text" readonly>
             </div>
           </div>
-
+        </div>
           <div class="modal-footer">
             
             {{-- <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button> --}}
-              <button type="submit" name="" class="btn btn-primary" data-dismiss="modal" onclick="formSubmit()"><i class="fa fa-print"></i> Guardar e Imprimir</button>
-              <button type="button" name="printButton" id="printButton" class="btn btn-primary" ><i class="fa fa-print"></i> Imprimir </button>
+              <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendData()'><i class="fa fa-print"></i> Guardar</button>
+              <button type="button" name="printButton" id="printButton" class="btn btn-primary" onclick="print()" ><i class="fa fa-print"></i> Imprimir </button>
         </form>
         
       </div>
@@ -304,7 +305,7 @@
 
 
 @section('dataTableJS')
-<script src="print.js"></script>
+<script src="js/print.js"></script>
 <script type=text/javascript>
 //Parte del autocerrado del alert cuando e inserta un nuevo registro
 $("#alerta").fadeTo(5000,500).slideUp(500,function() {
@@ -336,21 +337,21 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
           
         })
 
-        $("#printButton").click(function(){
-          // alert("aaaaa");
-          $("#inscripcionModal").printThis({
-            debug: false,                //show the iframe for debugging
-            importCSS: true,             //import page CSS
-            importStyle: false,          //import style tags
-            printContainer: true,        //grab outer container as well as the contents of the selector
-            loadCSS: "/vendor/bootstrap/css/bootstrap.css",   //path to additional css file - us an array [] for multiple
-            pageTitle: "",               //add title to print page
-            removeInline: false,         //remove all inline styles from print elements
-            printDelay: 333,             //variable print delay
-            header: null,                //prefix to html
-            formValues: true             //preserve input/form values
-            });
-        });
+        // $("#printButton").click(function(){
+        //   // alert("aaaaa");
+        //   $("#inscripcionModal").printThis({
+        //     debug: false,                //show the iframe for debugging
+        //     importCSS: true,             //import page CSS
+        //     importStyle: false,          //import style tags
+        //     printContainer: true,        //grab outer container as well as the contents of the selector
+        //     loadCSS: "/vendor/bootstrap/css/bootstrap.css",   //path to additional css file - us an array [] for multiple
+        //     pageTitle: "",               //add title to print page
+        //     removeInline: false,         //remove all inline styles from print elements
+        //     printDelay: 333,             //variable print delay
+        //     header: null,                //prefix to html
+        //     formValues: true             //preserve input/form values
+        //     });
+        // });
 
       });
 
@@ -371,10 +372,21 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             $("#Form").attr('action', url);
         }
 
+        function sendData()
+        {
+          var oculto = document.getElementById("ocultos").value;
+          //alert(oculto);
+
+            var url = 'http://traductorescertificados/solicitudesInscr/' + oculto;
+            // var url = 'http://traductorescertificados/inscripcionesDeneg/' + id + '/' + selectedOption + '/' +  textAreaRazones;
+            $("#FormImprimir").attr('action', url);
+            $("#FormImprimir").submit();
+        }
+
         function showAprobarData(id,nmbre,apellidos,carnet,colorPiel,profesion,sexo,direccion,provincia,municipio,tel_fijo,tel_cel,email,idioma,certificacion) 
         {
           // alert(id);
-          // document.getElementById("ocultos").value = id;
+          document.getElementById("ocultos").value = id;
           document.getElementById("nombrePlanilla").value = nmbre;
           document.getElementById("apellidos").value = apellidos;
           document.getElementById("CI").value = carnet;
@@ -411,6 +423,26 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
           {
             $("#Form").submit();
           }
+        }
+
+        //Imprimir el modal 
+        // document.getElementById("printButton").addEventListener("click", print);
+
+        function print() {
+          printJS({
+            printable: "inscripcionModal",
+            header: null,
+            type: "html",
+            documentTitle: '',
+            style: "#test {position: absolute;top: 50%;left: 50%;margin: 100px 0 0 -250px;}",
+            css: "/css/app.css",
+            ignoreElements: ["printButton","saveButton"],
+            targetStyles: ['*'],
+            // style: '@page {size: A4}',
+            scanStyles: false,
+            honorMarginPadding: true,
+          });
+          
         }
         
   </script>

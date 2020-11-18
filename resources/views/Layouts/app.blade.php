@@ -34,6 +34,7 @@
   <!-- Custom styles for this template -->
   {{-- <link href="css/clean-blog.min.css" rel="stylesheet"> --}}
   <link href="/css/app.css" rel="stylesheet">
+  <link href="/css/print.css" rel="stylesheet">
 
 
 </head>
