@@ -7,8 +7,12 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Administración Sistema</title>
+        <link href="/vendor/jQueryDT/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+        <link href="/vendor/jQueryDT/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
         <script src="{{asset('js/bootstrap.js')}}"> </script>
-
+        <script src="/js/jQueryDT/js/dataTables.bootstrap4.js"></script>
+        <script src="/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/js/admin/demo/datatables-demo.js"></script>
         <link href="/css/admin/styles.css" rel="stylesheet" />
         
         {{-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />--}}

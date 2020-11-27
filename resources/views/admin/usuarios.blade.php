@@ -3,8 +3,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <h1>Esto es la pagina de usuarios</h1>
-          <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="col-lg-10 col-md-10 mx-auto">
             @if (session('mensaje'))
             <div class="alert alert-success" role="alert" id="alerta" style="text-align:center">
               {{session('mensaje')}}
@@ -29,13 +28,13 @@
               </div>
           <br>
             <div class="card mb-4">
-                <div class="card-header">
+                <div class="card-header" style="text-align:center;">
                     <i class="fas fa-table mr-1"></i>
-                    DataTable Example
+                    Lista Usuarios
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="margin-left: 15%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-striped table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -127,6 +126,19 @@
             $("#deleteForm").submit();
         }
         
+        //Parte para poner al datatable en español 
+      $(document).ready(function () {
+          var table = $('#datatable').DataTable({
+            dom: 'frtipl',
+              "lengthChange": true,
+         "lengthMenu": [[10, 50, 100, -1], [10, 50, 100, "Todos"]],
+              "ordering": true,
+          language: {
+            url: "/vendor/jQueryDT/Spanish.json"
+        }
+      });
+
+      });
         
     </script>
 

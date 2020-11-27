@@ -78,14 +78,25 @@
                                         <td>{{ $solicitudes->listaestados($solicitudes->estado)}} </td>
                                         <td data-order="{{ strtotime($solicitudes->created_at)}}" > {{ date('d-m-Y', strtotime($solicitudes->created_at)) }}</td>
                                         <td> 
-                                          <button data-toggle="modal" onclick='showAprobarData("{{$solicitudes->id}}","{{$solicitudes->nombre}}",
+                                          {{-- <button data-toggle="modal" onclick='showAprobarData("{{$solicitudes->id}}","{{$solicitudes->nombre}}",
                                           "{{$solicitudes->apellidos}}","{{$solicitudes->carnet}}","{{ $solicitudes->listacolor($solicitudes->colorP)}}",
-                                          "{{ $solicitudes->listaprofesion($solicitudes->profesion)}}","{{$solicitudes->sexo}}","{{$solicitudes->direccion}}",
+                                          "{{ $solicitudes->listaprofesion($solicitudes->profesion)}}","{{$solicitudes->sexo}}",
                                           "{{ $solicitudes->listaprovincias($solicitudes->provincia)}}","{{ $solicitudes->listamunicipio($solicitudes->municipio)}}",
                                           "{{$solicitudes->telefono_fijo}}","{{$solicitudes->telefono_celular}}","{{$solicitudes->email}}",
-                                          "{{ $solicitudes->listaidiomas($solicitudes->idioma)}}","{{ $solicitudes->listacertificacion($solicitudes->certificacion)}}")' data-target="#showModal" class="btn btn-primary btn-sm">
+                                          "{{ $solicitudes->listaidiomas($solicitudes->idioma)}}","{{ $solicitudes->listacertificacion($solicitudes->certificacion)}}","{{$solicitudes->direccion}}")' data-target="#showModal" class="btn btn-primary btn-sm">
                                             <i class="fa fa-folder-plus"></i> Aprobar admisión examen
-                                          </button>
+                                          </button> --}}
+
+                                          <button data-toggle="modal" type="button" data-id="{{$solicitudes->id}}" data-nombre="{{$solicitudes->nombre}}"
+                                            data-apellidos="{{$solicitudes->apellidos}}" data-carnet="{{$solicitudes->carnet}}" data-colorpiel="{{$solicitudes->listacolor($solicitudes->colorP)}}" 
+                                            data-profesion="{{$solicitudes->listaprofesion($solicitudes->profesion)}}" data-sexo="{{$solicitudes->sexo}}" data-direccion="{{$solicitudes->direccion}}"
+                                            data-provincia="{{$solicitudes->listaprovincias($solicitudes->provincia)}}" data-municipio="{{$solicitudes->listamunicipio($solicitudes->municipio)}}" 
+                                            data-tel_fijo="{{$solicitudes->telefono_fijo}}" data-tel_cel="{{$solicitudes->telefono_celular}}" data-email="{{$solicitudes->email}}"
+                                            data-idioma="{{$solicitudes->listaidiomas($solicitudes->idioma)}}" data-certificacion="{{$solicitudes->listacertificacion($solicitudes->certificacion)}}"
+                                            data-target="#showModal" class="btn btn-primary btn-sm">
+                                              <i class="fa fa-folder-plus"></i> Aprobar admisión examen
+                                            </button>
+
                                           {{-- <form method="POST"  action="/solicitudes/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
                                             @csrf
@@ -120,11 +131,38 @@
                                             </button>
                                         </td>
                                         <td style="text-align: center">
-                                          <a href="{{ route('solicitudes.descFoto', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar foto</a>
+                                          {{-- <a href="{{ route('solicitudes.descFoto', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar foto</a>
                                           <a href="{{ route('solicitudes.descCarnet1', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar carnet anverso</a>
                                           <a href="{{ route('solicitudes.descCarnet2', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar carnet reverso</a>
-                                          <a href="{{ route('solicitudes.descTit', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar título</a>
-                                          <a href="{{ route('solicitudes.descAnte', $solicitudes->id) }}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar antecedentes</a>
+                                          <a href="{{ route('solicitudes.descTit', $solicitudes->id) }}" class="btn btn-success btn-sm"> <i class="fa fa-download"></i> Descargar título</a> 
+                                          <a href="{{ route('solicitudes.descAnte', $solicitudes->id) }}" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar antecedentes</a> --}}
+                                          {{-- foto --}}
+                                          {{-- {{var_dump("/certificacion" . "/" . $solicitudes->file_antecedentes)}}; --}}
+                                          @if(file_exists("/certificacion"  . "/" . $solicitudes->file_foto))
+                                            @else  
+                                            <a download="foto" href="/certificacion/{{$solicitudes->file_foto}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar foto </a>
+                                          @endif
+                                          {{-- carnet 1  --}}
+                                          @if(file_exists("/certificacion"  . "/" . $solicitudes->file_carnet1))
+                                            @else
+                                            <a download="carnet anverso" href="/certificacion/{{$solicitudes->file_carnet1}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar carnet anverso </a>
+                                          @endif
+                                         {{-- carnet 2 --}}
+                                          @if(file_exists("/certificacion"  . "/" . $solicitudes->file_carnet2))
+                                            @else
+                                            <a download="carnet reverso" href="/certificacion/{{$solicitudes->file_carnet2}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar carnet reverso </a>
+                                          @endif
+                                          {{-- titulo  --}}
+                                          @if(file_exists("/certificacion"  . "/" . $solicitudes->file_titulo))
+                                            @else
+                                            <a download="título" href="/certificacion/{{$solicitudes->file_titulo}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar título </a>
+                                          @endif
+                                          {{-- antecedentes  --}}
+                                          @if($solicitudes->file_antecedentes == ""/*file_exists("/certificacion"  . "/" . "antecedentes.jpg")*/)
+                                            @else 
+                                            <a download="antecedentes" href="/certificacion/{{$solicitudes->file_antecedentes}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar antecedentes </a>
+                                          @endif
+                                          
                                           
                                         </td>
                                     </tr>
@@ -251,7 +289,8 @@
           <div class="form-group">
             <div class="col-8 col-sm-12">
             <label for="message-text" class="col-form-label">Dirección</label>
-            <textarea class="form-control" id="direccion" name="direccion" readonly></textarea>
+            <input class="form-control" id="direccion" name="direccion" type="text" readonly>
+            {{-- <textarea class="form-control" id="direccion" name="direccion" readonly></textarea> --}}
             </div>
           </div>
 
@@ -289,7 +328,7 @@
           <div class="modal-footer">
             
             {{-- <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button> --}}
-              <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendData()'><i class="fa fa-print"></i> Guardar</button>
+              <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendData()'><i class="fa fa-check"></i> Aprobar </button>
               <button type="button" name="printButton" id="printButton" class="btn btn-primary" onclick="print()" ><i class="fa fa-print"></i> Imprimir </button>
         </form>
         
@@ -337,6 +376,44 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
           
         })
 
+        $('#showModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        console.log(button);
+        // let id = button.data('deleteid');
+        let id = button.data('id');
+        let nmbre = button.data('nombre');
+        let apellidos = button.data('apellidos');
+        let carnet = button.data('carnet');
+        let colorPiel = button.data('colorpiel');
+        let profesion = button.data('profesion');
+        let sexo = button.data('sexo');
+        let direccion = button.data('direccion');
+        let provincia = button.data('provincia');
+        let municipio = button.data('municipio');
+        let tel_fijo = button.data('tel_fijo');
+        let tel_cel = button.data('tel_cel');
+        let email = button.data('email');
+        let idioma = button.data('idioma');
+        let certificacion = button.data('certificacion');
+        var modal = $(this)
+
+          document.getElementById("ocultos").value = id;
+          document.getElementById("nombrePlanilla").value = nmbre;
+          document.getElementById("apellidos").value = apellidos;
+          document.getElementById("CI").value = carnet;
+          document.getElementById("colorP").value = colorPiel;
+          document.getElementById("profesion").value = profesion;
+          document.getElementById("sexo").value = sexo;
+          document.getElementById("direccion").value = direccion;
+          document.getElementById("provincia").value = provincia;
+          document.getElementById("municipio").value = municipio;
+          document.getElementById("telefono_fijo").value = tel_fijo;
+          document.getElementById("telefono_celular").value = tel_cel;
+          document.getElementById("correo").value = email;
+          document.getElementById("idioma").value = idioma;
+          document.getElementById("certificación").value = certificacion;
+        })
+
         // $("#printButton").click(function(){
         //   // alert("aaaaa");
         //   $("#inscripcionModal").printThis({
@@ -381,26 +458,6 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             // var url = 'http://traductorescertificados/inscripcionesDeneg/' + id + '/' + selectedOption + '/' +  textAreaRazones;
             $("#FormImprimir").attr('action', url);
             $("#FormImprimir").submit();
-        }
-
-        function showAprobarData(id,nmbre,apellidos,carnet,colorPiel,profesion,sexo,direccion,provincia,municipio,tel_fijo,tel_cel,email,idioma,certificacion) 
-        {
-          // alert(id);
-          document.getElementById("ocultos").value = id;
-          document.getElementById("nombrePlanilla").value = nmbre;
-          document.getElementById("apellidos").value = apellidos;
-          document.getElementById("CI").value = carnet;
-          document.getElementById("colorP").value = colorPiel;
-          document.getElementById("profesion").value = profesion;
-          document.getElementById("sexo").value = sexo;
-          document.getElementById("direccion").value = direccion;
-          document.getElementById("provincia").value = provincia;
-          document.getElementById("municipio").value = municipio;
-          document.getElementById("telefono_fijo").value = tel_fijo;
-          document.getElementById("telefono_celular").value = tel_cel;
-          document.getElementById("correo").value = email;
-          document.getElementById("idioma").value = idioma;
-          document.getElementById("certificación").value = certificacion;
         }
 
         function formSubmit()

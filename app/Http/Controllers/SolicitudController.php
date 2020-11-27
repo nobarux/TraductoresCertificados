@@ -9,9 +9,12 @@ use App\Razones;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
-use Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Mail\Error;
 use Response;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class SolicitudController extends Controller
 {
@@ -43,35 +46,21 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        $entity = new Solicitud();
-        $entity->nombre = $request->nombre;
-        $entity->apellidos = $request->apellidos;
-        $entity->carnet = $request->carnet;
-        $entity->profesion = $request->profesion;
-        $entity->sexo = $request->sexo;
-        $entity->direccion = $request->direccion;
-        $entity->provincia = $request->provincia;
-        $entity->municipio = $request->municipio;
-        $entity->telefono_fijo = $request->telefono_fijo;
-        $entity->telefono_celular = $request->telefono_celular;
-        $entity->email = $request->email;
-        $entity->idioma = $request->idioma;
-        $entity->certificacion = $request->certificacion;
+        
+    }
 
-        $archivos = [
-            'archivo_foto' => "ap",
-            'archivo_carnet_alante' => "cal",
-            'archivo_carnet_atras' => "cat",
-            'archivo_titulo_univ' => "univ",
-            'archivo_antecedentes' => "ant"
-        ];
-        $entity->file_foto = $this->uploadFile($request->file('archivo_foto'), $entity->carnet.'/'.$archivos['archivo_foto']);
-        $entity->file_carnet1 = $this->uploadFile($request->file('archivo_carnet_alante'), $entity->carnet.'/'.$archivos['archivo_carnet_alante']);
-        $entity->file_carnet2 = $this->uploadFile($request->file('archivo_carnet_atras'), $entity->carnet.'/'.$archivos['archivo_carnet_atras']);
-        $entity->file_titulo = $this->uploadFile($request->file('archivo_titulo_univ'), $entity->carnet.'/'.$archivos['archivo_titulo_univ']);
-        $entity->file_antecedentes = $this->uploadFile($request->file('archivo_antecedentes'), $entity->carnet.'/'.$archivos['archivo_antecedentes']);
+    public function uploadFile($file, $fileName)
+    {
+        if ($file == null)
+            return "";
+//            if(Storage::disk('certificates')->exists($fileName))
+//                die('Ya existe ese archivo');
 
-        $entity->save();
+        // Storage::putFile($fileName . "." . $file->getClientOriginalExtension(), new File('/app/public/certificacion'));
+        $path = $file->storeAs('certificacion', $fileName . "." . $file->getClientOriginalExtension());
+        $path = storage_path() . $path;
+
+        return $path;
     }
 
     /**
@@ -228,56 +217,72 @@ class SolicitudController extends Controller
 
     }
 
-    public function foto($solicitudes)
-    {
-        $fotoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        $rutaFotoBD = $fotoUser->file_foto;
-        // dd($rutaFotoBD);
-        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
-        // $file_path = "/Apps/certificacion/91022322500/foto.png";
-        //$file = Storage::disk('ftp')->download($file_path);
-        // Storage::disk('ftp')->files($this->filePath.$filename);
-        // $datafile = file_get_contents("smb://INTERNAL;desarrollador1:desarollador*2020@10.10.10.11/Apps/certificacion/91022322500/foto.png");
-        // dd($datafile);
+    // public function foto($solicitudes)
+    // {
+    //     $fotoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     $carnetUser = $fotoUser->carnet;
+    //     $rutaFotoBD = $fotoUser->file_foto;
+    //     $filepath = public_path() . "/certificacion/" .  $rutaFotoBD;
+    //     // dd($filepath);
+    //     return Response::download($filepath);
+    // }
+    
+    // public function fotos($solicitudes)
+    // {
+    //     $fotoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     $carnetUser = $fotoUser->carnet;
+    //     $rutaFotoBD = $fotoUser->file_foto;
+    //     $tipoArchivo = explode(".",$rutaFotoBD);
+    //     $tipo = $tipoArchivo[6];
 
-        return Response::download($rutaCambiada);
-    }
+    //     $rutaCambiada = str_replace($rutaFotoBD,$carnetUser. "/foto.".$tipo,$rutaFotoBD);
+    //     $filepath = public_path() . "/certificacion/" .  $rutaCambiada;
+    //     return Response::download($filepath);
+    // }
 
-    public function carnet1($solicitudes)
-    {
-        $anversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        // dd($anversoUser);
-        $rutaFotoBD = $anversoUser->file_carnet1;
-        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
+    // public function carnet1($solicitudes)
+    // {
+    //     $anversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     $carnetUser = $anversoUser->carnet;
+    //     $rutaFotoBD = $anversoUser->file_carnet1;
+    //     $filepath = public_path() . "/certificacion/" .  $rutaFotoBD;
+    //     // dd($rutaCambiada);
+    //     return Response::download($filepath);
+    // }
 
-        // dd($ruta);
-        return Response::download($rutaCambiada);
-    }
+    // public function carnet2($solicitudes)
+    // {
+    //     $reversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     //dd($fotoUser);
+    //     $carnetUser = $reversoUser->carnet;
+    //     $rutaFotoBD = $reversoUser->file_carnet2;
+    //     $filepath = public_path() . "/certificacion/" .  $rutaFotoBD;
+    //     return Response::download($filepath);
+    // }
 
-    public function carnet2($solicitudes)
-    {
-        $reversoUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        //dd($fotoUser);
-        $rutaFotoBD = $reversoUser->file_carnet2;
-        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
-        return Response::download($rutaCambiada);
-    }
+    // public function tit($solicitudes)
+    // {
+    //     $titUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     $carnetUser = $titUser->carnet;
+    //     $rutaFotoBD = $titUser->file_titulo;
+    //     $filepath = public_path() . "/certificacion/" .  $rutaFotoBD;
+    //     return Response::download($filepath);
+    // }
 
-    public function tit($solicitudes)
-    {
-        $titUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        //dd($fotoUser);
-        $rutaFotoBD = $titUser->file_titulo;
-        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
-        return Response::download($rutaCambiada);
-    }
+    // public function ante($solicitudes)
+    // {
+    //     $anteUser = Solicitud::where('id', $solicitudes)->firstOrFail();
+    //     $carnetUser = $anteUser->carnet;
+    //     $rutaFotoBD = $anteUser->file_antecedentes;
+    //     $filepath = public_path() . "/certificacion/" .  $rutaFotoBD;
 
-    public function ante($solicitudes)
-    {
-        $anteUser = Solicitud::where('id', $solicitudes)->firstOrFail();
-        //dd($fotoUser);
-        $rutaFotoBD = $anteUser->file_antecedentes;
-        $rutaCambiada = str_replace("D:\\","\\\\10.10.10.11\\",$rutaFotoBD);
-        return Response::download($rutaCambiada);
-    }
+    //     if (file_exists($filepath . $carnetUser . "antecedentes")) {
+    //         return Response::download($filepath);
+    //     } else {
+    //         // dd("b");
+    //         return view('/solicitudes/solicitudesGeneral')->with('mensaje','La imagen solicitada no existe');
+
+    //     }     
+    // }
+
 }

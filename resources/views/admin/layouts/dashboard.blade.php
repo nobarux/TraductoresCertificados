@@ -10,6 +10,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Usuarios Registrados
                             </a>
+
+                            <a class="nav-link" href="/roles">
+                                <div class="sb-nav-link-icon"><i class="fas fa-unlock-alt"></i></div>
+                                Roles
+                            </a>
                              <div class="sb-sidenav-menu-heading">Regreso</div>
                             <a class="nav-link" href="/" >
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
