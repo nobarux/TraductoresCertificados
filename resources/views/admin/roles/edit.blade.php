@@ -4,6 +4,8 @@
 @section('content')
     <!-- Main Content -->
     <div class="container-fluid">
+<h1> Actualizar usuario</h1>
+
       <div class="row">
         
         
@@ -24,19 +26,23 @@
                 </div>
               @endif
               {{-- -------------------------------- --}}
-              <form method="POST" action="/usuarios/{{ $roles->id }}" enctype="multipart/form-data">
+              <form method="POST" action="/roles/{{ $roles->id }}" enctype="multipart/form-data">
                 @method('PATCH')  
                 @csrf
 
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control" name="nombre" id="nombre" value="{{$roles->nombre}}">
+                      <label for="role_nombre">Nombre</label>
+                      <input type="text" class="form-control" name="role_nombre" id="role_nombre" value="{{$roles->nombre}}">
                     </div>
-                    {{-- <div class="form-group col-md-6">
-                      <label for="email">Email</label>
-                      <input type="text" class="form-control" id="email" name="email" value="{{$user->email}}">
-                    </div> --}}
+                    <div class="form-group col-md-6">
+                      <label for="role_slug">Slug</label>
+                      <input type="text" class="form-control" name="role_slug" id="role_slug" value="{{$roles->slug}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="role_permisos">Agregar Permisos</label>
+                      <input type="text" data-role="tagsinput" class="form-control" id="role_permisos" name="role_permisos" value="" required>
+                    </div>
                   </div>
                  
 

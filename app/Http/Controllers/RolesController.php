@@ -26,7 +26,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create'); 
     }
 
     /**
@@ -37,7 +37,16 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'role_nombre' => 'required|max:255',
+            'role_slug' => 'required|max:255'
+        ]);
+        $role = new Role;
+        $role->nombre = $request->role_nombre;
+        $role->slug = $request->role_slug;
+        $role->save();
+        return redirect('/roles')->with('mensaje','Ha eliminad el rol correctamente');
     }
 
     /**
@@ -48,7 +57,7 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('admin.roles.show',['role'=> $role]);
     }
 
     /**
@@ -76,7 +85,11 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        // dd($request); 
+        $role->nombre = $request->role_nombre;
+        $role->slug = $request->role_slug;
+        $role->save();
+        return redirect('/roles');
     }
 
     /**
@@ -87,6 +100,8 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        //Borrar el traductor
+        $role->delete();
+        return redirect('/roles')->with('mensaje','Ha eliminad el rol correctamente');
     }
 }

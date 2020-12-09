@@ -20,7 +20,7 @@
         <div class="row py-1g-2">
             
             <div class="col-md-12">
-                <a href="/usuarios/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
+                <a href="/roles/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
                     Registro Nuevo
                     </a>
             </div>
@@ -57,6 +57,7 @@
                                     <td>{{ $rol->slug }} </td>
                                     <td>permisos </td>
                                     <td> 
+                                        <a type="button" class="btn btn-outline-primary" href="/roles/{{ $rol->id }}" >Ver</a>
                                         <a type="button" class="btn btn-outline-primary" href="/roles/{{ $rol->id }}/edit" >Editar</a>
                                         {{-- <a href="javascript:;" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{ $users['id'] }})">Eliminar</a>    --}}
                                         <hr/>
@@ -80,12 +81,12 @@
     <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminado de Usuario</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Eliminado de Rol</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="close">
         <span aria-hidden="true">&times;</span>
         </button>
         </div>
-        <div class="modal-body">¿Esta seguro que desea eliminar a este usuario?</div>
+        <div class="modal-body">¿Esta seguro que desea eliminar a este rol?</div>
         <div class="modal-footer">
         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
         
@@ -112,7 +113,7 @@
     function deleteData(id)
     {
         var id = id;
-        var url = '{{ route("usuarios.destroy", ":id") }}';
+        var url = '{{ route("roles.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
     }

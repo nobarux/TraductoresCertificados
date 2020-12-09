@@ -92,7 +92,7 @@
                                             data-profesion="{{$solicitudes->listaprofesion($solicitudes->profesion)}}" data-sexo="{{$solicitudes->sexo}}" data-direccion="{{$solicitudes->direccion}}"
                                             data-provincia="{{$solicitudes->listaprovincias($solicitudes->provincia)}}" data-municipio="{{$solicitudes->listamunicipio($solicitudes->municipio)}}" 
                                             data-tel_fijo="{{$solicitudes->telefono_fijo}}" data-tel_cel="{{$solicitudes->telefono_celular}}" data-email="{{$solicitudes->email}}"
-                                            data-idioma="{{$solicitudes->listaidiomas($solicitudes->idioma)}}" data-certificacion="{{$solicitudes->listacertificacion($solicitudes->certificacion)}}"
+                                            data-idioma="{{$solicitudes->listaidiomas($solicitudes->idioma)}}" data-certificacion="{{$solicitudes->listacertificacion($solicitudes->certificacion)}}" data-foto = "{{$solicitudes->file_foto}}"
                                             data-target="#showModal" class="btn btn-primary btn-sm">
                                               <i class="fa fa-folder-plus"></i> Aprobar admisión examen
                                             </button>
@@ -259,6 +259,9 @@
           </div>
           <div id="test">
           <div class="form-group">
+            <div class="col-8 col-sm-12" style="text-align: center;">
+              <img src="" id="imagen" style="width: 200px; height: 200px; margin: 25px 0 20px;" class="rounded" alt="...">
+            </div>
             <div class="col-8 col-sm-12">
               <label for="nombrePlanilla" class="col-form-label">Nombre(s)</label>
               <input class="form-control" id="nombrePlanilla" name="nombrePlanilla" type="text" readonly>
@@ -395,7 +398,11 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
         let email = button.data('email');
         let idioma = button.data('idioma');
         let certificacion = button.data('certificacion');
+        let foto = button.data('foto');
         var modal = $(this)
+        
+          var imagModal = document.querySelector('#imagen');
+          imagModal.setAttribute("src", "/certificacion/" + foto);
 
           document.getElementById("ocultos").value = id;
           document.getElementById("nombrePlanilla").value = nmbre;
