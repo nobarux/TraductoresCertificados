@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,8 +40,10 @@ class UserController extends Controller
      */
     public function create()
     {
+      $roles = Role::all();
+      dd($roles);
 
-        return view('admin.usuarios.create');
+        return view('admin.usuarios.create',['roles' => $roles]);
     }
 
     /**

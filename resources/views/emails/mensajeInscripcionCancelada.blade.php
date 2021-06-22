@@ -6,38 +6,19 @@
 </head>
 
 <body>
-    <h1>Su solicitud de certificación ha sido aprobada.</h1>
+    <h1>Su solicitud de certificación ha sido denegada.</h1>
     </br>    
 
     <table>
        
         <tr>
     {{-- {{dd($sms[1])}} --}}
-            <h3>Estimad{{ $sms[1]->sexo == "M" ? 'o' : 'a' }}: {{$sms[1]->nombre}} {{$sms[1]->apellidos}} CI: {{$sms[1]->carnet}}</h3>
-            <p><strong>Ud. ha sido aprobado para presentarse a los exámenes. Se pagarán todas las inscripciones de exámenes ahora(en un término de 5 días) debido a la tarea de ordenamiento del país. ( a través del link {{$sms[0]}}).</strong> 
-            <p>
-                <strong>Se pagarán 1000.00 CUP como arancel de pago de inscripción de los exámenes de Traducción e Interpretación (los que optaron por ambas inscripciones). 
-                        En caso de suspender el examen de Traducción, no se presentará al examen de Interpretación y se devolverán los 500.00 CUP.
-                </strong>
-            </p>
-            <p>
-                <strong>Se pagarán 500.00 CUP como arancel de pago de inscripción del examen de Traducción (los que optaron solo por Traducción).
-                </strong>
-            </p>
-            <p>
-                <strong>Se pagarán 500.00 cup como arancel de pago de inscripción del examen de Interpretación (los que optaron solo por Interpretación).
-                </strong>
-            </p>
-            <p><strong>Le recordamos que aprobar el examen es lo que determina su certificación.</strong> </p> 
-            <p><strong>¡IMPORTANTE!</strong></p>
-            <p><strong>Los aspirantes admitidos a los exámenes para las certificación de traductores deben pagar el arancel establecido utilizando la pasarela de ENZONA.  No podemos utilizar hoy TRANSFERMÓVIL por dificultades técnicas que debemos resolver en breve plazo.  
-                La oficina de Habilitación les enviará un correo personalizado a todos los solicitantes.</strong></p> 
-
-            {{-- <p><strong>El arancel para el examen de interpretación lo pagarán los admitidos en una fecha posterior al examen de traducción.</strong> </p>     --}}
-                {{-- <ul>
-                    <li>URL de pago: {{$sms[0]}}</li>
-                </ul>         --}}
-            </p>
+            <h3>Estimad{{ $sms[0]->sexo == "M" ? 'o' : 'a' }}: {{$sms[0]->nombre}} {{$sms[0]->apellidos}} CI: {{$sms[0]->carnet}}</h3>
+            @if($sms[0]->razones == 6)
+            <p><strong>No se ha aceptado su inscripción por la siguiente razón: {{$sms[0]->listarazones($sms[0]->razones)}} por {{$sms[0]->razonesDenegar}}.</strong> </p>
+            @else
+            <p><strong>No se ha aceptado su inscripción por la siguiente razón: {{$sms[0]->listarazones($sms[0]->razones)}}.</strong> </p>
+            @endif
             <p>Oficina de Control y Habilitación.</p>
             <p>Equipo de Servicios de Traductores e Intérpretes. </p>      
         </tr>

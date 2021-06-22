@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Role;
+use App\Permisos;
+use App\RolePermisos;
+use DB;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -37,7 +40,6 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate([
             'role_nombre' => 'required|max:255',
             'role_slug' => 'required|max:255'
@@ -46,7 +48,20 @@ class RolesController extends Controller
         $role->nombre = $request->role_nombre;
         $role->slug = $request->role_slug;
         $role->save();
-        return redirect('/roles')->with('mensaje','Ha eliminad el rol correctamente');
+        $listaPermisos = explode(',',$request->role_permisos);
+        // dd($listaPermisos);
+
+        foreach($listaPermisos as $listapermisos)
+        {
+            $permisos = new Permisos;
+            $permisos->nombre = $listapermisos;
+            $permisos->slug = strtolower(str_replace(" ","-",$listapermisos));
+            $permisos->save();
+            $role->permisos()->attach($permisos->id);
+            $role->save();
+        }
+
+        return redirect('/roles')->with('mensaje','Ha creado el rol correctamente');
     }
 
     /**
@@ -85,11 +100,32 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        // dd($request); 
         $role->nombre = $request->role_nombre;
         $role->slug = $request->role_slug;
+        // dd($role);
         $role->save();
-        return redirect('/roles');
+
+        DB::table('roles_permisos')->where('role_id', $role->id)->delete();
+        $role->permisos()->detach();
+        
+        // $role->permisos()->delete();
+        // $role->permisos()->detach();
+
+        $listaPermisos = explode(',',$request->role_permisos);
+        // dd($listaPermisos);
+
+        foreach($listaPermisos as $listapermisos)
+        {
+            $permisos = new Permisos;
+            $permisos->nombre = $listapermisos;
+            $permisos->slug = strtolower(str_replace(" ","-",$listapermisos));
+            // $perms = RolePermisos::where('role_id','=',$role->id)->get();
+            $permisos->save();
+
+            $role->permisos()->attach($permisos->id);
+            $role->save();
+        }
+        return redirect('/roles')->with('mensaje','Ha actualizado el rol correctamente');
     }
 
     /**
@@ -100,8 +136,12 @@ class RolesController extends Controller
      */
     public function destroy(Role $role)
     {
+        //Borra los permisos del rol mandado
+        // $role->permisos()->delete();
+
         //Borrar el traductor
         $role->delete();
-        return redirect('/roles')->with('mensaje','Ha eliminad el rol correctamente');
+        // $role->permisos()->detach();
+        return redirect('/roles')->with('mensaje','Ha eliminado el rol correctamente');
     }
 }

@@ -50,6 +50,7 @@
                                     {{-- <th>Apellidos</th> --}}
                                     <th>Carnet</th>
                                     <th>Email</th>
+                                    <th>Tipo Certificación</th>
                                     <th>Sexo</th>
                                     <th>Teléfono Fijo</th>
                                     <th>Teléfono Celular</th>
@@ -70,6 +71,7 @@
                                         {{-- <td>{{ $solicitudes->apellidos }} </td>  --}}
                                         <td>{{ $solicitudes->carnet }} </td> 
                                         <td>{{ $solicitudes->email }} </td> 
+                                        <td>{{ $solicitudes->listacertificacion($solicitudes->certificacion)}} </td> 
                                         <td>{{ $solicitudes->sexo }} </td>
                                         <td>{{ $solicitudes->telefono_fijo }} </td>
                                         <td>{{ $solicitudes->telefono_celular }} </td>
@@ -102,13 +104,13 @@
                                             @csrf
                                           </form> --}}
     
-                                          <form method="POST"  action="/solicitudesPend/{{ $solicitudes->id }}" enctype="multipart/form-data">
+                                          {{-- <form method="POST"  action="/solicitudesPend/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
                                             @csrf
                                             <button type="submit" class="btn btn-primary btn-sm" value="submit">
                                               <i class="fa fa-stopwatch"></i>  Pendiente Calif.
                                             </button>
-                                          </form>
+                                          </form> --}}
     
                                           <form method="POST"  action="/solicitudesAprob/{{ $solicitudes->id }}" enctype="multipart/form-data">
                                             @method('PATCH')
@@ -139,7 +141,7 @@
                                           {{-- foto --}}
                                           {{-- {{var_dump("/certificacion" . "/" . $solicitudes->file_antecedentes)}}; --}}
                                           @if(file_exists("/certificacion"  . "/" . $solicitudes->file_foto))
-                                            @else  
+                                            @else
                                             <a download="foto" href="/certificacion/{{$solicitudes->file_foto}}"  class="btn btn-success btn-sm"><i class="fa fa-download"></i> Descargar foto </a>
                                           @endif
                                           {{-- carnet 1  --}}
@@ -192,13 +194,14 @@
       </div>
       <div class="modal-body">
         <form method="POST" action="" id="Form" >
-          {{-- @method('PATCH') --}}
+          @method('PATCH')
           @csrf
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">¿Esta seguro que desea denegar esta inscripción?</label>
             <input class="form-control" id="nombre" name="nombre" type="text" readonly>
             <input class="form-control" id="oculto" name="oculto" type="text" hidden>
+            <input class="form-control" id="ocultoOpcionDenegar" name="ocultoOpcionDenegar" type="text" hidden>
           </div>
           <div class="form-group">
             {{-- <label for="id_Idioma">Idioma</label> --}}
@@ -367,7 +370,7 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
       
       $("#id_Razones").change(function() {
           var selectedOption = $(this).children("option:selected").text();
-          document.getElementById("oculto").value = selectedOption;
+          document.getElementById("ocultoOpcionDenegar").value = selectedOption;
           if (selectedOption == "Otros") {
             $("#textRazones").removeAttr('hidden');
           }
@@ -449,7 +452,7 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             var apellido = apellidos;
             var selectedOption = $(this).children("option:selected").val();
             var textAreaRazones = $.trim($("razon").val());
-           
+            document.getElementById("oculto").value = id; 
             document.getElementById("nombre").value = nmbre + " " + apellidos; 
             var url = 'http://traductorescertificados/inscripcionesDeneg/' + id;
             // var url = 'http://traductorescertificados/inscripcionesDeneg/' + id + '/' + selectedOption + '/' +  textAreaRazones;
@@ -469,9 +472,10 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
 
         function formSubmit()
         {
-          var oculto = document.getElementById("oculto").value;
-          // alert(oculto);
-          if (oculto == "") 
+          var valorSeleccionadoDeneg = document.getElementById("ocultoOpcionDenegar").value;
+          var idOculto = document.getElementById("oculto").value;
+          // alert(idOculto);
+          if (valorSeleccionadoDeneg == "") 
           {
             alert("Debe seleccionar un elemento de la lista de opciones");
             $('#incModal').click(function(e) {
@@ -485,6 +489,8 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
           }
           else
           {
+            var url = 'http://traductorescertificados/solicitudesDenegMensaje/' + idOculto;
+            $("#Form").attr('action', url);
             $("#Form").submit();
           }
         }

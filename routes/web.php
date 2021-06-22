@@ -33,6 +33,7 @@ Route::get('admin', 'AdminController@index')->middleware('auth');
 
 //Rutas para las solicitudes 
 Route::get('/solicitudes', 'SolicitudController@index');
+Route::get('/solicitudes/enviarCorreo', 'SolicitudController@enviarCorreo');
 Route::view('/a', 'test');
 Route::patch('/solicitudes/{soli}', 'SolicitudController@update');
 Route::post('/solicitudesDocumentos', 'SolicitudController@store');
@@ -47,6 +48,8 @@ Route::patch('/solicitudesReclamar/{soli}', 'SolicitudController@reclamarUpdate'
 Route::patch('/solicitudesReclamarRechazada/{soli}', 'SolicitudController@reclamarRechazado');
 Route::get('/solicitudesRegistro/{soli}', 'SolicitudController@test');
 Route::post('/inscripcionesDeneg/{soli}/{idDeneg?}/{razonDeneg?}', 'SolicitudController@inscripcionDeneg')->name('solicitud.updateIncs');
+Route::patch('/solicitudesDenegMensaje/{soli}', 'SolicitudController@denegarInscripcionMensaje');
+
 // Route::get('/solicitudesTest', 'SolicitudController@test');
 
 

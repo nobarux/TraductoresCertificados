@@ -52,4 +52,16 @@ class Reporte extends Model
         $listaestados = Estado::where('id_Estados', $idEstado)->first();
        return $listaestados->nombre;
       }
+
+      public function listacertificacion($idCert)
+      {
+        $listacert = Certificacion::where('id_Tipo_Cert', $idCert)->first();
+       return $listacert->nombre;
+      }
+      
+      public function listarazones($idRazones)
+      {
+        $listaraz = Razones::where('idRazones', $idRazones)->first();
+       return $listaraz->descripciones;
+      }
 }

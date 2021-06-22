@@ -80,9 +80,9 @@
       $(document).ready(function(){
         $('#role_nombre').keyup(function (e) { 
           var str = $('#role_nombre').val();
-          str = str.replace(/\W+(?!$)/g,'-').toLowerCase();
+          str = str.replace(/\W+(?!$)/g,'-').toLowerCase();//Reemplaza espcacio por una -
           $('#role_slug').val(str);
-          $('role_slug').attr('placeholder',str);
+          $('#role_slug').attr('placeholder',str);
         });
       })
     </script>

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MensajeRecibido extends Mailable
+class MensajeInscripcionCancelacion extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -20,9 +20,9 @@ class MensajeRecibido extends Mailable
      *
      * @return void
      */
-    public function __construct($url, $solicitud)
+    public function __construct($solicitud)
     {
-        $this->sms = [$url,$solicitud];
+        $this->sms = [$solicitud];
         
         $this->from = [['address' => 'sitio@esti.cu', 'name' => 'Sitio Web']];
         // $this->subject = $mensaje['subject'];
@@ -35,6 +35,6 @@ class MensajeRecibido extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.mensajeRecibido');
+        return $this->view('emails.mensajeInscripcionCancelada');
     }
 }

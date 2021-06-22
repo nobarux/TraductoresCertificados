@@ -2554,7 +2554,7 @@ textarea.form-control.is-invalid {
 }
 
 .form-inline {
-  display: flex;
+  /* display: flex; */
   flex-flow: row wrap;
   align-items: center;
 }

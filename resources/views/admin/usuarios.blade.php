@@ -20,7 +20,7 @@
             </div> --}}
             <div class="row py-1g-2">
                 
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-top: 20px;">
                     <a href="/usuarios/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true" >
                         Registro Nuevo
                         </a>
@@ -32,7 +32,7 @@
                     <i class="fas fa-table mr-1"></i>
                     Lista Usuarios
                 </div>
-                <div class="card-body" style="margin-left: 15%;">
+                <div class="card-body" >
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -58,8 +58,8 @@
                                     <tr>
                                         <td>{{ $users->name }} </td>
                                         <td>{{ $users->email }} </td>
-                                        <td>roles </td>
-                                        <td> ....... </td>
+                                        <td style="text-align: center">roles </td>
+                                        <td style="text-align: center"> ....... </td>
                                         <td> 
                                             <a type="button" class="btn btn-outline-primary" href="/usuarios/{{ $users['id'] }}/edit" >Editar</a>
                                             {{-- <a href="javascript:;" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{ $users['id'] }})">Eliminar</a>    --}}

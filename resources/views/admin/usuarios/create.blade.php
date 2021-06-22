@@ -40,7 +40,7 @@
               <input type="password" class="form-control" id="password_confirmation" placeholder="Confirmar Contraseña" name="password_confirmation" required minlength="8" >
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-md-4">
                 <label for="role">Seleccionar rol</label>
                 
             </div>

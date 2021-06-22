@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Mail\MensajeRecibido;
+use App\Mail\MensajeInscripcionCancelacion;
 use App\Mail\Error;
 use Response;
 use Illuminate\Support\Facades\Log;
@@ -102,23 +104,65 @@ class SolicitudController extends Controller
 
     public function aprobadosInscripcion(Request $request, $solicitudes)
     {
-        // return view('solicitudes.solicitudesRegistro');
-        //Llamado al modelo de traductores para poder guardarlo luego n bd
-        $solicitud = Solicitud::findOrFail($solicitudes);
-        $solicitud->estado = 2;
-        //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
-        $random = rand(5, 15);
-        $dirUrl = "http://beta.esti.cu/pagos/certificacion/";
-        $getHash = $solicitud->hashSeguridad;
-        $dirCompleta = $dirUrl . $getHash;
-        Mail::to('danilo.arrieta@esti.cu')->queue(new Error("Llego el correo"));
-        // dd($dirCompleta);
-        $solicitud->referencia = $random;
-        //dd($traductor);
-        $solicitud->save();
-        return redirect('/solicitudes')->with('mensaje','Se ha aprobado la solicitud correctamente');;
+        
+            //Llamado al modelo de traductores para poder guardarlo luego n bd
+            $solicitud = Solicitud::findOrFail($solicitudes);
+            $solicitud->estado = 2;
+
+            //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
+            $random = rand(5, 15);
+            $dirUrl = "https://www.esti.cu/pagos/certificacion/";
+            $getHash = $solicitud->hashSeguridad;
+            $mensaje = $dirUrl . $getHash;
+            // dd($dirCompleta);
+            Mail::to([$solicitud->email,'danilo.arrieta@esti.cu'])->queue(new MensajeRecibido($mensaje,$solicitud));
+            // $solicitud->referencia = $random;
+            $solicitud->save();
+        
+
+        return redirect('/solicitudes')->with('mensaje','Se ha aprobado la solicitud correctamente y se ha enviado un correo al usuario');;
     }
 
+    public function denegarInscripcionMensaje(Request $request, $solicitudes)
+    {
+            //Llamado al modelo de traductores para poder guardarlo luego n bd
+            $solicitud = Solicitud::findOrFail($solicitudes);
+            $solicitud->estado = 8;
+            $solicitud->razones = $request->id_Razones;
+            $solicitud->razonesDenegar = $request->razon;
+          
+            $solicitud->save();
+            // dd($solicitud);
+
+            Mail::to($solicitud->email)->bcc('danilo.arrieta@esti.cu')->queue(new MensajeInscripcionCancelacion($solicitud));
+
+        return redirect('/solicitudes')->with('mensaje','Ha denegado una inscipción correctamente y se ha enviado un correo al usuario');
+    }
+
+    
+    public function enviarCorreo()
+    {
+        //Llamado al modelo de traductores para poder guardarlo luego n bd
+        $solicitud = Solicitud::where('estado',2)->get();
+        $cont = 0;
+        
+        // dd($dirCompleta);
+        foreach ($solicitud as $sol) {
+            $dirUrl = "https://www.esti.cu/pagos/certificacion/";
+            $getHash = $sol->hashSeguridad;
+            $mensaje = $dirUrl . $getHash;
+            Mail::to($sol->email)->send(new MensajeRecibido($mensaje,$sol));
+
+            // dd($sol->email);
+            // if ($cont < 1 ) {
+            // Mail::to($sol->email)->send(new MensajeRecibido($mensaje,$sol));
+            // }
+            $cont++;
+        }
+        return $cont;
+        // $solicitud->referencia = $random;
+        // $solicitud->save();
+    }
 
 
     public function pendienteCalifUpdate(Request $request, $solicitudes)

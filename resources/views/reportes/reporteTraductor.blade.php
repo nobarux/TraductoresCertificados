@@ -25,7 +25,7 @@
 @endif
 <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-10 col-md-10 mx-auto">
         <div class="row py-1g-2">
           <div class="col-md-6"> 
             
@@ -48,6 +48,7 @@
                                     <th>Apellidos</th>
                                     <th>Carnet</th>
                                     <th>Sexo</th>
+                                    <th>Tipo Certificación</th>
                                     <th>Estado</th>
                                     <th>Idioma</th>
                                     <th>Provincia</th>
@@ -65,6 +66,7 @@
                                         <td>{{ $reporte->apellidos }} </td> 
                                         <td>{{ $reporte->carnet }} </td> 
                                         <td>{{ $reporte->sexo }} </td>
+                                        <td>{{ $reporte->listacertificacion($reporte->certificacion)}} </td>
                                         <td>{{ $reporte->listaestados($reporte->estado)}} </td>
                                         <td>{{ $reporte->listaidiomas($reporte->idioma)}} </td>
                                         <td>{{ $reporte->listaprovincias($reporte->provincia)}} </td>
@@ -87,6 +89,7 @@
                                   <th>Apellidos</th>
                                   <th>Carnet</th>
                                   <th>Sexo</th>
+                                  <th>Tipo Certificación</th>
                                   <th>Estado</th>
                                   <th>Idioma</th>
                                   <th>Provincia</th>

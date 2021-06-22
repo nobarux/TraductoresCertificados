@@ -62,4 +62,10 @@ class Solicitud extends Model
        return $listacert->nombre;
       }
 
+      public function listarazones($idRazones)
+      {
+        $listaraz = Razones::where('idRazones', $idRazones)->first();
+       return $listaraz->descripciones;
+      }
+
 }

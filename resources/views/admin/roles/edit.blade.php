@@ -39,9 +39,13 @@
                       <label for="role_slug">Slug</label>
                       <input type="text" class="form-control" name="role_slug" id="role_slug" value="{{$roles->slug}}">
                     </div>
-                    <div class="form-group col-md-6">
-                      <label for="role_permisos">Agregar Permisos</label>
-                      <input type="text" data-role="tagsinput" class="form-control" id="role_permisos" name="role_permisos" value="" required>
+                    <div class="form-group" style="width: 100%">
+                      <label for="role_permisos">Permisos</label>
+                      <input type="text" data-role="tagsinput"  class="form-control" id="role_permisos" name="role_permisos"  value="
+                      @foreach($roles->permisos as $permisos)
+                      {{$permisos->nombre. ","}}
+                      @endforeach
+                      " required>
                     </div>
                   </div>
                  
@@ -65,3 +69,20 @@
     </div>
 
 @endsection
+@section('cssTags' )
+    <link href="/css/admin/bootstrap-tagsinput.css" rel="stylesheet" type="text/css">
+  @endsection
+
+  @section('jsTags' )
+    <script src="/js/admin/bootstrap-tagsinput.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#role_nombre').keyup(function (e) { 
+          var str = $('#role_nombre').val();
+          str = str.replace(/\W+(?!$)/g,'-').toLowerCase();//Reemplaza espcacio por una -
+          $('#role_slug').val(str);
+          $('#role_slug').attr('placeholder',str);
+        });
+      })
+    </script>
+  @endsection
