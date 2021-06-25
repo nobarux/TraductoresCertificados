@@ -9,7 +9,7 @@
           <div class="container"> 
             <div class="row">
               <div class="col-md-9 col-lg-8 mx-auto">
-                <h3 class="login-heading mb-4">Bienvenido de Vuelta!</h3>
+                <h3 class="login-heading mb-4">Bienvenidos</h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                   <div class="form-label-group">
@@ -39,6 +39,8 @@
                     {{ __('Recordar Contraseña') }}
                   </div>
                   <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Entrar</button>
+                <br/>
+                  <a class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" href="/">Volver al Inicio</a>
                   <div class="text-center" >
                     @if (Route::has('password.request'))
                     <a class="small" href="{{ route('password.request') }}">Olvidó la contraseña?</a></div>

@@ -12977,7 +12977,7 @@ footer .copyright {
 }
 
 .bg-image {
-  background-image: url("/img/photo.jpg");
+  background-image: url("/img/login.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -13121,7 +13121,7 @@ footer .copyright {
 .card-signin .card-img-left {
   width: 45%;
   /* Link to your background image using in the property below! */
-  background: scroll center url("/img/photo.jpg");
+  background: scroll center url("/img/register.jpg");
   background-size: cover;
 }
 
@@ -16197,7 +16197,7 @@ span.right {
 
 @media (min-width: 992px) {
   footer {
-    /* margin-left: 230px; */
+    margin-left: 230px;
   }
 }
 
