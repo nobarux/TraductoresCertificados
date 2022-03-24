@@ -7,7 +7,7 @@
            
           </ul>
           {{-- @if (!\Request::is('login') && !\Request::is('register')) --}}
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+          <p class="copyright text-muted">Copyright &copy; ESTI 2020</p>
           {{-- @endif --}}
         </div>
       </div>

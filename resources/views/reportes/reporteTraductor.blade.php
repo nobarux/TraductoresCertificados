@@ -50,6 +50,7 @@
                                     <th>Sexo</th>
                                     <th>Tipo Certificación</th>
                                     <th>Estado</th>
+                                    <th>Pasarela</th>
                                     <th>Idioma</th>
                                     <th>Provincia</th>
                                     <th>Profesión</th>
@@ -68,6 +69,7 @@
                                         <td>{{ $reporte->sexo }} </td>
                                         <td>{{ $reporte->listacertificacion($reporte->certificacion)}} </td>
                                         <td>{{ $reporte->listaestados($reporte->estado)}} </td>
+                                        <td>{{ $reporte->Pasarela }} </td>
                                         <td>{{ $reporte->listaidiomas($reporte->idioma)}} </td>
                                         <td>{{ $reporte->listaprovincias($reporte->provincia)}} </td>
                                         <td>{{ $reporte->listaprofesion($reporte->profesion)}} </td>
@@ -91,6 +93,7 @@
                                   <th>Sexo</th>
                                   <th>Tipo Certificación</th>
                                   <th>Estado</th>
+                                  <th>Pasarela</th>
                                   <th>Idioma</th>
                                   <th>Provincia</th>
                                   <th>Profesión</th>

@@ -53,6 +53,7 @@
             
           <br>
           <button type="submit" class="btn btn-primary" value="submit">Registrar</button>
+          <a class="btn btn-danger" href="{{ url()->previous() }}" >Átras</a>   
         </form>
         
       </div>

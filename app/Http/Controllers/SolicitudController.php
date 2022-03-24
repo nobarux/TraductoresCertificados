@@ -29,15 +29,26 @@ class SolicitudController extends Controller
     {
         $razon = Razones::all();
         // dd($razon);
-        $soli= Solicitud::where([
-            ['estado', '<>', '5'],
-            ['estado', '<>', '6'],
-            ['estado', '<>', '7'],
-            ['estado', '<>', '8']
-        ])->get();
-        // dd($soli);
-        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli], ['razon' => $razon]);
+        // $soli= Solicitud::where([
+        //     ['estado', '<>', '5'],
+        //     ['estado', '<>', '6'],
+        //     ['estado', '<>', '7'],
+        //     ['estado', '<>', '8']
+        // ])->orderBy('id')->paginate(25);
+        $soli = Solicitud::select(['id', 'nombre', 'apellidos','carnet','email',
+        'certificacion','sexo','telefono_fijo','telefono_celular','idioma','colorP',
+        'profesion','provincia','municipio','estado','created_at'])
+        ->where([
+                ['estado', '<>', '5'],
+                ['estado', '<>', '6'],
+                ['estado', '<>', '7'],
+                ['estado', '<>', '8']
+            ])
+        ->orderBy('id')->get();
         
+        // $soli = Solicitud::all();
+        //dd($soli);
+        return view('/solicitudes/solicitudesGeneral', ['soli' => $soli], ['razon' => $razon]);
     }
 
     /**
@@ -104,7 +115,6 @@ class SolicitudController extends Controller
 
     public function aprobadosInscripcion(Request $request, $solicitudes)
     {
-        
             //Llamado al modelo de traductores para poder guardarlo luego n bd
             $solicitud = Solicitud::findOrFail($solicitudes);
             $solicitud->estado = 2;
@@ -120,7 +130,7 @@ class SolicitudController extends Controller
             $solicitud->save();
         
 
-        return redirect('/solicitudes')->with('mensaje','Se ha aprobado la solicitud correctamente y se ha enviado un correo al usuario');;
+        return redirect('/solicitudes')->with('mensaje','Se ha aprobado la solicitud correctamente y se ha enviado un correo al usuario');
     }
 
     public function denegarInscripcionMensaje(Request $request, $solicitudes)

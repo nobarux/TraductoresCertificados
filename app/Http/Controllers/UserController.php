@@ -41,7 +41,7 @@ class UserController extends Controller
     public function create()
     {
       $roles = Role::all();
-      dd($roles);
+      //dd($roles);
 
         return view('admin.usuarios.create',['roles' => $roles]);
     }
@@ -114,7 +114,7 @@ class UserController extends Controller
         //Validar el formulario
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
-        'email'=> 'required|unique:users|email',
+        'email'=> 'required',
         'password'=> 'required|between:8,255|confirmed',
         'password_confirmation'=> 'required'
 
