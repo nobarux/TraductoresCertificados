@@ -19,7 +19,6 @@ class RolesController extends Controller
     {
         $roles = Role::orderBy('id','desc')->get();
         return view('admin.roles.index', ['roles' => $roles]);
-
     }
 
     /**
@@ -100,16 +99,22 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        //Validacion de los campos de updatear roles
+
+        $request->validate([
+            'role_nombre' => 'required|max:255',
+            'role_slug' => 'required|max:255'
+        ]);
         $role->nombre = $request->role_nombre;
         $role->slug = $request->role_slug;
         // dd($role);
         $role->save();
 
-        DB::table('roles_permisos')->where('role_id', $role->id)->delete();
-        $role->permisos()->detach();
+        //DB::table('roles_permisos')->where('role_id', $role->id)->delete();
+        //$role->permisos()->detach();
         
-        // $role->permisos()->delete();
-        // $role->permisos()->detach();
+         $role->permisos()->delete();
+         $role->permisos()->detach();
 
         $listaPermisos = explode(',',$request->role_permisos);
         // dd($listaPermisos);
@@ -139,9 +144,10 @@ class RolesController extends Controller
         //Borra los permisos del rol mandado
         // $role->permisos()->delete();
 
-        //Borrar el traductor
+        //Borrar el rol
         $role->delete();
-        // $role->permisos()->detach();
+        //Borra en la tabla rolespermisos la union entre el rol borrado y el permiso
+        $role->permisos()->detach();
         return redirect('/roles')->with('mensaje','Ha eliminado el rol correctamente');
     }
 }

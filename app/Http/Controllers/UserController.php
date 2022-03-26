@@ -38,8 +38,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+      if ($request->ajax()) {
+        $roles = Role::where('id' , $request->role_id)->first();
+        
+        $permisos = $roles->permisos;
+        return $permisos;
+      }
       $roles = Role::all();
       //dd($roles);
 
@@ -54,6 +60,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+      //dd($request);
        //Validar el formulario
        $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
@@ -72,6 +79,20 @@ class UserController extends Controller
         }
         
         $user->save();
+        //Crea la relacion con roles y lo guarda en bd
+        if ($request->role != null) {
+          $user->roles()->attach($request->role);
+          $user->save();
+        }
+        
+        //Crea la relacion con los permisos y lo guarda en bd
+        if ($request->permisos != null) {
+          foreach ($request->permisos as $permiso ) {
+            $user->permisos()->attach($permiso);
+            $user->save();
+          }
+          
+        }
         
         return redirect('/usuarios')->with('mensaje','Ha creado un usuario correctamente');
     }

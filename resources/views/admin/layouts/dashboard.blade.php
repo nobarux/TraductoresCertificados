@@ -82,7 +82,7 @@
             </div>
         </div>
 
-
+        @yield('js_usuario_pagina')
 </body>
 </html>
 <script src="{{asset('js/bootstrap.js')}}"> </script>

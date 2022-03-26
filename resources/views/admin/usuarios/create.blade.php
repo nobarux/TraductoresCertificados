@@ -42,10 +42,18 @@
 
             <div class="form-group col-md-4">
                 <label for="role">Seleccionar rol</label>
+                <select class="form-control" name="role" id="role">
+                  <option value="">Seleccioné el rol</option>
+                  @foreach ($roles as $role)
+                    <option data-role-id="{{$role->id}}" data-role-slug="{{$role->slug}}" value="{{$role->id}}">{{$role->nombre}}</option>
+                  @endforeach
+                </select>
                 
             </div>
-            <div id="selectPermiso">
-                
+            <div class="form-group col-md-8" id="selectPermiso">
+                <label for="permisos">Seleccioné el permiso</label>
+                <div class="form-group col-md-4" id="lista_permisos">
+                </div>
             </div>
             
           </div>
@@ -53,6 +61,45 @@
           <button type="submit" class="btn btn-primary" value="submit">Registrar</button>
           <a class="btn btn-danger" href="{{ url()->previous() }}" >Átras</a>   
         </form>
+        @section('js_usuario_pagina')
+        <script>
+          $(document).ready(function(){
+            var selectPermiso = $('#selectPermiso');
+            var lista_permisos = $('#lista_permisos');
+            selectPermiso.hide();//Esconde el elemento completo segun el id q se le pase
+            
+            $('#role').on('change',function() {
+              var role = $(this).find(':selected');
+              var role_id = role.data('role-id');
+              var role_slug = role.data('role-slug');
+              lista_permisos.empty();
+              //console.log(role_id);
+              $.ajax({
+                url: "/usuarios/create",
+                method: "get",
+                dataType: "json",
+                data: {
+                  role_id : role_id,
+                  role_slug: role_slug, 
+                }            
+              }).done(function(data){
+              console.log(data);
+              selectPermiso.show();
+              $.each(data,function(index,element){
+                $(lista_permisos).append(
+                  '<div class = "form-group col-md-4">'+
+                    '<input class= "form-control" type="checkbox" name="permisos[]" id="'+ element.slug +'" value="'+ element.id +'">' + 
+                    '<label  for="'+ element.slug +'">' + element.nombre + '</label>' +
+                  '</div>'
+                );
+              });
+
+              });
+            });
+          });
+        </script>
+            
+        @endsection
         
       </div>
     </div>
