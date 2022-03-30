@@ -48,7 +48,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Roles</th>
+                                    <th>Roles</th> 
                                     <th>Permisos</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -58,8 +58,24 @@
                                     <tr>
                                         <td>{{ $users->name }} </td>
                                         <td>{{ $users->email }} </td>
-                                        <td style="text-align: center">roles </td>
-                                        <td style="text-align: center"> ....... </td>
+                                        <td style="text-align: center">
+                                            @if ($users->roles->isNotEmpty())
+                                                @foreach ($users->roles as $role)
+                                                    <span class="badge badge-primary">
+                                                        {{$role->nombre}}
+                                                    </span>
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                        <td style="text-align: center">
+                                            @if ($users->permisos->isNotEmpty())
+                                            @foreach ($users->permisos as $permiso)
+                                                <span class="badge badge-primary">
+                                                    {{$permiso->nombre}}
+                                                </span>
+                                            @endforeach
+                                        @endif
+                                        </td>
                                         <td> 
                                             <a type="button" class="btn btn-outline-primary" href="/usuarios/{{ $users['id'] }}/edit" >Editar</a>
                                             {{-- <a href="javascript:;" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteModal" onclick="deleteData({{ $users['id'] }})">Eliminar</a>    --}}

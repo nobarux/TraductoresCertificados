@@ -48,8 +48,8 @@
                     <option data-role-id="{{$role->id}}" data-role-slug="{{$role->slug}}" value="{{$role->id}}">{{$role->nombre}}</option>
                   @endforeach
                 </select>
-                
             </div>
+            
             <div class="form-group col-md-8" id="selectPermiso">
                 <label for="permisos">Seleccioné el permiso</label>
                 <div class="form-group col-md-4" id="lista_permisos">

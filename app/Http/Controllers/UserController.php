@@ -118,8 +118,24 @@ class UserController extends Controller
     {
         //Variable q captura la id del traductor para editarlo
         $user_id = User::find($user);
+        
+        $roles = Role::get();
+        $userRoles = $user_id->roles->first();
+        if ($userRoles != null) {
+          $rolesPermisos = $userRoles->permisos;          
+        }
+        else {
+          $rolesPermisos = null;
+        }
+        $usuariosPermisos = $user_id->permisos;
         //Retornar a la vista
-        return view('admin/usuarios/edit',['user'=>$user_id]);
+        return view('admin/usuarios/edit',[
+          'user'=>$user_id,
+          'roles'=>$roles,
+          'userRoles'=> $userRoles,
+          'rolesPermisos' => $rolesPermisos,
+          'usuariosPermisos' => $usuariosPermisos
+        ]);
     }
 
 
@@ -136,13 +152,10 @@ class UserController extends Controller
       $data = $request->validate([
         'nombre'=> 'required|min:5|max:255',
         'email'=> 'required',
-        'password'=> 'required|between:8,255|confirmed',
-        'password_confirmation'=> 'required'
-
-        
+        // 'password'=> 'required|between:8,255|confirmed',
+        // 'password_confirmation'=> 'required'
       ]);
-
-        
+   
       //Llamado al modelo de traductores para poder guardarlo luego n bd
         $user = User::findOrFail($user);
         
@@ -153,6 +166,24 @@ class UserController extends Controller
         }
         
         $user->save();
+
+        //Borra las relaciones en un a tabla pivote(muchos a muchos)
+        $user->roles()->detach();
+        $user->permisos()->detach();
+
+        //Validacion para crear nuevas relaciones entre el rol y el usuario
+        if ($request->role != null) {
+          $user->roles()->attach($request->role);
+          $user->save();
+        }
+
+        if ($request->permisos != null) {
+          foreach ($request->permisos as $permisos) {
+            $user->permisos()->attach($permisos);
+            $user->save();  
+          }
+        }
+
         return redirect('/usuarios')->with('mensaje','Ha actualizado un usuario correctamente');
     }
 
@@ -167,6 +198,8 @@ class UserController extends Controller
         $user_id = User::find($user);
         //Borrar el traductor
         $user_id->delete();
+        $user_id->roles()->detach();
+        $user_id->permisos()->detach();
         return redirect('/usuarios')->with('mensaje','Ha eliminado un usuario correctamente');
     }
 }
