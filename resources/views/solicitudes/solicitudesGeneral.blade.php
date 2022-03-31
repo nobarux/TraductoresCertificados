@@ -46,6 +46,7 @@
                         <table class="table table-striped table-bordered dataTable" id="datatable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th>Número</th>
                                     <th>Nombre</th>
                                     {{-- <th>Apellidos</th> --}}
                                     <th>Carnet</th>
@@ -67,6 +68,7 @@
                                 @foreach ($soli as $solicitudes)
                                     
                                     <tr>
+                                        <td>{{ $solicitudes->id }} </td> 
                                         <td>{{ $solicitudes->nombre. " " .$solicitudes->apellidos}}</td>
                                         {{-- <td>{{ $solicitudes->apellidos }} </td>  --}}
                                         <td>{{ $solicitudes->carnet }} </td> 
@@ -116,7 +118,7 @@
                                             @method('PATCH')
                                             @csrf
                                             <button type="submit" class="btn btn-primary btn-sm" value="submit">
-                                              <i class="fa fa-check"></i>  Aprobar Solicitud
+                                              <i class="fa fa-check"></i>  Aprobar Examen
                                             </button>
                                           </form>
     
@@ -124,7 +126,7 @@
                                             @method('PATCH')
                                             @csrf
                                             <button type="submit" class="btn btn-primary btn-sm" value="submit">
-                                              <i class="fa fa-times-circle"></i>  Suspender Solicitud
+                                              <i class="fa fa-times-circle"></i>  Suspender Examen
                                             </button>
                                           </form>
 
