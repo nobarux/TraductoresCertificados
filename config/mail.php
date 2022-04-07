@@ -29,20 +29,22 @@ return [
     | mailers below. You are free to add additional mailers as required.
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses",
-    |            "postmark", "log", "array"
+    |            "postmark", "log", "array", "failover"
     |
     */
 
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'correo.esti.cu'),
+            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', ''),
-            'username' => env('MAIL_USERNAME','contacto@esti.cu'),
-            'password' => env('MAIL_PASSWORD','esti*2020'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
+            'auth_mode' => null,
         ],
+
         'ses' => [
             'transport' => 'ses',
         ],
@@ -68,6 +70,14 @@ return [
         'array' => [
             'transport' => 'array',
         ],
+
+        'failover' => [
+            'transport' => 'failover',
+            'mailers' => [
+                'smtp',
+                'log',
+            ],
+        ],
     ],
 
     /*
@@ -82,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'sitio@esti.cu'),
-        'name' => env('MAIL_FROM_NAME', 'ESTI ~ Sitio Web'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
     /*

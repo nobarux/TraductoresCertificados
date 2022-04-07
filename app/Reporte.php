@@ -41,6 +41,13 @@ class Reporte extends Model
        return $listaprov->nombre;
       }
 
+      public function listamunicipio($idMunicipio)
+      {
+        $listamun = Municipio::where('id', $idMunicipio)->first();
+        // dd($listamun);
+       return $listamun->nombre;
+      }
+
       public function listaprofesion($idProfesion)
       {
         $listaprof = Profesion::where('id_Prof', $idProfesion)->first();

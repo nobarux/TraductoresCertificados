@@ -78,9 +78,8 @@ Route::resource('roles', 'RolesController');//Esto se utiliza para rutear de man
 
 //Rutas para el reporte
 Route::get('/reporteTrad', 'ReporteController@reporteTrad');
-
-
 Route::get('/reporteTrad/pdf','ReporteController@downloadPDF');
 
-
+//Rutas para los correos
+Route::get('/enviarCor/enviar', 'EnviarMailController@enviarCorreo');
 

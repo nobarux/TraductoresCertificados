@@ -117,7 +117,7 @@ class SolicitudController extends Controller
     {
             //Llamado al modelo de traductores para poder guardarlo luego n bd
             $solicitud = Solicitud::findOrFail($solicitudes);
-            $solicitud->estado = 2;
+            $solicitud->estado = 9;
 
             //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
             $random = rand(5, 15);
@@ -125,7 +125,9 @@ class SolicitudController extends Controller
             $getHash = $solicitud->hashSeguridad;
             $mensaje = $dirUrl . $getHash;
             // dd($dirCompleta);
-            Mail::to([$solicitud->email,'danilo.arrieta@esti.cu'])->queue(new MensajeRecibido($mensaje,$solicitud));
+            // Mail::to([$solicitud->email,'danilo.arrieta@esti.cu'])->queue(new MensajeRecibido($mensaje,$solicitud));//Aqui se pueden enviar correos en cola si son muchos
+            // Mail::to($solicitud->email)->cc('danilo.arrieta@esti.cu')->send(new MensajeRecibido($mensaje,$solicitud));//Aqui se pueden enviar correos y enviar correos con copia con el cc
+            Mail::to($solicitud->email)->send(new MensajeRecibido($mensaje,$solicitud));
             // $solicitud->referencia = $random;
             $solicitud->save();
         

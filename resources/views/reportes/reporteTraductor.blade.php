@@ -53,6 +53,7 @@
                                     <th>Pasarela</th>
                                     <th>Idioma</th>
                                     <th>Provincia</th>
+                                    <th>Municipio</th>
                                     <th>Profesión</th>
                                     <th>Registrado</th>
                                 
@@ -72,6 +73,7 @@
                                         <td>{{ $reporte->Pasarela }} </td>
                                         <td>{{ $reporte->listaidiomas($reporte->idioma)}} </td>
                                         <td>{{ $reporte->listaprovincias($reporte->provincia)}} </td>
+                                        <td>{{ $reporte->listamunicipio($reporte->municipio)}} </td>
                                         <td>{{ $reporte->listaprofesion($reporte->profesion)}} </td>
                                         <td data-order="{{ strtotime($reporte->created_at)}}" > {{ date('d-m-Y', strtotime($reporte->created_at)) }}</td>
                                         
@@ -96,6 +98,7 @@
                                   <th>Pasarela</th>
                                   <th>Idioma</th>
                                   <th>Provincia</th>
+                                  <th>Municipio</th>
                                   <th>Profesión</th>
                                   <th>Registro</th>
                               </tr>

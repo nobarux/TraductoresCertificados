@@ -51,6 +51,8 @@
                                     {{-- <th>Apellidos</th> --}}
                                     <th>Carnet</th>
                                     <th>Email</th>
+                                    <th>Profesión</th>
+                                    <th>Ciudad</th>
                                     <th>Tipo Certificación</th>
                                     <th>Sexo</th>
                                     <th>Teléfono Fijo</th>
@@ -72,7 +74,9 @@
                                         <td>{{ $solicitudes->nombre. " " .$solicitudes->apellidos}}</td>
                                         {{-- <td>{{ $solicitudes->apellidos }} </td>  --}}
                                         <td>{{ $solicitudes->carnet }} </td> 
-                                        <td>{{ $solicitudes->email }} </td> 
+                                        <td><font color="blue"><u><a data-toggle="modal" onclick='showDataEmail("{{$solicitudes->id}}","{{$solicitudes->nombre}}","{{$solicitudes->apellidos}}","{{$solicitudes->email}}")' type="button" data-target="#showEmailModal" data-email="{{$solicitudes->email}}" target = container>{{ $solicitudes->email }} </a></u></font></td> 
+                                        <td>{{ $solicitudes->listaprofesion($solicitudes->profesion)}}</td>
+                                        <td>{{ $solicitudes->listaprovincias($solicitudes->provincia)}}</td>
                                         <td>{{ $solicitudes->listacertificacion($solicitudes->certificacion)}} </td> 
                                         <td>{{ $solicitudes->sexo }} </td>
                                         <td>{{ $solicitudes->telefono_fijo }} </td>
@@ -350,6 +354,70 @@
 
 {{-- Termino Modal para el imprimir cert --}}
 
+{{-- Modal para mandar el correo al cliente --}}
+<div class="modal fade bd-example-modal-lg" id="showEmailModal" tabindex="-1" role="dialog" aria-labelledby="showEmailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="showEmailModalLabel"></h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body" id="emailModal">
+        <form method="GET" action="" id="FormSendEmail" >
+          {{-- @method('PATCH') --}}
+          @csrf
+
+          <div class="form-group">
+            <h5 style="position: absolute; right: 20px">CERT-01</h5>
+            <br />
+
+            {{-- <h3 class="text-center">
+              Se enviará un correo a:
+            </h3> --}}
+          </div>
+          <div id="test">
+          <div class="form-group">
+            <div class="col-8 col-sm-12">
+              <label for="correo" class="col-form-label">Correo electrónico</label>
+              <input class="form-control" id="correoEmail" name="correoEmail" type="text" readonly>
+            </div>
+
+            <div class="col-8 col-sm-12">
+              <label for="nombreEmail" class="col-form-label">Nombre y Apellido</label>
+              <input class="form-control" id="nombreEmail" name="nombreEmail" type="text" readonly>
+              <input class="form-control" id="ocultos" name="ocultos" type="text" hidden>
+            </div>
+            
+          </div>
+
+          <div class="form-group">
+            <div class="col-8 col-sm-12">
+            <label for="message-text" class="col-form-label">Mensaje</label>
+            {{-- <input class="form-control" id="direccion" name="direccion" type="text" readonly> --}}
+            <textarea class="form-control" id="mensaje" name="mensaje" placeholder="Escriba el contenido del correo aqui..."></textarea>
+            </div>
+          </div>
+
+        </div>
+          <div class="modal-footer">
+            
+              <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cancelar </button>
+              <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendMail()'><i class="fa fa-paper-plane"></i> Enviar </button>
+              
+        </form>
+        
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{{-- Termino Modal para mandar el correo al cliente  --}}
+
+
 
 @section('dataTableJS')
 <script src="js/print.js"></script>
@@ -461,6 +529,18 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             $("#Form").attr('action', url);
         }
 
+//Funcion q muestra el modal de envio de correo electronico
+      function showDataEmail(id,nmbre,apellidos,correo)
+        {
+            var id = id;
+            var nombre = nmbre;
+            var apellido = apellidos;
+            var textAreaEmail = $.trim($("mensaje").val());
+            document.getElementById("oculto").value = id; 
+            document.getElementById("nombreEmail").value = nmbre + " " + apellidos; 
+            document.getElementById("correoEmail").value = correo; 
+        }
+
         function sendData()
         {
           var oculto = document.getElementById("ocultos").value;
@@ -495,6 +575,19 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             $("#Form").attr('action', url);
             $("#Form").submit();
           }
+        }
+
+        function sendMail()
+        {
+          var idOculto = document.getElementById("oculto").value;
+          var email = document.getElementById('correoEmail').value;
+          var cuerpoCorreo = document.getElementById('mensaje').value;
+          //Le envio al controlador la url con el email al cual voy a enviar y el cuerpo del correo
+          var url = 'http://traductorescertificados/enviarCor/enviar';
+          // var url = 'http://traductorescertificados/enviarCor/enviar/' + email + '/' + cuerpoCorreo;
+            $("#FormSendEmail").attr('action', url);
+            $("#FormSendEmail").submit();
+          // alert(email);
         }
 
         //Imprimir el modal 
