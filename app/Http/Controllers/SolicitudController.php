@@ -115,9 +115,15 @@ class SolicitudController extends Controller
 
     public function aprobadosInscripcion(Request $request, $solicitudes)
     {
+        
+        // $this->validate($request, [
+        //     'pasarela' => 'required|in:Transfermóvil,Enzona'
+        // ]);
             //Llamado al modelo de traductores para poder guardarlo luego n bd
             $solicitud = Solicitud::findOrFail($solicitudes);
             $solicitud->estado = 9;
+            $solicitud->Pasarela = $request->pasarela;
+            //dd($rules);
 
             //Este numero de referencia lo voy a generar aleatorio hasta q me den el formato del numero de referencia de cada user
             $random = rand(5, 15);
@@ -127,8 +133,7 @@ class SolicitudController extends Controller
             // dd($dirCompleta);
             // Mail::to([$solicitud->email,'danilo.arrieta@esti.cu'])->queue(new MensajeRecibido($mensaje,$solicitud));//Aqui se pueden enviar correos en cola si son muchos
             // Mail::to($solicitud->email)->cc('danilo.arrieta@esti.cu')->send(new MensajeRecibido($mensaje,$solicitud));//Aqui se pueden enviar correos y enviar correos con copia con el cc
-            Mail::to($solicitud->email)->send(new MensajeRecibido($mensaje,$solicitud));
-            // $solicitud->referencia = $random;
+            // Mail::to($solicitud->email)->send(new MensajeRecibido($mensaje,$solicitud));
             $solicitud->save();
         
 

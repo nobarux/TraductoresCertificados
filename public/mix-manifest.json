@@ -10,5 +10,6 @@
     "/css/app.css": "/css/app.css",
     "/css/admin/styles.css": "/css/admin/styles.css",
     "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/jquery.validate.min.js": "/js/jquery.validate.min.js",
     "/js/printThis.js": "/js/printThis.js"
 }

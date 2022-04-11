@@ -340,8 +340,20 @@
           <div class="modal-footer">
             
             {{-- <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button> --}}
+            <div class="form-group col-md-4" style="margin-right: 100px;">
+              <label for="pasarela">Seleccioné la pasarela de pago <span class="text-danger">*</span></label>
+              <select class="form-control" name="pasarela" id="pasarela">
+                <option value="">Seleccioné una opción</option>
+                <option value="Transfermóvil">Transfermóvil</option>
+                <option value="Enzona">Enzona</option>
+              </select>
+          </div>
+
               <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendData()'><i class="fa fa-check"></i> Aprobar </button>
               <button type="button" name="printButton" id="printButton" class="btn btn-primary" onclick="print()" ><i class="fa fa-print"></i> Imprimir </button>
+          
+      </div>
+
         </form>
         
       </div>
