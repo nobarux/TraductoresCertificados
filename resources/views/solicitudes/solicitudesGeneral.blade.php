@@ -342,16 +342,15 @@
             {{-- <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button> --}}
             <div class="form-group col-md-4" style="margin-right: 100px;">
               <label for="pasarela">Seleccioné la pasarela de pago <span class="text-danger">*</span></label>
-              <select class="form-control" name="pasarela" id="pasarela">
+              <select class="form-control" name="pasarela" id="pasarela" required>
                 <option value="">Seleccioné una opción</option>
                 <option value="Transfermóvil">Transfermóvil</option>
                 <option value="Enzona">Enzona</option>
               </select>
           </div>
 
-              <button type="submit" id="saveButton" name="" class="btn btn-primary" data-dismiss="modal" onclick='sendData()'><i class="fa fa-check"></i> Aprobar </button>
+              <button type="submit" id="saveButton" name="" class="btn btn-primary"  onclick='sendData()'><i class="fa fa-check"></i> Aprobar </button>
               <button type="button" name="printButton" id="printButton" class="btn btn-primary" onclick="print()" ><i class="fa fa-print"></i> Imprimir </button>
-          
       </div>
 
         </form>
@@ -526,7 +525,7 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
 
             
 
-//Funcion q muestra el modal de incripciones denegadas
+      //Funcion q muestra el modal de incripciones denegadas
       function showData(id,nmbre,apellidos)
         {
             var id = id;
@@ -560,8 +559,15 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
 
             var url = 'http://traductorescertificados/solicitudesInscr/' + oculto;
             // var url = 'http://traductorescertificados/inscripcionesDeneg/' + id + '/' + selectedOption + '/' +  textAreaRazones;
-            $("#FormImprimir").attr('action', url);
-            $("#FormImprimir").submit();
+            if ($('#pasarela').val().trim() === '') {
+              alert('Debe seleccionar una pasarela de pago')
+            }
+            else
+            {
+              $("#FormImprimir").attr('action', url);
+              $("#FormImprimir").submit();
+            }
+            
         }
 
         function formSubmit()
@@ -574,7 +580,7 @@ $("#alerta").fadeTo(5000,500).slideUp(500,function() {
             alert("Debe seleccionar un elemento de la lista de opciones");
             $('#incModal').click(function(e) {
               e.preventDefault();
-              $($(this).attr('data-modal-id')).modal('show',{
+              $($(this).attr('data-moqdal-id')).modal('show',{
                   onApprove : function() {
                       return false; //block the modal here
               }
